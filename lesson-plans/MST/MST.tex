@@ -1,0 +1,96 @@
+\documentclass [12 pt, twoside] {article}
+\usepackage[margin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{textcomp}
+\usepackage{setspace}
+\usepackage{verbatim}
+
+\newcommand\la{\textlangle}
+\newcommand\ra{\textrangle}
+
+\setlength{\parindent}{0pt}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codeblue}{rgb}{0,0,0.6}
+\definecolor{backcolor}{rgb}{0.95,0.95,0.95}
+
+\lstdefinestyle{mystyle}{
+	backgroundcolor = \color{backcolor},
+	commentstyle = \color{codeblue},
+	keywordstyle = \color{codegreen},
+	numberstyle = \color{codegray},
+	stringstyle = \color{magenta},
+	basicstyle = \footnotesize\ttfamily,
+	breakatwhitespace = false,
+	breaklines = true,
+	captionpos = b,
+	keepspaces = true,
+	numbers = left,
+	numbersep = 5pt,
+	showspaces = false,
+	showstringspaces = false,
+	showtabs = false,
+	tabsize = 4
+}
+
+\lstset{style = mystyle}
+
+\begin{document}
+{\catcode`?=\active
+\def?!#1!{\footnote{#1}}
+
+\section*{Minimal Spanning Tree (Prim's Algorithm)}
+
+\subsection*{Terms and Definitions}
+
+\textbf{Minimal Spanning Tree (MST)}: A set of edges in a connected, undirected,
+edge-weighted graph that connects all the vertices without any cycles and with
+the lowest possible edge length.
+
+\subsection*{Algorithm Outline}
+
+Given $G = (V, E)$, we will keep track of which node has been visited by the
+following procedure, and start at an arbitrary vertex $s$:
+\begin{verbatim}
+while not all vertices has been visited:
+    mark s as visited
+    u = s's closest neighbor that has not been visited?!Use a priority queue or linear search (see Performance for more details)!
+    add edge connecting s and u to the MST
+    s = u
+\end{verbatim}
+
+\subsection*{Algorithm Pre-Condition and Pitfalls}
+Note that this algorithm only works correctly for \textbf{undirected graphs}. A
+different algorithm must be used for directed graphs.
+
+Also note that this program does not terminate if the graph is not connected. A
+way to fix this is to slightly modify the algorithm to generate a
+\textbf{Minimal Spanning Forest}, or a collection of MST's. The modification is
+that if all of $s$'s neighbors have been visited, let $s$ be a random vertex that
+has not been visited and continue the loop.
+
+\subsection*{Performance}
+
+The algorithm is greedy in nature, and the runtime depends on implementation,
+the main difference is using a priority queue or linear search, and the runtime
+difference are:
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+Priority Queue & $O(|E| \log |V|)$ \\ \hline
+Linear Search & $O(|V|^2)$ \\ \hline
+\end{tabular}
+\end{table}
+
+Due to the cost of building a priority queue, it is generally preferred to just
+use a linear search for dense graphs (where $|E| \approx |V|^2$), but the priority
+queue implementation is generally preferred for sparse graphs.
+
+\subsection*{Sample Problems}
+\url{https://uva.onlinejudge.org/external/100/10034.pdf}
+\end{document}

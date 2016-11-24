@@ -1,0 +1,3320 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title></title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html --> 
+<meta name="src" content="basics.tex"> 
+<meta name="date" content="2016-11-24 12:51:00"> 
+<link rel="stylesheet" type="text/css" href="basics.css"> 
+</head><body 
+>
+<h3 class="likesectionHead"><a 
+ id="x1-1000"></a>C++ Basics</h3>
+<!--l. 59--><p class="noindent" >
+<h4 class="likesubsectionHead"><a 
+ id="x1-2000"></a>Structs and Class</h4>
+<!--l. 61--><p class="noindent" >In vanilla C, structs are collections of variables, originally created for custom typing. In
+C++, structs and classes are the same and have the same function as any other object
+oriented language. The only difference between the two is that in structs, variables and
+methods are by default public and in classes they are by default private. This basically
+means that for the purpose of competitive programming we almost always want to use
+structs.
+<!--l. 68--><p class="noindent" >The following is an example of a struct used to keep tract of a product on sale: <!--l. 69-->
+<div class="lstlisting" id="listing-1"><span class="label"><a 
+ id="x1-2001r1"></a><span 
+class="cmr-10">1</span></span><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">this</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">is</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">a</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">declaration</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">of</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">a</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">struct</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-2002r2"></a><span 
+class="cmr-10">2</span></span><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">it</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">follows</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">the</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">general</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">pattern</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">of</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-2003r3"></a><span 
+class="cmr-10">3</span></span><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">struct</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x003C;</span><span 
+class="cmtt-10">struct_name</span><span 
+class="cmtt-10">&#x003E;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">{</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-2004r4"></a><span 
+class="cmr-10">4</span></span><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x003C;</span><span 
+class="cmtt-10">member_type_1</span><span 
+class="cmtt-10">&#x003E;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x003C;</span><span 
+class="cmtt-10">member_name_1</span><span 
+class="cmtt-10">&#x003E;;</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-2005r5"></a><span 
+class="cmr-10">5</span></span><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x003C;</span><span 
+class="cmtt-10">member_type_2</span><span 
+class="cmtt-10">&#x003E;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x003C;</span><span 
+class="cmtt-10">member_name_2</span><span 
+class="cmtt-10">&#x003E;;</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-2006r6"></a><span 
+class="cmr-10">6</span></span><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-2007r7"></a><span 
+class="cmr-10">7</span></span><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x003C;</span><span 
+class="cmtt-10">method_type_1</span><span 
+class="cmtt-10">&#x003E;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x003C;</span><span 
+class="cmtt-10">method_name_1</span><span 
+class="cmtt-10">&#x003E;(&#x003C;</span><span 
+class="cmtt-10">params</span><span 
+class="cmtt-10">&#x003E;)</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">{&#x003C;</span><span 
+class="cmtt-10">implementation</span><span 
+class="cmtt-10">&#x003E;};</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-2008r8"></a><span 
+class="cmr-10">8</span></span><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">};</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-2009r9"></a><span 
+class="cmr-10">9</span></span><span 
+class="cmtt-10">struct</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">product</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">{</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-2010r10"></a><span 
+class="cmr-10">10</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">string</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">name</span><span 
+class="cmtt-10">;</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-2011r11"></a><span 
+class="cmr-10">11</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">double</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">price</span><span 
+class="cmtt-10">;</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-2012r12"></a><span 
+class="cmr-10">12</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">bool</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">avaliable</span><span 
+class="cmtt-10">;</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-2013r13"></a><span 
+class="cmr-10">13</span></span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-2014r14"></a><span 
+class="cmr-10">14</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">since</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">structs</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">and</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">classes</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">are</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">the</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">same</span><span 
+class="cmtt-10">,</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">we</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">can</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">define</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">constructors</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-2015r15"></a><span 
+class="cmr-10">15</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">product</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">string</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">a_name</span><span 
+class="cmtt-10">,</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">double</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">a_price</span><span 
+class="cmtt-10">)</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">{</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-2016r16"></a><span 
+class="cmr-10">16</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">name</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">=</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">a_name</span><span 
+class="cmtt-10">;</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-2017r17"></a><span 
+class="cmr-10">17</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">price</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">=</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">a_price</span><span 
+class="cmtt-10">;</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-2018r18"></a><span 
+class="cmr-10">18</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">avaliable</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">=</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">true</span><span 
+class="cmtt-10">;</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-2019r19"></a><span 
+class="cmr-10">19</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">};</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-2020r20"></a><span 
+class="cmr-10">20</span></span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-2021r21"></a><span 
+class="cmr-10">21</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">we</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">can</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">also</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">define</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">our</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">own</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">comparison</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">operators</span><span 
+class="cmtt-10">,</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">default</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">behavior</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-2022r22"></a><span 
+class="cmr-10">22</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">is</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">very</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">glitchy</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">so</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">it</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">is</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">recommended</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">if</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">you</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">want</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">to</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">sort</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">an</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">array</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-2023r23"></a><span 
+class="cmr-10">23</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">of</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">this</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">type</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">to</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">define</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">your</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">own</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">comparison</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-2024r24"></a><span 
+class="cmr-10">24</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">bool</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">operator</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x003C;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">const</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">product</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&amp;</span><span 
+class="cmtt-10">B</span><span 
+class="cmtt-10">)</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">const</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">{</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-2025r25"></a><span 
+class="cmr-10">25</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">return</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">price</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x003C;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">B</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">price</span><span 
+class="cmtt-10">;</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-2026r26"></a><span 
+class="cmr-10">26</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">};</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-2027r27"></a><span 
+class="cmr-10">27</span></span><span 
+class="cmtt-10">};</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-2028r28"></a><span 
+class="cmr-10">28</span></span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-2029r29"></a><span 
+class="cmr-10">29</span></span><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">to</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">create</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">an</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">element</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">of</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">the</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">type</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">product</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">you</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">can</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">use</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">a</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">constructor</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-2030r30"></a><span 
+class="cmr-10">30</span></span><span 
+class="cmtt-10">product</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">apple</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">"</span><span 
+class="cmtt-10">apple</span><span 
+class="cmtt-10">"</span><span 
+class="cmtt-10">,</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">6.5)</span><span 
+class="cmtt-10">;</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-2031r31"></a><span 
+class="cmr-10">31</span></span><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">or</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">in</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">c</span><span 
+class="cmtt-10">++11</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">you</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">can</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">initialize</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">any</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">struct</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">with</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">list</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">initialization</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-2032r32"></a><span 
+class="cmr-10">32</span></span><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">by</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">default</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">the</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">order</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">of</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">arguments</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">provided</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">is</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">the</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">order</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">of</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">struct</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-2033r33"></a><span 
+class="cmr-10">33</span></span><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">members</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">in</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">the</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">definition</span><span 
+class="cmtt-10">,</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">but</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">you</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">can</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">also</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">specify</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-2034r34"></a><span 
+class="cmr-10">34</span></span><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">omitted</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">values</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">are</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">given</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">the</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">default</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">value</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">of</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">the</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">type</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-2035r35"></a><span 
+class="cmr-10">35</span></span><span 
+class="cmtt-10">product</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">banana</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">=</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">{</span><span 
+class="cmtt-10">"</span><span 
+class="cmtt-10">banana</span><span 
+class="cmtt-10">"</span><span 
+class="cmtt-10">,</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">3.33,</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">true</span><span 
+class="cmtt-10">};</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x003C;-</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">for</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">our</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">purposes</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">use</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">this</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-2036r36"></a><span 
+class="cmr-10">36</span></span><span 
+class="cmtt-10">product</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">orange</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">=</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">{.</span><span 
+class="cmtt-10">price</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">=</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">3.33,</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">name</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">=</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">"</span><span 
+class="cmtt-10">orange</span><span 
+class="cmtt-10">"</span><span 
+class="cmtt-10">,</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">avaliable</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">=</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">true</span><span 
+class="cmtt-10">};</span>
+</div>
+<!--l. 107--><p class="noindent" >
+<h4 class="likesubsectionHead"><a 
+ id="x1-3000"></a>Lambda Expression</h4>
+<!--l. 109--><p class="noindent" >Lambda expressions are inline anonymous functions especially helpful when using certain functions
+in <span 
+class="cmtt-12">algorithms </span>when doing special comparison. The following example is an implementation of
+something similar to filter in cpp: <!--l. 112-->
+<div class="lstlisting" id="listing-2"><span class="label"><a 
+ id="x1-3001r1"></a><span 
+class="cmr-10">1</span></span><span 
+class="cmtt-10">#</span><span 
+class="cmtt-10">define</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">T</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">5</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-3002r2"></a><span 
+class="cmr-10">2</span></span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-3003r3"></a><span 
+class="cmr-10">3</span></span><span 
+class="cmtt-10">void</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">filterAbove</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">vector</span><span 
+class="cmtt-10">&#x003C;</span><span 
+class="cmtt-10">int</span><span 
+class="cmtt-10">&#x003E;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&amp;</span><span 
+class="cmtt-10">v</span><span 
+class="cmtt-10">)</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">{</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-3004r4"></a><span 
+class="cmr-10">4</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">the</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">syntax</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">for</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">a</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">lambda</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">expression</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">is</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-3005r5"></a><span 
+class="cmr-10">5</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">[&#x003C;</span><span 
+class="cmtt-10">capture</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">group</span><span 
+class="cmtt-10">&#x003E;](&#x003C;</span><span 
+class="cmtt-10">argument</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">list</span><span 
+class="cmtt-10">&#x003E;)</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">-&#x003E;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x003C;</span><span 
+class="cmtt-10">ret</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">type</span><span 
+class="cmtt-10">&#x003E;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">{</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x003C;</span><span 
+class="cmtt-10">code</span><span 
+class="cmtt-10">&#x003E;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">}</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-3006r6"></a><span 
+class="cmr-10">6</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">the</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">return</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">type</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">along</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">with</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">-&#x003E;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">are</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">often</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">omitted</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">for</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">simple</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">code</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-3007r7"></a><span 
+class="cmr-10">7</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">because</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">the</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">compiler</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">can</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">guess</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">the</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">return</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">type</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-3008r8"></a><span 
+class="cmr-10">8</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">the</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">capture</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">group</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">is</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">what</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">the</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">lambda</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">function</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#8216;&#8216;</span><span 
+class="cmtt-10">captures</span><span 
+class="cmtt-10">&#8217;&#8217;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">from</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">the</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-3009r9"></a><span 
+class="cmr-10">9</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">surrounding</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">namespace</span><span 
+class="cmtt-10">,</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">for</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">competitive</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">programming</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">purposes</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">leave</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-3010r10"></a><span 
+class="cmr-10">10</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">it</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">empty</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">and</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">just</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">use</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">#</span><span 
+class="cmtt-10">define</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">statements</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">up</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">top</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-3011r11"></a><span 
+class="cmr-10">11</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">transform</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">v</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">begin</span><span 
+class="cmtt-10">()</span><span 
+class="cmtt-10">,</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">v</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">end</span><span 
+class="cmtt-10">()</span><span 
+class="cmtt-10">,</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">[](</span><span 
+class="cmtt-10">double</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">d</span><span 
+class="cmtt-10">)</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">{</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">return</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">d</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x003E;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">T</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">?</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">d</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">:</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">0</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">})</span><span 
+class="cmtt-10">;</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-3012r12"></a><span 
+class="cmr-10">12</span></span><span 
+class="cmtt-10">}</span>
+</div>
+<!--l. 126--><p class="noindent" >
+<h4 class="likesubsectionHead"><a 
+ id="x1-4000"></a>Pointers</h4>
+<!--l. 128--><p class="noindent" >Don&#8217;t use them on purpose... Just know that <span 
+class="cmtt-12">*p </span>dereferences a pointer and <span 
+class="cmtt-12">p+1 </span>accesses the
+address at <span 
+class="cmtt-12">p+ </span>the size of the type of pointer that <span 
+class="cmtt-12">p </span>is.
+<!--l. 132--><p class="noindent" >
+<h3 class="likesectionHead"><a 
+ id="x1-5000"></a>C++ Containers</h3>
+                                                                                         
+                                                                                         
+<!--l. 133--><p class="noindent" >
+<h4 class="likesubsectionHead"><a 
+ id="x1-6000"></a>vectors</h4>
+<div class="table">
+                                                                                         
+                                                                                         
+<!--l. 135--><p class="noindent" ><hr class="float"><div class="float" 
+>
+                                                                                         
+                                                                                         
+<div class="tabular"> <table id="TBL-1" class="tabular" 
+cellspacing="0" cellpadding="0" rules="groups" 
+><colgroup id="TBL-1-1g"><col 
+id="TBL-1-1"></colgroup><colgroup id="TBL-1-2g"><col 
+id="TBL-1-2"></colgroup><colgroup id="TBL-1-3g"><col 
+id="TBL-1-3"></colgroup><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-1-"><td colspan="3" style="white-space:nowrap; text-align:center;" id="TBL-1-1-1"  
+class="td11">                                  <div class="multicolumn"  style="white-space:nowrap; text-align:center;"><span 
+class="cmbx-12">Constructors</span></div></td></tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-1-2-1"  
+class="td
+11"><span 
+class="cmtt-12">vector</span><span 
+class="cmmi-12">&#x003C;</span><span 
+class="cmtt-12">T</span><span 
+class="cmmi-12">&#x003E;</span><span 
+class="cmtt-12">v;              </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-2-2"  
+class="td11">Make an empty vector.                                            </td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-2-3"  
+class="td11">O(1)  </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-1-3-1"  
+class="td11"><span 
+class="cmtt-12">vector</span><span 
+class="cmmi-12">&#x003C;</span><span 
+class="cmtt-12">T</span><span 
+class="cmmi-12">&#x003E;</span><span 
+class="cmtt-12">v(n);           </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-3-2"  
+class="td11">Make a vector with N elements.                                </td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-3-3"  
+class="td11">O(n) </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-1-4-1"  
+class="td11"><span 
+class="cmtt-12">vector</span><span 
+class="cmmi-12">&#x003C;</span><span 
+class="cmtt-12">T</span><span 
+class="cmmi-12">&#x003E;</span><span 
+class="cmtt-12">v(n, value);    </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-4-2"  
+class="td11">Make a vector with N elements, initialized to value.      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-4-3"  
+class="td11">O(n) </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-1-5-1"  
+class="td11"><span 
+class="cmtt-12">vector</span><span 
+class="cmmi-12">&#x003C;</span><span 
+class="cmtt-12">T</span><span 
+class="cmmi-12">&#x003E;</span><span 
+class="cmtt-12">v(begin, end);  </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-5-2"  
+class="td11">Make a vector and copy the elements from begin to end.</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-5-3"  
+class="td11">O(n) </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-6-"><td colspan="3" style="white-space:nowrap; text-align:center;" id="TBL-1-6-1"  
+class="td11">                                    <div class="multicolumn"  style="white-space:nowrap; text-align:center;"><span 
+class="cmbx-12">Accessors</span></div></td></tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-7-"><td  style="white-space:nowrap; text-align:left;" id="TBL-1-7-1"  
+class="td
+11"><span 
+class="cmtt-12">v[i];                     </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-7-2"  
+class="td11">Return (or set) the I&#8217;th element.                               </td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-7-3"  
+class="td11">O(1)  </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-8-"><td  style="white-space:nowrap; text-align:left;" id="TBL-1-8-1"  
+class="td11"><span 
+class="cmtt-12">v.at(i);                  </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-8-2"  
+class="td11">Return (or set) the I&#8217;th element, with bounds checking. </td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-8-3"  
+class="td11">O(1)  </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-9-"><td  style="white-space:nowrap; text-align:left;" id="TBL-1-9-1"  
+class="td11"><span 
+class="cmtt-12">v.size();                 </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-9-2"  
+class="td11">Return current number of elements.                           </td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-9-3"  
+class="td11">O(1)  </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-10-"><td  style="white-space:nowrap; text-align:left;" id="TBL-1-10-1"  
+class="td11"><span 
+class="cmtt-12">v.empty();                </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-10-2"  
+class="td11">Return true if vector is empty.                                  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-10-3"  
+class="td11">O(1)  </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-11-"><td  style="white-space:nowrap; text-align:left;" id="TBL-1-11-1"  
+class="td11"><span 
+class="cmtt-12">v.begin();                </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-11-2"  
+class="td11">Return random access iterator to start.                       </td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-11-3"  
+class="td11">O(1)  </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-12-"><td  style="white-space:nowrap; text-align:left;" id="TBL-1-12-1"  
+class="td11"><span 
+class="cmtt-12">v.end();                  </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-12-2"  
+class="td11">Return random access iterator to end.                        </td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-12-3"  
+class="td11">O(1)  </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-13-"><td  style="white-space:nowrap; text-align:left;" id="TBL-1-13-1"  
+class="td11"><span 
+class="cmtt-12">v.front();                </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-13-2"  
+class="td11">Return the first element.                                          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-13-3"  
+class="td11">O(1)  </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-14-"><td  style="white-space:nowrap; text-align:left;" id="TBL-1-14-1"  
+class="td11"><span 
+class="cmtt-12">v.back();                 </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-14-2"  
+class="td11">Return the last element.                                          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-14-3"  
+class="td11">O(1)  </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-15-"><td  style="white-space:nowrap; text-align:left;" id="TBL-1-15-1"  
+class="td11"><span 
+class="cmtt-12">v.capacity();             </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-15-2"  
+class="td11">Return maximum number of elements.                        </td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-15-3"  
+class="td11">O(1)  </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-16-"><td colspan="3" style="white-space:nowrap; text-align:center;" id="TBL-1-16-1"  
+class="td11">                                    <div class="multicolumn"  style="white-space:nowrap; text-align:center;"><span 
+class="cmbx-12">Modifiers</span></div>
+</td></tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-17-"><td  style="white-space:nowrap; text-align:left;" id="TBL-1-17-1"  
+class="td11"><span 
+class="cmtt-12">v.push</span><span 
+class="cmtt-12">_back(value);       </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-17-2"  
+class="td11">Add value to end.                                                   </td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-17-3"  
+class="td11">O(1)*</td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-18-"><td  style="white-space:nowrap; text-align:left;" id="TBL-1-18-1"  
+class="td11"><span 
+class="cmtt-12">v.insert(iterator, value);</span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-18-2"  
+class="td11">Insert value at the position indexed by iterator.            </td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-18-3"  
+class="td11">O(n) </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-19-"><td  style="white-space:nowrap; text-align:left;" id="TBL-1-19-1"  
+class="td11"><span 
+class="cmtt-12">v.pop</span><span 
+class="cmtt-12">_back();             </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-19-2"  
+class="td11">Remove value from end.                                           </td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-19-3"  
+class="td11">O(1)  </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-20-"><td  style="white-space:nowrap; text-align:left;" id="TBL-1-20-1"  
+class="td11"><span 
+class="cmtt-12">v.erase(iterator);        </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-20-2"  
+class="td11">Erase value indexed by iterator.                                </td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-20-3"  
+class="td11">O(n) </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-21-"><td  style="white-space:nowrap; text-align:left;" id="TBL-1-21-1"  
+class="td11"><span 
+class="cmtt-12">v.erase(begin, end);      </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-21-2"  
+class="td11">Erase the elements from begin to end.                        </td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-21-3"  
+class="td11">O(n) </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-22-"><td  style="white-space:nowrap; text-align:left;" id="TBL-1-22-1"  
+class="td11">                          </td></tr></table></div>
+                                                                                         
+                                                                                         
+</div><hr class="endfloat" />
+</div>
+<h4 class="likesubsectionHead"><a 
+ id="x1-7000"></a>lists</h4>
+<div class="table">
+                                                                                         
+                                                                                         
+<!--l. 164--><p class="noindent" ><hr class="float"><div class="float" 
+>
+                                                                                         
+                                                                                         
+<div class="tabular"> <table id="TBL-2" class="tabular" 
+cellspacing="0" cellpadding="0" rules="groups" 
+><colgroup id="TBL-2-1g"><col 
+id="TBL-2-1"></colgroup><colgroup id="TBL-2-2g"><col 
+id="TBL-2-2"></colgroup><colgroup id="TBL-2-3g"><col 
+id="TBL-2-3"></colgroup><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-1-"><td colspan="3" style="white-space:nowrap; text-align:center;" id="TBL-2-1-1"  
+class="td11">                                   <div class="multicolumn"  style="white-space:nowrap; text-align:center;"><span 
+class="cmbx-12">Constructors</span></div></td></tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-2-2-1"  
+class="td
+11"><span 
+class="cmtt-12">list</span><span 
+class="cmmi-12">&#x003C;</span><span 
+class="cmtt-12">T</span><span 
+class="cmmi-12">&#x003E;</span><span 
+class="cmtt-12">l;                 </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-2-2"  
+class="td11">Make an empty list.                                         </td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-2-3"  
+class="td11">O(1)        </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-2-3-1"  
+class="td11"><span 
+class="cmtt-12">list</span><span 
+class="cmmi-12">&#x003C;</span><span 
+class="cmtt-12">T</span><span 
+class="cmmi-12">&#x003E;</span><span 
+class="cmtt-12">l(begin, end);     </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-3-2"  
+class="td11">Make a list and copy the values from begin to end.</td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-3-3"  
+class="td11">O(n)        </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-4-"><td colspan="3" style="white-space:nowrap; text-align:center;" id="TBL-2-4-1"  
+class="td11">                                     <div class="multicolumn"  style="white-space:nowrap; text-align:center;"><span 
+class="cmbx-12">Accessors</span></div></td></tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-2-5-1"  
+class="td
+11"><span 
+class="cmtt-12">l.size();                  </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-5-2"  
+class="td11">Return current number of elements.                    </td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-5-3"  
+class="td11">O(1)        </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-2-6-1"  
+class="td11"><span 
+class="cmtt-12">l.empty();                 </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-6-2"  
+class="td11">Return true if list is empty.                               </td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-6-3"  
+class="td11">O(1)        </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-7-"><td  style="white-space:nowrap; text-align:left;" id="TBL-2-7-1"  
+class="td11"><span 
+class="cmtt-12">l.begin();                 </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-7-2"  
+class="td11">Return bidirectional iterator to start.                  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-7-3"  
+class="td11">O(1)        </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-8-"><td  style="white-space:nowrap; text-align:left;" id="TBL-2-8-1"  
+class="td11"><span 
+class="cmtt-12">l.end();                   </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-8-2"  
+class="td11">Return bidirectional iterator to end.                   </td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-8-3"  
+class="td11">O(1)        </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-9-"><td  style="white-space:nowrap; text-align:left;" id="TBL-2-9-1"  
+class="td11"><span 
+class="cmtt-12">l.front();                 </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-9-2"  
+class="td11">Return the first element.                                  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-9-3"  
+class="td11">O(1)        </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-10-"><td  style="white-space:nowrap; text-align:left;" id="TBL-2-10-1"  
+class="td11"><span 
+class="cmtt-12">l.back();                  </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-10-2"  
+class="td11">Return the last element.                                   </td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-10-3"  
+class="td11">O(1)        </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-11-"><td colspan="3" style="white-space:nowrap; text-align:center;" id="TBL-2-11-1"  
+class="td11">                                     <div class="multicolumn"  style="white-space:nowrap; text-align:center;"><span 
+class="cmbx-12">Modifiers</span></div></td></tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-12-"><td  style="white-space:nowrap; text-align:left;" id="TBL-2-12-1"  
+class="td
+11"><span 
+class="cmtt-12">l.push</span><span 
+class="cmtt-12">_front(value);       </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-12-2"  
+class="td11">Add value to front.                                          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-12-3"  
+class="td11">O(1)        </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-13-"><td  style="white-space:nowrap; text-align:left;" id="TBL-2-13-1"  
+class="td11"><span 
+class="cmtt-12">l.push</span><span 
+class="cmtt-12">_back(value);        </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-13-2"  
+class="td11">Add value to end.                                           </td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-13-3"  
+class="td11">O(1)        </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-14-"><td  style="white-space:nowrap; text-align:left;" id="TBL-2-14-1"  
+class="td11"><span 
+class="cmtt-12">l.insert(iterator, value); </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-14-2"  
+class="td11">Insert value after position indexed by iterator.      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-14-3"  
+class="td11">O(1)        </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-15-"><td  style="white-space:nowrap; text-align:left;" id="TBL-2-15-1"  
+class="td11"><span 
+class="cmtt-12">l.pop</span><span 
+class="cmtt-12">_front();             </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-15-2"  
+class="td11">Remove value from front.                                  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-15-3"  
+class="td11">O(1)        </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-16-"><td  style="white-space:nowrap; text-align:left;" id="TBL-2-16-1"  
+class="td11"><span 
+class="cmtt-12">l.pop</span><span 
+class="cmtt-12">_back();              </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-16-2"  
+class="td11">Remove value from end.                                   </td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-16-3"  
+class="td11">O(1)        </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-17-"><td  style="white-space:nowrap; text-align:left;" id="TBL-2-17-1"  
+class="td11"><span 
+class="cmtt-12">l.erase(iterator);         </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-17-2"  
+class="td11">Erase value indexed by iterator.                         </td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-17-3"  
+class="td11">O(1)        </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-18-"><td  style="white-space:nowrap; text-align:left;" id="TBL-2-18-1"  
+class="td11"><span 
+class="cmtt-12">l.erase(begin, end);       </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-18-2"  
+class="td11">Erase the elements from begin to end.                 </td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-18-3"  
+class="td11">O(1)        </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-19-"><td  style="white-space:nowrap; text-align:left;" id="TBL-2-19-1"  
+class="td11"><span 
+class="cmtt-12">l.remove(value);           </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-19-2"  
+class="td11">Remove all occurrences of value.                        </td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-19-3"  
+class="td11">O(n)        </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-20-"><td  style="white-space:nowrap; text-align:left;" id="TBL-2-20-1"  
+class="td11"><span 
+class="cmtt-12">l.remove</span><span 
+class="cmtt-12">_if(test);         </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-20-2"  
+class="td11">Remove all element that satisfy test.                   </td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-20-3"  
+class="td11">O(n)        </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-21-"><td  style="white-space:nowrap; text-align:left;" id="TBL-2-21-1"  
+class="td11"><span 
+class="cmtt-12">l.reverse();               </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-21-2"  
+class="td11">Reverse the list.                                              </td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-21-3"  
+class="td11">O(n)        </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-22-"><td  style="white-space:nowrap; text-align:left;" id="TBL-2-22-1"  
+class="td11"><span 
+class="cmtt-12">l.sort();                  </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-22-2"  
+class="td11">Sort the list.                                                  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-22-3"  
+class="td11">O(n log n)</td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-23-"><td  style="white-space:nowrap; text-align:left;" id="TBL-2-23-1"  
+class="td11"><span 
+class="cmtt-12">l.sort(comparison);        </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-23-2"  
+class="td11">Sort with comparison function.                          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-23-3"  
+class="td11">O(n log n)</td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-24-"><td  style="white-space:nowrap; text-align:left;" id="TBL-2-24-1"  
+class="td11"><span 
+class="cmtt-12">l.merge(l2);               </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-24-2"  
+class="td11">Merge sorted lists.                                           </td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-24-3"  
+class="td11">O(n)        </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-25-"><td  style="white-space:nowrap; text-align:left;" id="TBL-2-25-1"  
+class="td11">                           </td></tr></table></div>
+                                                                                         
+                                                                                         
+</div><hr class="endfloat" />
+</div>
+<h4 class="likesubsectionHead"><a 
+ id="x1-8000"></a>deques</h4>
+<div class="table">
+                                                                                         
+                                                                                         
+<!--l. 195--><p class="noindent" ><hr class="float"><div class="float" 
+>
+                                                                                         
+                                                                                         
+<div class="tabular"> <table id="TBL-3" class="tabular" 
+cellspacing="0" cellpadding="0" rules="groups" 
+><colgroup id="TBL-3-1g"><col 
+id="TBL-3-1"></colgroup><colgroup id="TBL-3-2g"><col 
+id="TBL-3-2"></colgroup><colgroup id="TBL-3-3g"><col 
+id="TBL-3-3"></colgroup><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-3-1-"><td colspan="3" style="white-space:nowrap; text-align:center;" id="TBL-3-1-1"  
+class="td11">                                <div class="multicolumn"  style="white-space:nowrap; text-align:center;"><span 
+class="cmbx-12">Constructors</span></div></td></tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-3-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-3-2-1"  
+class="td
+11"><span 
+class="cmtt-12">deque</span><span 
+class="cmmi-12">&#x003C;</span><span 
+class="cmtt-12">T</span><span 
+class="cmmi-12">&#x003E;</span><span 
+class="cmtt-12">d;            </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-3-2-2"  
+class="td11">Make an empty deque.                                           </td><td  style="white-space:nowrap; text-align:left;" id="TBL-3-2-3"  
+class="td11">O(1)</td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-3-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-3-3-1"  
+class="td11"><span 
+class="cmtt-12">deque</span><span 
+class="cmmi-12">&#x003C;</span><span 
+class="cmtt-12">T</span><span 
+class="cmmi-12">&#x003E;</span><span 
+class="cmtt-12">d(n);         </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-3-3-2"  
+class="td11">Make a deque with N elements.                                </td><td  style="white-space:nowrap; text-align:left;" id="TBL-3-3-3"  
+class="td11">O(n)</td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-3-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-3-4-1"  
+class="td11"><span 
+class="cmtt-12">deque</span><span 
+class="cmmi-12">&#x003C;</span><span 
+class="cmtt-12">T</span><span 
+class="cmmi-12">&#x003E;</span><span 
+class="cmtt-12">d(n, value);  </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-3-4-2"  
+class="td11">Make a deque with N elements, initialized to value.     </td><td  style="white-space:nowrap; text-align:left;" id="TBL-3-4-3"  
+class="td11">O(n)</td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-3-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-3-5-1"  
+class="td11"><span 
+class="cmtt-12">deque</span><span 
+class="cmmi-12">&#x003C;</span><span 
+class="cmtt-12">T</span><span 
+class="cmmi-12">&#x003E;</span><span 
+class="cmtt-12">d(begin, end);</span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-3-5-2"  
+class="td11">Make a deque and copy the values from begin to end.  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-3-5-3"  
+class="td11">O(n)</td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-3-6-"><td colspan="3" style="white-space:nowrap; text-align:center;" id="TBL-3-6-1"  
+class="td11">                                  <div class="multicolumn"  style="white-space:nowrap; text-align:center;"><span 
+class="cmbx-12">Accessors</span></div>
+</td></tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-3-7-"><td  style="white-space:nowrap; text-align:left;" id="TBL-3-7-1"  
+class="td11"><span 
+class="cmtt-12">d[i];                  </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-3-7-2"  
+class="td11">Return (or set) the I&#8217;th element.                              </td><td  style="white-space:nowrap; text-align:left;" id="TBL-3-7-3"  
+class="td11">O(1)</td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-3-8-"><td  style="white-space:nowrap; text-align:left;" id="TBL-3-8-1"  
+class="td11"><span 
+class="cmtt-12">d.at(i);               </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-3-8-2"  
+class="td11">Return (or set) the I&#8217;th element, with bounds checking.</td><td  style="white-space:nowrap; text-align:left;" id="TBL-3-8-3"  
+class="td11">O(1)</td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-3-9-"><td  style="white-space:nowrap; text-align:left;" id="TBL-3-9-1"  
+class="td11">                       </td></tr></table></div>
+                                                                                         
+                                                                                         
+</div><hr class="endfloat" />
+</div>
+<div class="table">
+                                                                                         
+                                                                                         
+<!--l. 210--><p class="noindent" ><hr class="float"><div class="float" 
+>
+                                                                                         
+                                                                                         
+<div class="tabular"> <table id="TBL-4" class="tabular" 
+cellspacing="0" cellpadding="0" rules="groups" 
+><colgroup id="TBL-4-1g"><col 
+id="TBL-4-1"></colgroup><colgroup id="TBL-4-2g"><col 
+id="TBL-4-2"></colgroup><colgroup id="TBL-4-3g"><col 
+id="TBL-4-3"></colgroup><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-4-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-4-1-1"  
+class="td11"><span 
+class="cmtt-12">d.size();                 </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-4-1-2"  
+class="td11">Return current number of elements.               </td><td  style="white-space:nowrap; text-align:left;" id="TBL-4-1-3"  
+class="td11">O(1)  </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-4-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-4-2-1"  
+class="td11"><span 
+class="cmtt-12">d.empty();                 </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-4-2-2"  
+class="td11">Return true if deque is empty.                       </td><td  style="white-space:nowrap; text-align:left;" id="TBL-4-2-3"  
+class="td11">O(1)  </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-4-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-4-3-1"  
+class="td11"><span 
+class="cmtt-12">d.begin();                 </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-4-3-2"  
+class="td11">Return random access iterator to start.           </td><td  style="white-space:nowrap; text-align:left;" id="TBL-4-3-3"  
+class="td11">O(1)  </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-4-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-4-4-1"  
+class="td11"><span 
+class="cmtt-12">d.end();                   </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-4-4-2"  
+class="td11">Return random access iterator to end.            </td><td  style="white-space:nowrap; text-align:left;" id="TBL-4-4-3"  
+class="td11">O(1)  </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-4-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-4-5-1"  
+class="td11"><span 
+class="cmtt-12">d.front();                 </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-4-5-2"  
+class="td11">Return the first element.                              </td><td  style="white-space:nowrap; text-align:left;" id="TBL-4-5-3"  
+class="td11">O(1)  </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-4-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-4-6-1"  
+class="td11"><span 
+class="cmtt-12">d.back();                  </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-4-6-2"  
+class="td11">Return the last element.                               </td><td  style="white-space:nowrap; text-align:left;" id="TBL-4-6-3"  
+class="td11">O(1)  </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-4-7-"><td colspan="3" style="white-space:nowrap; text-align:center;" id="TBL-4-7-1"  
+class="td11">                                 <div class="multicolumn"  style="white-space:nowrap; text-align:center;"><span 
+class="cmbx-12">Modifiers</span></div>
+</td></tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-4-8-"><td  style="white-space:nowrap; text-align:left;" id="TBL-4-8-1"  
+class="td11"><span 
+class="cmtt-12">d.push</span><span 
+class="cmtt-12">_front(value);       </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-4-8-2"  
+class="td11">Add value to front.                                     </td><td  style="white-space:nowrap; text-align:left;" id="TBL-4-8-3"  
+class="td11">O(1)*</td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-4-9-"><td  style="white-space:nowrap; text-align:left;" id="TBL-4-9-1"  
+class="td11"><span 
+class="cmtt-12">d.push</span><span 
+class="cmtt-12">_back(value);        </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-4-9-2"  
+class="td11">Add value to end.                                       </td><td  style="white-space:nowrap; text-align:left;" id="TBL-4-9-3"  
+class="td11">O(1)*</td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-4-10-"><td  style="white-space:nowrap; text-align:left;" id="TBL-4-10-1"  
+class="td11"><span 
+class="cmtt-12">d.insert(iterator, value); </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-4-10-2"  
+class="td11">Insert value at the position indexed by iterator.</td><td  style="white-space:nowrap; text-align:left;" id="TBL-4-10-3"  
+class="td11">O(n) </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-4-11-"><td  style="white-space:nowrap; text-align:left;" id="TBL-4-11-1"  
+class="td11"><span 
+class="cmtt-12">d.pop</span><span 
+class="cmtt-12">_front();             </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-4-11-2"  
+class="td11">Remove value from front.                             </td><td  style="white-space:nowrap; text-align:left;" id="TBL-4-11-3"  
+class="td11">O(1)  </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-4-12-"><td  style="white-space:nowrap; text-align:left;" id="TBL-4-12-1"  
+class="td11"><span 
+class="cmtt-12">d.pop</span><span 
+class="cmtt-12">_back();              </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-4-12-2"  
+class="td11">Remove value from end.                               </td><td  style="white-space:nowrap; text-align:left;" id="TBL-4-12-3"  
+class="td11">O(1)  </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-4-13-"><td  style="white-space:nowrap; text-align:left;" id="TBL-4-13-1"  
+class="td11"><span 
+class="cmtt-12">d.erase(iterator);         </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-4-13-2"  
+class="td11">Erase value indexed by iterator.                     </td><td  style="white-space:nowrap; text-align:left;" id="TBL-4-13-3"  
+class="td11">O(n) </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-4-14-"><td  style="white-space:nowrap; text-align:left;" id="TBL-4-14-1"  
+class="td11"><span 
+class="cmtt-12">d.erase(begin, end);       </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-4-14-2"  
+class="td11">Erase the elements from begin to end.             </td><td  style="white-space:nowrap; text-align:left;" id="TBL-4-14-3"  
+class="td11">O(n) </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-4-15-"><td  style="white-space:nowrap; text-align:left;" id="TBL-4-15-1"  
+class="td11">                           </td></tr></table></div>
+                                                                                         
+                                                                                         
+</div><hr class="endfloat" />
+</div>
+<h4 class="likesubsectionHead"><a 
+ id="x1-9000"></a>stacks and queues</h4>
+<!--l. 228--><p class="noindent" >In C++ STL, stacks and queues are <span 
+class="cmti-12">container adaptors</span>, so they are created from another container
+(one of the ones listed above, default to vector). <div class="table">
+                                                                                         
+                                                                                         
+<!--l. 231--><p class="noindent" ><hr class="float"><div class="float" 
+>
+                                                                                         
+                                                                                         
+<div class="tabular"> <table id="TBL-5" class="tabular" 
+cellspacing="0" cellpadding="0" rules="groups" 
+><colgroup id="TBL-5-1g"><col 
+id="TBL-5-1"></colgroup><colgroup id="TBL-5-2g"><col 
+id="TBL-5-2"></colgroup><colgroup id="TBL-5-3g"><col 
+id="TBL-5-3"></colgroup><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-5-1-"><td colspan="3" style="white-space:nowrap; text-align:center;" id="TBL-5-1-1"  
+class="td11">                           <div class="multicolumn"  style="white-space:nowrap; text-align:center;"><span 
+class="cmbx-12">Constructors</span></div></td></tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-5-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-5-2-1"  
+class="td
+11"><span 
+class="cmtt-12">stack&#x003C; container&#x003C;T&#x003E; &#x003E; s;    </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-2-2"  
+class="td11">Make an empty stack.                   </td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-2-3"  
+class="td11">O(1) </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-5-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-5-3-1"  
+class="td11"><span 
+class="cmtt-12">queue&#x003C; container&#x003C;T&#x003E; &#x003E; q;    </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-3-2"  
+class="td11">Make an empty queue.                  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-3-3"  
+class="td11">O(1) </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-5-4-"><td colspan="3" style="white-space:nowrap; text-align:center;" id="TBL-5-4-1"  
+class="td11">                             <div class="multicolumn"  style="white-space:nowrap; text-align:center;"><span 
+class="cmbx-12">Accessors</span></div></td></tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-5-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-5-5-1"  
+class="td
+11"><span 
+class="cmtt-12">s.top(); q.front(); q.back()</span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-5-2"  
+class="td11">Returns the top/front/back element.</td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-5-3"  
+class="td11">O(1) </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-5-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-5-6-1"  
+class="td11"><span 
+class="cmtt-12">s.size(); q.size();         </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-6-2"  
+class="td11">Returns current number of elements </td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-6-3"  
+class="td11">O(1) </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-5-7-"><td  style="white-space:nowrap; text-align:left;" id="TBL-5-7-1"  
+class="td11"><span 
+class="cmtt-12">s.empty(); q.empty();       </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-7-2"  
+class="td11">Returns true if empty                    </td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-7-3"  
+class="td11">O(1) </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-5-8-"><td colspan="3" style="white-space:nowrap; text-align:center;" id="TBL-5-8-1"  
+class="td11">                             <div class="multicolumn"  style="white-space:nowrap; text-align:center;"><span 
+class="cmbx-12">Modifiers</span></div>
+</td></tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-5-9-"><td  style="white-space:nowrap; text-align:left;" id="TBL-5-9-1"  
+class="td11"><span 
+class="cmtt-12">s.push(v); q.push(v)        </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-9-2"  
+class="td11">Push value to top/end                   </td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-9-3"  
+class="td11">varies</td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-5-10-"><td  style="white-space:nowrap; text-align:left;" id="TBL-5-10-1"  
+class="td11"><span 
+class="cmtt-12">s.pop(); q.pop()            </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-10-2"  
+class="td11">Removes value from the top/front    </td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-10-3"  
+class="td11">O(1) </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-5-11-"><td  style="white-space:nowrap; text-align:left;" id="TBL-5-11-1"  
+class="td11">                            </td></tr></table></div>
+                                                                                         
+                                                                                         
+</div><hr class="endfloat" />
+</div>
+<!--l. 246--><p class="noindent" >Note that the complexity of <span 
+class="cmtt-12">push </span>varies depending on the underlying container. But
+remember that it is always equal to the complexity of <span 
+class="cmtt-12">push</span><span 
+class="cmtt-12">_back </span>for the underlying
+container.
+<h5 class="likesubsubsectionHead"><a 
+ id="x1-10000"></a>priority queues</h5>
+<!--l. 252--><p class="noindent" >This is also a <span 
+class="cmti-12">container adaptor</span>. Except the element on top is irrelevent of order of insertion.
+Instead the &#8220;biggest&#8221; element is on top. Biggest is determined by the comparison predicate you
+give the priority queue constructor.
+      <ul class="itemize1">
+      <li class="itemize">If that predicate is a &#8220;less than&#8221; type predicate, then biggest means largest.
+      </li>
+      <li class="itemize">If it is a &#8220;greater than&#8221; type predicate, then biggest means smallest.</li></ul>
+<!--l. 260--><p class="noindent" >Again, the default container is a vector, the constructor is
+                                                                                         
+                                                                                         
+<div class="verbatim" id="verbatim-1">
+priority_queue&#x003C;T,&#x00A0;container&#x003C;T&#x003E;,&#x00A0;comparison&#x003C;T&#x003E;&#x00A0;&#x003E;&#x00A0;q;
+</div>
+<!--l. 263--><p class="nopar" >and the complexity for push and pop are both O(n log n)
+<h4 class="likesubsectionHead"><a 
+ id="x1-11000"></a>sets and multisets</h4>
+<div class="table">
+                                                                                         
+                                                                                         
+<!--l. 268--><p class="noindent" ><hr class="float"><div class="float" 
+>
+                                                                                         
+                                                                                         
+<div class="tabular"> <table id="TBL-6" class="tabular" 
+cellspacing="0" cellpadding="0" rules="groups" 
+><colgroup id="TBL-6-1g"><col 
+id="TBL-6-1"></colgroup><colgroup id="TBL-6-2g"><col 
+id="TBL-6-2"></colgroup><colgroup id="TBL-6-3g"><col 
+id="TBL-6-3"></colgroup><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-6-1-"><td colspan="3" style="white-space:nowrap; text-align:center;" id="TBL-6-1-1"  
+class="td11">                                    <div class="multicolumn"  style="white-space:nowrap; text-align:center;"><span 
+class="cmbx-12">Constructors</span></div></td></tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-6-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-6-2-1"  
+class="td
+11"><span 
+class="cmtt-12">set&#x003C;T, compare&#x003E; s;            </span></td><td  style="white-space:wrap; text-align:left;" id="TBL-6-2-2"  
+class="td11"><!--l. 273--><p class="noindent" >Make an empty set. compare should be a binary
+predicate for ordering the set. It&#8217;s optional and will
+default to a function that uses <span 
+class="cmtt-12">operator</span><span 
+class="cmmi-12">&#x003C;</span>.         </td><td  style="white-space:nowrap; text-align:left;" id="TBL-6-2-3"  
+class="td11">O(1)        </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-6-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-6-3-1"  
+class="td11"><span 
+class="cmtt-12">set&#x003C;T, compare&#x003E; s(begin, end);</span></td><td  style="white-space:wrap; text-align:left;" id="TBL-6-3-2"  
+class="td11"><!--l. 278--><p class="noindent" >Make a set and copy the values from begin to end.</td><td  style="white-space:nowrap; text-align:left;" id="TBL-6-3-3"  
+class="td11">O(n log n)</td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-6-4-"><td colspan="3" style="white-space:nowrap; text-align:center;" id="TBL-6-4-1"  
+class="td11">                                      <div class="multicolumn"  style="white-space:nowrap; text-align:center;"><span 
+class="cmbx-12">Accessors</span></div></td></tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-6-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-6-5-1"  
+class="td
+11"><span 
+class="cmtt-12">s.find(key)                   </span></td><td  style="white-space:wrap; text-align:left;" id="TBL-6-5-2"  
+class="td11"><!--l. 281--><p class="noindent" >Return an iterator pointing to an occurrence of key
+in s, or s.end() if key is not in s.                        </td><td  style="white-space:nowrap; text-align:left;" id="TBL-6-5-3"  
+class="td11">O(log n)   </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-6-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-6-6-1"  
+class="td11"><span 
+class="cmtt-12">s.lower</span><span 
+class="cmtt-12">_bound(key)            </span></td><td  style="white-space:wrap; text-align:left;" id="TBL-6-6-2"  
+class="td11"><!--l. 282--><p class="noindent" >Return an iterator pointing to the first occurrence
+of an item in s not less than key, or s.end() if no
+such item is found.                                         </td><td  style="white-space:nowrap; text-align:left;" id="TBL-6-6-3"  
+class="td11">O(log n)   </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-6-7-"><td  style="white-space:nowrap; text-align:left;" id="TBL-6-7-1"  
+class="td11"><span 
+class="cmtt-12">s.upper</span><span 
+class="cmtt-12">_bound(key)            </span></td><td  style="white-space:wrap; text-align:left;" id="TBL-6-7-2"  
+class="td11"><!--l. 283--><p class="noindent" >Return an iterator pointing to the first occurrence
+of an item greater than key in s, or s.end() if no
+such item is found.                                         </td><td  style="white-space:nowrap; text-align:left;" id="TBL-6-7-3"  
+class="td11">O(log n)   </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-6-8-"><td  style="white-space:nowrap; text-align:left;" id="TBL-6-8-1"  
+class="td11"><span 
+class="cmtt-12">s.equal</span><span 
+class="cmtt-12">_range(key)            </span></td><td  style="white-space:wrap; text-align:left;" id="TBL-6-8-2"  
+class="td11"><!--l. 284--><p class="noindent" >Returns pair_bound(key), upper_bound(key)<span 
+class="cmmi-12">&#x003E;</span>.    </td><td  style="white-space:nowrap; text-align:left;" id="TBL-6-8-3"  
+class="td11">O(log n)   </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-6-9-"><td  style="white-space:nowrap; text-align:left;" id="TBL-6-9-1"  
+class="td11"><span 
+class="cmtt-12">s.count(key)                  </span></td><td  style="white-space:wrap; text-align:left;" id="TBL-6-9-2"  
+class="td11"><!--l. 285--><p class="noindent" >Returns the number of items equal to key in s.     </td><td  style="white-space:nowrap; text-align:left;" id="TBL-6-9-3"  
+class="td11">O(log n)   </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-6-10-"><td  style="white-space:nowrap; text-align:left;" id="TBL-6-10-1"  
+class="td11"><span 
+class="cmtt-12">s.size();                     </span></td><td  style="white-space:wrap; text-align:left;" id="TBL-6-10-2"  
+class="td11"><!--l. 286--><p class="noindent" >Return current number of elements.                   </td><td  style="white-space:nowrap; text-align:left;" id="TBL-6-10-3"  
+class="td11">O(1)        </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-6-11-"><td  style="white-space:nowrap; text-align:left;" id="TBL-6-11-1"  
+class="td11"><span 
+class="cmtt-12">s.empty();                    </span></td><td  style="white-space:wrap; text-align:left;" id="TBL-6-11-2"  
+class="td11"><!--l. 287--><p class="noindent" >Return true if set is empty.                              </td><td  style="white-space:nowrap; text-align:left;" id="TBL-6-11-3"  
+class="td11">O(1)        </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-6-12-"><td  style="white-space:nowrap; text-align:left;" id="TBL-6-12-1"  
+class="td11"><span 
+class="cmtt-12">s.begin()                     </span></td><td  style="white-space:wrap; text-align:left;" id="TBL-6-12-2"  
+class="td11"><!--l. 288--><p class="noindent" >Return an iterator pointing to the first element.   </td><td  style="white-space:nowrap; text-align:left;" id="TBL-6-12-3"  
+class="td11">O(1)        </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-6-13-"><td  style="white-space:nowrap; text-align:left;" id="TBL-6-13-1"  
+class="td11"><span 
+class="cmtt-12">s.end()                       </span></td><td  style="white-space:wrap; text-align:left;" id="TBL-6-13-2"  
+class="td11"><!--l. 289--><p class="noindent" >Return  an  iterator  pointing  one  past  the  last
+element.                                                       </td><td  style="white-space:nowrap; text-align:left;" id="TBL-6-13-3"  
+class="td11">O(1)        </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-6-14-"><td colspan="3" style="white-space:nowrap; text-align:center;" id="TBL-6-14-1"  
+class="td11">                                      <div class="multicolumn"  style="white-space:nowrap; text-align:center;"><span 
+class="cmbx-12">Modifiers</span></div>
+</td></tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-6-15-"><td  style="white-space:nowrap; text-align:left;" id="TBL-6-15-1"  
+class="td11"><span 
+class="cmtt-12">s.insert(iterator, key)       </span></td><td  style="white-space:wrap; text-align:left;" id="TBL-6-15-2"  
+class="td11"><!--l. 291--><p class="noindent" >Inserts key into s. iterator is taken as a &#8221;hint&#8221; but
+key will go in the correct position no matter what.
+Returns an iterator pointing to where key went.   </td><td  style="white-space:nowrap; text-align:left;" id="TBL-6-15-3"  
+class="td11">O(log n)   </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-6-16-"><td  style="white-space:nowrap; text-align:left;" id="TBL-6-16-1"  
+class="td11"><span 
+class="cmtt-12">s.insert(key)                 </span></td><td  style="white-space:wrap; text-align:left;" id="TBL-6-16-2"  
+class="td11"><!--l. 292--><p class="noindent" >Inserts  key  into  s  and  returns  a  pair<span 
+class="cmmi-12">&#x003C;</span>iterator,
+bool<span 
+class="cmmi-12">&#x003E;</span>, where iterator is where key went and bool
+is true if key was actually inserted, i.e., was not
+already in the set.                                          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-6-16-3"  
+class="td11">O(log n)   </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-6-17-"><td  style="white-space:nowrap; text-align:left;" id="TBL-6-17-1"  
+class="td11">                              </td></tr></table></div>
+                                                                                         
+                                                                                         
+</div><hr class="endfloat" />
+</div>
+<!--l. 295--><p class="noindent" >
+                                                                                         
+                                                                                         
+<h4 class="likesubsectionHead"><a 
+ id="x1-12000"></a>maps and multimaps</h4>
+<div class="table">
+                                                                                         
+                                                                                         
+<!--l. 298--><p class="noindent" ><hr class="float"><div class="float" 
+>
+                                                                                         
+                                                                                         
+<div class="tabular"> <table id="TBL-7" class="tabular" 
+cellspacing="0" cellpadding="0" rules="groups" 
+><colgroup id="TBL-7-1g"><col 
+id="TBL-7-1"></colgroup><colgroup id="TBL-7-2g"><col 
+id="TBL-7-2"></colgroup><colgroup id="TBL-7-3g"><col 
+id="TBL-7-3"></colgroup><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-7-1-"><td colspan="3" style="white-space:nowrap; text-align:center;" id="TBL-7-1-1"  
+class="td11">                                  <div class="multicolumn"  style="white-space:nowrap; text-align:center;"><span 
+class="cmbx-12">Constructors</span></div></td></tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-7-2-"><td  style="white-space:wrap; text-align:left;" id="TBL-7-2-1"  
+class="td
+11"><!--l. 303--><p class="noindent" ><span 
+class="cmtt-12">map&#x003C;key</span><span 
+class="cmtt-12">_type,</span>
+<span 
+class="cmtt-12">value</span><span 
+class="cmtt-12">_type,</span>
+<span 
+class="cmtt-12">key</span><span 
+class="cmtt-12">_compare&#x003E; m;</span>        </td><td  style="white-space:wrap; text-align:left;" id="TBL-7-2-2"  
+class="td11"><!--l. 303--><p class="noindent" >Make an empty map. key_compare should be a binary
+predicate for ordering the keys. It&#8217;s optional and will
+default to a function that uses operator<span 
+class="cmmi-12">&#x003C;</span>.                 </td><td  style="white-space:nowrap; text-align:left;" id="TBL-7-2-3"  
+class="td11">O(1)        </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-7-3-"><td  style="white-space:wrap; text-align:left;" id="TBL-7-3-1"  
+class="td11"><!--l. 304--><p class="noindent" ><span 
+class="cmtt-12">map&#x003C;key</span><span 
+class="cmtt-12">_type,</span>
+<span 
+class="cmtt-12">value</span><span 
+class="cmtt-12">_type,</span>
+<span 
+class="cmtt-12">key</span><span 
+class="cmtt-12">_compare&#x003E; m(begin,</span>
+<span 
+class="cmtt-12">end);</span>                  </td><td  style="white-space:wrap; text-align:left;" id="TBL-7-3-2"  
+class="td11"><!--l. 304--><p class="noindent" >Make a map and copy the values from begin to end.   </td><td  style="white-space:nowrap; text-align:left;" id="TBL-7-3-3"  
+class="td11">O(n log n)</td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-7-4-"><td colspan="3" style="white-space:nowrap; text-align:center;" id="TBL-7-4-1"  
+class="td11">                                    <div class="multicolumn"  style="white-space:nowrap; text-align:center;"><span 
+class="cmbx-12">Accessors</span></div></td></tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-7-5-"><td  style="white-space:wrap; text-align:left;" id="TBL-7-5-1"  
+class="td
+11"><!--l. 306--><p class="noindent" ><span 
+class="cmtt-12">m[key]</span>                 </td><td  style="white-space:wrap; text-align:left;" id="TBL-7-5-2"  
+class="td11"><!--l. 306--><p class="noindent" >Return the value stored for key. This adds a default
+value if key not in map.                                         </td><td  style="white-space:nowrap; text-align:left;" id="TBL-7-5-3"  
+class="td11">O(log n)   </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-7-6-"><td  style="white-space:wrap; text-align:left;" id="TBL-7-6-1"  
+class="td11"><!--l. 307--><p class="noindent" ><span 
+class="cmtt-12">m.find(key)</span>            </td><td  style="white-space:wrap; text-align:left;" id="TBL-7-6-2"  
+class="td11"><!--l. 307--><p class="noindent" >Return  an  iterator  pointing  to  a  key-value  pair,  or
+m.end() if key is not in map.                                  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-7-6-3"  
+class="td11">O(log n)   </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-7-7-"><td  style="white-space:wrap; text-align:left;" id="TBL-7-7-1"  
+class="td11"><!--l. 308--><p class="noindent" ><span 
+class="cmtt-12">m.lower</span><span 
+class="cmtt-12">_bound(key)</span>     </td><td  style="white-space:wrap; text-align:left;" id="TBL-7-7-2"  
+class="td11"><!--l. 308--><p class="noindent" >Return an iterator pointing to the first pair containing
+key, or m.end() if key is not in map.                        </td><td  style="white-space:nowrap; text-align:left;" id="TBL-7-7-3"  
+class="td11">O(log n)   </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-7-8-"><td  style="white-space:wrap; text-align:left;" id="TBL-7-8-1"  
+class="td11"><!--l. 309--><p class="noindent" ><span 
+class="cmtt-12">m.upper</span><span 
+class="cmtt-12">_bound(key)</span>     </td><td  style="white-space:wrap; text-align:left;" id="TBL-7-8-2"  
+class="td11"><!--l. 309--><p class="noindent" >Return  an  iterator  pointing  one  past  the  last  pair
+containing key, or m.end() if key is not in map.          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-7-8-3"  
+class="td11">O(log n)   </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-7-9-"><td  style="white-space:wrap; text-align:left;" id="TBL-7-9-1"  
+class="td11"><!--l. 310--><p class="noindent" ><span 
+class="cmtt-12">m.equal</span><span 
+class="cmtt-12">_range(key)</span>     </td><td  style="white-space:wrap; text-align:left;" id="TBL-7-9-2"  
+class="td11"><!--l. 310--><p class="noindent" >Return a pair containing the lower and upper bounds
+for key. This may be more efficient than calling those
+functions separately.                                             </td><td  style="white-space:nowrap; text-align:left;" id="TBL-7-9-3"  
+class="td11">O(log n)   </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-7-10-"><td  style="white-space:wrap; text-align:left;" id="TBL-7-10-1"  
+class="td11"><!--l. 311--><p class="noindent" ><span 
+class="cmtt-12">m.size();</span>              </td><td  style="white-space:wrap; text-align:left;" id="TBL-7-10-2"  
+class="td11"><!--l. 311--><p class="noindent" >Return current number of elements.                         </td><td  style="white-space:nowrap; text-align:left;" id="TBL-7-10-3"  
+class="td11">O(1)        </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-7-11-"><td  style="white-space:wrap; text-align:left;" id="TBL-7-11-1"  
+class="td11"><!--l. 312--><p class="noindent" ><span 
+class="cmtt-12">m.empty();</span>             </td><td  style="white-space:wrap; text-align:left;" id="TBL-7-11-2"  
+class="td11"><!--l. 312--><p class="noindent" >Return true if map is empty.                                  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-7-11-3"  
+class="td11">O(1)        </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-7-12-"><td  style="white-space:wrap; text-align:left;" id="TBL-7-12-1"  
+class="td11"><!--l. 313--><p class="noindent" ><span 
+class="cmtt-12">m.begin()</span>              </td><td  style="white-space:wrap; text-align:left;" id="TBL-7-12-2"  
+class="td11"><!--l. 313--><p class="noindent" >Return an iterator pointing to the first pair.              </td><td  style="white-space:nowrap; text-align:left;" id="TBL-7-12-3"  
+class="td11">O(1)        </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-7-13-"><td  style="white-space:wrap; text-align:left;" id="TBL-7-13-1"  
+class="td11"><!--l. 314--><p class="noindent" ><span 
+class="cmtt-12">m.end()</span>                </td><td  style="white-space:wrap; text-align:left;" id="TBL-7-13-2"  
+class="td11"><!--l. 314--><p class="noindent" >Return an iterator pointing one past the last pair.      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-7-13-3"  
+class="td11">O(1)        </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-7-14-"><td colspan="3" style="white-space:nowrap; text-align:center;" id="TBL-7-14-1"  
+class="td11">                                    <div class="multicolumn"  style="white-space:nowrap; text-align:center;"><span 
+class="cmbx-12">Modifiers</span></div>
+</td></tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-7-15-"><td  style="white-space:wrap; text-align:left;" id="TBL-7-15-1"  
+class="td11"><!--l. 316--><p class="noindent" ><span 
+class="cmtt-12">m[key] = value;</span>        </td><td  style="white-space:wrap; text-align:left;" id="TBL-7-15-2"  
+class="td11"><!--l. 316--><p class="noindent" >Store value under key in map.                                </td><td  style="white-space:nowrap; text-align:left;" id="TBL-7-15-3"  
+class="td11">O(log n)   </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-7-16-"><td  style="white-space:wrap; text-align:left;" id="TBL-7-16-1"  
+class="td11"><!--l. 317--><p class="noindent" ><span 
+class="cmtt-12">m.insert(pair)</span>         </td><td  style="white-space:wrap; text-align:left;" id="TBL-7-16-2"  
+class="td11"><!--l. 317--><p class="noindent" >Inserts the <span 
+class="cmmi-12">&#x003C;</span>key, value<span 
+class="cmmi-12">&#x003E;</span>pair into the map. Equivalent
+to the above operation.                                         </td><td  style="white-space:nowrap; text-align:left;" id="TBL-7-16-3"  
+class="td11">O(log n)   </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-7-17-"><td  style="white-space:wrap; text-align:left;" id="TBL-7-17-1"  
+class="td11">                       </td></tr></table></div>
+                                                                                         
+                                                                                         
+</div><hr class="endfloat" />
+</div>
+<!--l. 321--><p class="noindent" >Adapted from http://www.cs.northwestern.edu/&#x00A0;riesbeck/programming/c++/stl-summary.html
+<h4 class="likesubsectionHead"><a 
+ id="x1-13000"></a>Using Lambda Functions as Comparisons</h4>
+<!--l. 324--><p class="noindent" >Usually comparisons call for a class, but that&#8217;s annoying, below is an example of how to use
+lambda function to get around it. <!--l. 326-->
+<div class="lstlisting" id="listing-3"><span class="label"><a 
+ id="x1-13001r1"></a><span 
+class="cmr-10">1</span></span><span 
+class="cmtt-10">using</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">namespace</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">std</span><span 
+class="cmtt-10">;</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-13002r2"></a><span 
+class="cmr-10">2</span></span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-13003r3"></a><span 
+class="cmr-10">3</span></span><span 
+class="cmtt-10">auto</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">comparison</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">=</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">[](</span><span 
+class="cmtt-10">int</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">a</span><span 
+class="cmtt-10">,</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">int</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">b</span><span 
+class="cmtt-10">)</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">{</span><span 
+class="cmtt-10">return</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">a</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x003E;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">b</span><span 
+class="cmtt-10">;};</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-13004r4"></a><span 
+class="cmr-10">4</span></span><span 
+class="cmtt-10">typedef</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">set</span><span 
+class="cmtt-10">&#x003C;</span><span 
+class="cmtt-10">int</span><span 
+class="cmtt-10">,</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">decltype</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">comparison</span><span 
+class="cmtt-10">)</span><span 
+class="cmtt-10">&#x003E;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">sint</span><span 
+class="cmtt-10">;</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-13005r5"></a><span 
+class="cmr-10">5</span></span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-13006r6"></a><span 
+class="cmr-10">6</span></span><span 
+class="cmtt-10">int</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">main</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">int</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">argc</span><span 
+class="cmtt-10">,</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">char</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">*</span><span 
+class="cmtt-10">argv</span><span 
+class="cmtt-10">[])</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">{</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-13007r7"></a><span 
+class="cmr-10">7</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">sint</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">A</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">comparison</span><span 
+class="cmtt-10">)</span><span 
+class="cmtt-10">;</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-13008r8"></a><span 
+class="cmr-10">8</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">int</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">N</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">=</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">1;</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-13009r9"></a><span 
+class="cmr-10">9</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">while</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">N</span><span 
+class="cmtt-10">)</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">{</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-13010r10"></a><span 
+class="cmr-10">10</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">cin</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x003E;&#x003E;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">N</span><span 
+class="cmtt-10">;</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-13011r11"></a><span 
+class="cmr-10">11</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">auto</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">print_bool</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">=</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">[](</span><span 
+class="cmtt-10">int</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">b</span><span 
+class="cmtt-10">)</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">{</span><span 
+class="cmtt-10">return</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">b</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">==</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">0</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">?</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">"</span><span 
+class="cmtt-10">False</span><span 
+class="cmtt-10">"</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">:</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">"</span><span 
+class="cmtt-10">True</span><span 
+class="cmtt-10">"</span><span 
+class="cmtt-10">;};</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-13012r12"></a><span 
+class="cmr-10">12</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">cout</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x003C;&#x003C;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">print_bool</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">A</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">insert</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">N</span><span 
+class="cmtt-10">)</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">second</span><span 
+class="cmtt-10">)</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x003C;&#x003C;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#8217;</span><span 
+class="cmtt-10">\</span><span 
+class="cmtt-10">n</span><span 
+class="cmtt-10">&#8217;</span><span 
+class="cmtt-10">;</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-13013r13"></a><span 
+class="cmr-10">13</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">}</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-13014r14"></a><span 
+class="cmr-10">14</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">return</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">0;</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-13015r15"></a><span 
+class="cmr-10">15</span></span><span 
+class="cmtt-10">}</span>
+</div>
+<!--l. 343--><p class="noindent" ><span 
+class="cmbx-12">Choosing the Right Container </span><hr class="figure"><div class="figure" 
+>
+                                                                                         
+                                                                                         
+                                                                                         
+                                                                                         
+
+<!--l. 346--><p class="noindent" ><img 
+src="containerchoice.png" alt="PIC"  
+>
+                                                                                         
+                                                                                         
+<!--l. 347--><p class="noindent" ></div><hr class="endfigure">
+<h4 class="likesubsectionHead"><a 
+ id="x1-14000"></a>Algorithms</h4>
+<!--l. 349-->
+<div class="lstlisting" id="listing-4"><span class="label"><a 
+ id="x1-14001r1"></a><span 
+class="cmr-10">1</span></span><span 
+class="cmtt-10">#</span><span 
+class="cmtt-10">include</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x003C;</span><span 
+class="cmtt-10">algorithm</span><span 
+class="cmtt-10">&#x003E;</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-14002r2"></a><span 
+class="cmr-10">2</span></span><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">almost</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">all</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">of</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">these</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">modify</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">on</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">containers</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">with</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">c</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">begin</span><span 
+class="cmtt-10">()</span><span 
+class="cmtt-10">,</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">c</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">end</span><span 
+class="cmtt-10">()</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-14003r3"></a><span 
+class="cmr-10">3</span></span><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">let</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">us</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">first</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">create</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">a</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">vector</span><span 
+class="cmtt-10">!</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-14004r4"></a><span 
+class="cmr-10">4</span></span><span 
+class="cmtt-10">vector</span><span 
+class="cmtt-10">&#x003C;</span><span 
+class="cmtt-10">int</span><span 
+class="cmtt-10">&#x003E;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">v</span><span 
+class="cmtt-10">(10)</span><span 
+class="cmtt-10">;</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-14005r5"></a><span 
+class="cmr-10">5</span></span><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">fill</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">-</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">fills</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">the</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">vector</span><span 
+class="cmtt-10">,</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">O</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">n</span><span 
+class="cmtt-10">)</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-14006r6"></a><span 
+class="cmr-10">6</span></span><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">this</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">fills</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">the</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">vector</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">with</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">the</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">value</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">10</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-14007r7"></a><span 
+class="cmr-10">7</span></span><span 
+class="cmtt-10">fill</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">v</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">begin</span><span 
+class="cmtt-10">()</span><span 
+class="cmtt-10">,</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">v</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">end</span><span 
+class="cmtt-10">()</span><span 
+class="cmtt-10">,</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">10)</span><span 
+class="cmtt-10">;</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-14008r8"></a><span 
+class="cmr-10">8</span></span><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">this</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">fills</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">the</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">length</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">-</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">2</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">with</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">the</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">value</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">5</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-14009r9"></a><span 
+class="cmr-10">9</span></span><span 
+class="cmtt-10">fill</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">v</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">begin</span><span 
+class="cmtt-10">()</span><span 
+class="cmtt-10">,</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">v</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">end</span><span 
+class="cmtt-10">()</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">-</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">2,</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">5)</span><span 
+class="cmtt-10">;</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-14010r10"></a><span 
+class="cmr-10">10</span></span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-14011r11"></a><span 
+class="cmr-10">11</span></span><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">find</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">-</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">returns</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">the</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">iterator</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">to</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">the</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">first</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">object</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">with</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">value</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">v</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-14012r12"></a><span 
+class="cmr-10">12</span></span><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">returns</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">end</span><span 
+class="cmtt-10">()</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">if</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">none</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">found</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-14013r13"></a><span 
+class="cmr-10">13</span></span><span 
+class="cmtt-10">auto</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">it</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">=</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">find</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">v</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">begin</span><span 
+class="cmtt-10">()</span><span 
+class="cmtt-10">,</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">v</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">end</span><span 
+class="cmtt-10">()</span><span 
+class="cmtt-10">,</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">5)</span><span 
+class="cmtt-10">;</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-14014r14"></a><span 
+class="cmr-10">14</span></span><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">find_if</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">-</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">returns</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">the</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">iterator</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">to</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">the</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">first</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">object</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">satisfying</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-14015r15"></a><span 
+class="cmr-10">15</span></span><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">condition</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-14016r16"></a><span 
+class="cmr-10">16</span></span><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">the</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">following</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">returns</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">the</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">iterator</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">to</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">the</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">first</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">even</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">number</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-14017r17"></a><span 
+class="cmr-10">17</span></span><span 
+class="cmtt-10">auto</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">it</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">=</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">find</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">v</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">begin</span><span 
+class="cmtt-10">()</span><span 
+class="cmtt-10">,</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">v</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">end</span><span 
+class="cmtt-10">()</span><span 
+class="cmtt-10">,</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">[](</span><span 
+class="cmtt-10">int</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">i</span><span 
+class="cmtt-10">)</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">{</span><span 
+class="cmtt-10">return</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">i</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">%</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">2</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">==</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">0;})</span><span 
+class="cmtt-10">;</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-14018r18"></a><span 
+class="cmr-10">18</span></span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-14019r19"></a><span 
+class="cmr-10">19</span></span><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">count</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">-</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">returns</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">the</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">number</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">of</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">objects</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">w</span><span 
+class="cmtt-10">/</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">value</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-14020r20"></a><span 
+class="cmr-10">20</span></span><span 
+class="cmtt-10">int</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">N</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">=</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">count</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">v</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">begin</span><span 
+class="cmtt-10">()</span><span 
+class="cmtt-10">,</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">v</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">end</span><span 
+class="cmtt-10">()</span><span 
+class="cmtt-10">,</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">5)</span><span 
+class="cmtt-10">;</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-14021r21"></a><span 
+class="cmr-10">21</span></span><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">count_if</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">-</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">returns</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">the</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">number</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">of</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">objects</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">satisfying</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">a</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">condition</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-14022r22"></a><span 
+class="cmr-10">22</span></span><span 
+class="cmtt-10">int</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">N</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">=</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">count_if</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">v</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">begin</span><span 
+class="cmtt-10">()</span><span 
+class="cmtt-10">,</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">v</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">end</span><span 
+class="cmtt-10">()</span><span 
+class="cmtt-10">,</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">[](</span><span 
+class="cmtt-10">int</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">i</span><span 
+class="cmtt-10">)</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">{</span><span 
+class="cmtt-10">return</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">i</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">%</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">2</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">==</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">0;})</span><span 
+class="cmtt-10">;</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-14023r23"></a><span 
+class="cmr-10">23</span></span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-14024r24"></a><span 
+class="cmr-10">24</span></span><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">search</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">-</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">searches</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">a</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">subsequence</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">within</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">a</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">bigger</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">sequence</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-14025r25"></a><span 
+class="cmr-10">25</span></span><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">returns</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">an</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">iterator</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">to</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">the</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">beginning</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">of</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">the</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">subsequence</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-14026r26"></a><span 
+class="cmr-10">26</span></span><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">O</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">mn</span><span 
+class="cmtt-10">)</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">where</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">m</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">and</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">n</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">are</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">the</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">lengths</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">of</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">the</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">target</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">and</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">source</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-14027r27"></a><span 
+class="cmr-10">27</span></span><span 
+class="cmtt-10">int</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">target</span><span 
+class="cmtt-10">[]</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">=</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">{5,5,5};</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-14028r28"></a><span 
+class="cmr-10">28</span></span><span 
+class="cmtt-10">auto</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">it</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">=</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">search</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">v</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">begin</span><span 
+class="cmtt-10">()</span><span 
+class="cmtt-10">,</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">v</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">end</span><span 
+class="cmtt-10">()</span><span 
+class="cmtt-10">,</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">target</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">begin</span><span 
+class="cmtt-10">()</span><span 
+class="cmtt-10">,</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">target</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">end</span><span 
+class="cmtt-10">()</span><span 
+class="cmtt-10">)</span><span 
+class="cmtt-10">;</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-14029r29"></a><span 
+class="cmr-10">29</span></span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-14030r30"></a><span 
+class="cmr-10">30</span></span><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">sort</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">-</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">sorts</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">the</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">range</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">according</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">to</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">comparison</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">function</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-14031r31"></a><span 
+class="cmr-10">31</span></span><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">if</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">less</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">than</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">sorts</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">lowest</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">-&#x003E;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">highest</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-14032r32"></a><span 
+class="cmr-10">32</span></span><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">if</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">more</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">than</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">sorts</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">highest</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">-&#x003E;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">lowest</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-14033r33"></a><span 
+class="cmr-10">33</span></span><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">the</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">following</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">sorts</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">lowest</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">-&#x003E;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">highest</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-14034r34"></a><span 
+class="cmr-10">34</span></span><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">O</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">N</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">log</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">N</span><span 
+class="cmtt-10">)</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-14035r35"></a><span 
+class="cmr-10">35</span></span><span 
+class="cmtt-10">sort</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">v</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">begin</span><span 
+class="cmtt-10">()</span><span 
+class="cmtt-10">,</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">v</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">end</span><span 
+class="cmtt-10">()</span><span 
+class="cmtt-10">,</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">[](</span><span 
+class="cmtt-10">int</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">a</span><span 
+class="cmtt-10">,</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">int</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">b</span><span 
+class="cmtt-10">)</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">{</span><span 
+class="cmtt-10">return</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">a</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x003C;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">b</span><span 
+class="cmtt-10">};)</span><span 
+class="cmtt-10">;</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-14036r36"></a><span 
+class="cmr-10">36</span></span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-14037r37"></a><span 
+class="cmr-10">37</span></span><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">partition</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">-</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">moves</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">the</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">content</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">around</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">such</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">that</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">elements</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">satisfying</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-14038r38"></a><span 
+class="cmr-10">38</span></span><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">the</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">precondition</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">comes</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">before</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">elements</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">that</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">don</span><span 
+class="cmtt-10">&#8217;</span><span 
+class="cmtt-10">t</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-14039r39"></a><span 
+class="cmr-10">39</span></span><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">O</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">N</span><span 
+class="cmtt-10">)</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-14040r40"></a><span 
+class="cmr-10">40</span></span><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">the</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">following</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">puts</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">the</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">10&#8217;</span><span 
+class="cmtt-10">s</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">in</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">front</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">of</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">the</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">5&#8217;</span><span 
+class="cmtt-10">s</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-14041r41"></a><span 
+class="cmr-10">41</span></span><span 
+class="cmtt-10">partition</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">v</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">begin</span><span 
+class="cmtt-10">()</span><span 
+class="cmtt-10">,</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">v</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">end</span><span 
+class="cmtt-10">()</span><span 
+class="cmtt-10">,</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">[](</span><span 
+class="cmtt-10">int</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">a</span><span 
+class="cmtt-10">)</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">{</span><span 
+class="cmtt-10">return</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">a</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x003E;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">10;})</span><span 
+class="cmtt-10">;</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-14042r42"></a><span 
+class="cmr-10">42</span></span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-14043r43"></a><span 
+class="cmr-10">43</span></span><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">following</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">are</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">based</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">on</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">binary</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">searches</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">on</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">a</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">*</span><span 
+class="cmtt-10">sorted</span><span 
+class="cmtt-10">*</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">container</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-14044r44"></a><span 
+class="cmr-10">44</span></span><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">lower_bound</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">-</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">returns</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">iterator</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">to</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">the</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">lower</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">bound</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">of</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">the</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">value</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-14045r45"></a><span 
+class="cmr-10">45</span></span><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">upper_bound</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">-</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">returns</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">iterator</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">to</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">the</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">upper</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">bound</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">of</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">the</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">value</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-14046r46"></a><span 
+class="cmr-10">46</span></span><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">equal_range</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">-</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">return</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x003C;</span><span 
+class="cmtt-10">lower_bound</span><span 
+class="cmtt-10">,</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">upper_bound</span><span 
+class="cmtt-10">&#x003E;</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-14047r47"></a><span 
+class="cmr-10">47</span></span><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">binary_search</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">-</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">returns</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">true</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">if</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">the</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">value</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">is</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">found</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-14048r48"></a><span 
+class="cmr-10">48</span></span><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">all</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">of</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">these</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">are</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">O</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">log</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">N</span><span 
+class="cmtt-10">)</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-14049r49"></a><span 
+class="cmr-10">49</span></span><span 
+class="cmtt-10">auto</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">it_l</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">=</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">lower_bound</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">v</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">begin</span><span 
+class="cmtt-10">()</span><span 
+class="cmtt-10">,</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">v</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">end</span><span 
+class="cmtt-10">()</span><span 
+class="cmtt-10">,</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">7)</span><span 
+class="cmtt-10">;</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-14050r50"></a><span 
+class="cmr-10">50</span></span><span 
+class="cmtt-10">auto</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">it_u</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">=</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">uppere_bound</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">v</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">begin</span><span 
+class="cmtt-10">()</span><span 
+class="cmtt-10">,</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">v</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">end</span><span 
+class="cmtt-10">()</span><span 
+class="cmtt-10">,</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">7)</span><span 
+class="cmtt-10">;</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-14051r51"></a><span 
+class="cmr-10">51</span></span><span 
+class="cmtt-10">auto</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">range</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">=</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">equal_range</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">v</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">begin</span><span 
+class="cmtt-10">()</span><span 
+class="cmtt-10">,</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">v</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">end</span><span 
+class="cmtt-10">()</span><span 
+class="cmtt-10">,</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">7)</span><span 
+class="cmtt-10">;</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-14052r52"></a><span 
+class="cmr-10">52</span></span><span 
+class="cmtt-10">bool</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">contains7</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">=</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">binary_search</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">v</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">begin</span><span 
+class="cmtt-10">()</span><span 
+class="cmtt-10">,</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">v</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">end</span><span 
+class="cmtt-10">()</span><span 
+class="cmtt-10">,</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">7,</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">less</span><span 
+class="cmtt-10">&#x003C;</span><span 
+class="cmtt-10">int</span><span 
+class="cmtt-10">&#x003E;)</span><span 
+class="cmtt-10">;</span>
+</div>
+ 
+</body></html> 
+
+                                                                                         
+
+
