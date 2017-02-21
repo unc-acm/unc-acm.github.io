@@ -1,0 +1,862 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title></title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html --> 
+<meta name="src" content="lesson.tex"> 
+<meta name="date" content="2017-02-21 15:59:00"> 
+<link rel="stylesheet" type="text/css" href="lesson.css"> 
+<style type="text/css">
+body {
+    margin:40px auto;
+    max-width:650px;
+    line-height:1.6;
+    font-size:18px;
+    color:#444;
+    padding:0 10px
+}
+
+h1,h2,h3 {
+    line-height:1.2
+}
+</style>
+
+</head><body 
+>
+<h3 class="likesectionHead"><a 
+ id="x1-1000"></a>Trie</h3>
+<!--l. 61--><p class="noindent" >
+<h4 class="likesubsectionHead"><a 
+ id="x1-2000"></a>Definition</h4>
+<!--l. 63--><p class="noindent" >A trie, or prefix tree, is a special data structure that functions as a collection of strings
+(or any type of sequence where the absolute location in the sequence matters). Before
+we dive into the applications and advantages of using this data structure over others,
+let us first see what it is. (from this point on, I will talk about trie in the context of
+storing a list of strings, but similar concept can be applied to all type of sequential data
+structures)
+<!--l. 70--><p class="noindent" >A trie is a tree where each node holds one character. Each vertex is an <span 
+class="cmbx-12">associative prefix </span>to each
+of its child nodes. The tree is rooted at the empty string, which is the universal prefix of the
+dictionary.
+<!--l. 74--><p class="noindent" >Pictorially a dictionary containing &#8220;also,&#8221; &#8220;all,&#8221; &#8220;algo,&#8221; &#8220;assoc,&#8221; &#8220;tree,&#8221; &#8220;trie,&#8221; &#8220;task,&#8221; &#8220;tasks,&#8221;
+&#8220;tank&#8221; looks like: <hr class="figure"><div class="figure" 
+>
+                                                                                         
+                                                                                         
+                                                                                         
+                                                                                         
+
+<!--l. 78--><p class="noindent" ><center><img width="400"
+src="trie.jpg" alt="PIC"  
+               ></center>
+                                                                                         
+                                                                                         
+<!--l. 79--><p class="noindent" ></div><hr class="endfigure">
+<!--l. 81--><p class="noindent" >Note that the end of words are marked by a star, and note that &#8220;task&#8221; is completed contained in
+the branch of &#8220;tasks.&#8221; This highlights one advantage of using tries (not an important one, but
+pretty neat) which is that it offers some degree of compression for a dictionary of strings where a
+lot of strings are similar.
+<!--l. 87--><p class="noindent" >Note that another thing tries are amazing at and commonly used for is that it can query which
+strings in a dictionary have a common prefix, as if they have a common prefix, that prefix must be
+their common ancestor in the tree.
+<h4 class="likesubsectionHead"><a 
+ id="x1-3000"></a>Operations and Implementation</h4>
+<!--l. 93--><p class="noindent" >
+<h5 class="likesubsubsectionHead"><a 
+ id="x1-4000"></a>Node</h5>
+<!--l. 95--><p class="noindent" >A node fundamentally need only 2 things, how many words terminate on this node (can be
+replaced by a boolean if repeated words are not allowed), and a list of references to its children. If
+this trie is used in a prefix-query heavy context, one can also store how many words have
+the current node as a common prefix. In code the structure should have the following
+fields:
+<!--l. 101-->
+<div class="lstlisting" id="listing-1"><span class="label"><a 
+ id="x1-4001r1"></a><span 
+class="cmr-10">1</span></span><span 
+class="cmtt-10">class</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">TrieNode</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">{</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-4002r2"></a><span 
+class="cmr-10">2</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">int</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">wordCount</span><span 
+class="cmtt-10">;</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-4003r3"></a><span 
+class="cmr-10">3</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">int</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">prefixCount</span><span 
+class="cmtt-10">;</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-4004r4"></a><span 
+class="cmr-10">4</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">Map</span><span 
+class="cmtt-10">&#x003C;</span><span 
+class="cmtt-10">Character</span><span 
+class="cmtt-10">,</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">TrieNode</span><span 
+class="cmtt-10">&#x003E;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">children</span><span 
+class="cmtt-10">;</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-4005r5"></a><span 
+class="cmr-10">5</span></span><span 
+class="cmtt-10">}</span>
+</div>
+<!--l. 109--><p class="noindent" >
+<h5 class="likesubsubsectionHead"><a 
+ id="x1-5000"></a>Insert</h5>
+<!--l. 111--><p class="noindent" >Insertion can be repeated until the string becomes the empty string:
+<!--l. 113-->
+<div class="lstlisting" id="listing-2"><span class="label"><a 
+ id="x1-5001r1"></a><span 
+class="cmr-10">1</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">void</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">insert</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">String</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">s</span><span 
+class="cmtt-10">)</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">{</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-5002r2"></a><span 
+class="cmr-10">2</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">if</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">s</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">length</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">==</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">0)</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">{</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-5003r3"></a><span 
+class="cmr-10">3</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">wordCount</span><span 
+class="cmtt-10">++;</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-5004r4"></a><span 
+class="cmr-10">4</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">prefixCount</span><span 
+class="cmtt-10">++;</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-5005r5"></a><span 
+class="cmr-10">5</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">return</span><span 
+class="cmtt-10">;</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-5006r6"></a><span 
+class="cmr-10">6</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">}</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-5007r7"></a><span 
+class="cmr-10">7</span></span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-5008r8"></a><span 
+class="cmr-10">8</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">char</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">head</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">=</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">s</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">charAt</span><span 
+class="cmtt-10">(0)</span><span 
+class="cmtt-10">;</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-5009r9"></a><span 
+class="cmr-10">9</span></span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-5010r10"></a><span 
+class="cmr-10">10</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">if</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">(!</span><span 
+class="cmtt-10">children</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">containsKey</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">head</span><span 
+class="cmtt-10">)</span><span 
+class="cmtt-10">)</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">{</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-5011r11"></a><span 
+class="cmr-10">11</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">children</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">put</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">head</span><span 
+class="cmtt-10">,</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">new</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">TrieNode</span><span 
+class="cmtt-10">(0,</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">0,</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">new</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">HashMap</span><span 
+class="cmtt-10">&#x003C;</span><span 
+class="cmtt-10">Character</span><span 
+class="cmtt-10">,</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">TrieNode</span><span 
+class="cmtt-10">&#x003E;()</span><span 
+class="cmtt-10">)</span><span 
+class="cmtt-10">)</span><span 
+class="cmtt-10">;</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-5012r12"></a><span 
+class="cmr-10">12</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">}</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-5013r13"></a><span 
+class="cmr-10">13</span></span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-5014r14"></a><span 
+class="cmr-10">14</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">children</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">get</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">head</span><span 
+class="cmtt-10">)</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">insert</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">s</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">substring</span><span 
+class="cmtt-10">(1)</span><span 
+class="cmtt-10">)</span><span 
+class="cmtt-10">;</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-5015r15"></a><span 
+class="cmr-10">15</span></span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-5016r16"></a><span 
+class="cmr-10">16</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">prefixCount</span><span 
+class="cmtt-10">++;</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-5017r17"></a><span 
+class="cmr-10">17</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">}</span>
+</div>
+<!--l. 133--><p class="noindent" >This operation have runtime <span 
+class="cmmi-12">O</span>(<span 
+class="cmmi-12">L</span>) where <span 
+class="cmmi-12">L </span>is the length of the string.
+                                                                                         
+                                                                                         
+<!--l. 135--><p class="noindent" >
+<h5 class="likesubsubsectionHead"><a 
+ id="x1-6000"></a>Contains</h5>
+<!--l. 137--><p class="noindent" >To check if a word is in the dictionary we similarly repeatedly ask until <span 
+class="cmtt-12">s </span>becomes an empty
+string:
+<!--l. 140-->
+<div class="lstlisting" id="listing-3"><span class="label"><a 
+ id="x1-6001r1"></a><span 
+class="cmr-10">1</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">boolean</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">contains</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">String</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">s</span><span 
+class="cmtt-10">)</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">{</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-6002r2"></a><span 
+class="cmr-10">2</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">if</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">s</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">length</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">==</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">0)</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">{</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-6003r3"></a><span 
+class="cmr-10">3</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">return</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">wordCount</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x003E;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">else</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">this</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">is</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">not</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">a</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">word</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-6004r4"></a><span 
+class="cmr-10">4</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">}</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-6005r5"></a><span 
+class="cmr-10">5</span></span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-6006r6"></a><span 
+class="cmr-10">6</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">char</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">head</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">=</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">s</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">charAt</span><span 
+class="cmtt-10">(0)</span><span 
+class="cmtt-10">;</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-6007r7"></a><span 
+class="cmr-10">7</span></span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-6008r8"></a><span 
+class="cmr-10">8</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">if</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">(!</span><span 
+class="cmtt-10">children</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">containsKey</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">head</span><span 
+class="cmtt-10">)</span><span 
+class="cmtt-10">)</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">{</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-6009r9"></a><span 
+class="cmr-10">9</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">return</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">false</span><span 
+class="cmtt-10">;</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-6010r10"></a><span 
+class="cmr-10">10</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">}</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-6011r11"></a><span 
+class="cmr-10">11</span></span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-6012r12"></a><span 
+class="cmr-10">12</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">return</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">children</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">get</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">head</span><span 
+class="cmtt-10">)</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">contains</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">s</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">substring</span><span 
+class="cmtt-10">(1)</span><span 
+class="cmtt-10">)</span><span 
+class="cmtt-10">;</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-6013r13"></a><span 
+class="cmr-10">13</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">}</span>
+</div>
+<!--l. 156--><p class="noindent" >This operation have runtime <span 
+class="cmmi-12">O</span>(<span 
+class="cmmi-12">L</span>) where <span 
+class="cmmi-12">L </span>is the length of the string. (Note that this is <span 
+class="cmmi-12">O</span>(1) in
+terms of size of the trie)
+<!--l. 159--><p class="noindent" >
+<h5 class="likesubsubsectionHead"><a 
+ id="x1-7000"></a>Query Prefix</h5>
+<!--l. 161--><p class="noindent" >To check how many words have a given prefix we simply advance to the node representing the
+prefix and return its <span 
+class="cmtt-12">prefixCount</span>:
+<!--l. 164-->
+<div class="lstlisting" id="listing-4"><span class="label"><a 
+ id="x1-7001r1"></a><span 
+class="cmr-10">1</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">int</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">countPrefix</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">String</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">prefix</span><span 
+class="cmtt-10">)</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">{</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-7002r2"></a><span 
+class="cmr-10">2</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">if</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">prefix</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">length</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">==</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">0)</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">{</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-7003r3"></a><span 
+class="cmr-10">3</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">return</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">prefixCount</span><span 
+class="cmtt-10">;</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-7004r4"></a><span 
+class="cmr-10">4</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">}</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-7005r5"></a><span 
+class="cmr-10">5</span></span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-7006r6"></a><span 
+class="cmr-10">6</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">head</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">=</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">prefix</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">charAt</span><span 
+class="cmtt-10">(0)</span><span 
+class="cmtt-10">;</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-7007r7"></a><span 
+class="cmr-10">7</span></span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-7008r8"></a><span 
+class="cmr-10">8</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">if</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">(!</span><span 
+class="cmtt-10">children</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">containsKey</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">head</span><span 
+class="cmtt-10">)</span><span 
+class="cmtt-10">)</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">{</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-7009r9"></a><span 
+class="cmr-10">9</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">return</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">prefix</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">doesn</span><span 
+class="cmtt-10">&#8217;</span><span 
+class="cmtt-10">t</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">exist</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-7010r10"></a><span 
+class="cmr-10">10</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">}</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-7011r11"></a><span 
+class="cmr-10">11</span></span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-7012r12"></a><span 
+class="cmr-10">12</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">return</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">children</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">get</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">head</span><span 
+class="cmtt-10">)</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">countPrefix</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">prefix</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">substring</span><span 
+class="cmtt-10">(1)</span><span 
+class="cmtt-10">)</span><span 
+class="cmtt-10">;</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-7013r13"></a><span 
+class="cmr-10">13</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">}</span>
+</div>
+<!--l. 180--><p class="noindent" >This operation have runtime <span 
+class="cmmi-12">O</span>(<span 
+class="cmmi-12">L</span>) where <span 
+class="cmmi-12">L </span>is the length of the prefix.
+<!--l. 182--><p class="noindent" >
+<h4 class="likesubsectionHead"><a 
+ id="x1-8000"></a>Variations</h4>
+<!--l. 184--><p class="noindent" >There are a lot of modifications we can make to the trie data structure to make it more versatile.
+To start we can turn trie into an <span 
+class="cmbx-12">associative data structure</span>, more commonly known as a map.
+If we were to turn it into a map we would just need an extra field within each node to store its
+<span 
+class="cmtt-12">content</span>, which may be null if this is not a key in the map. This offers <span 
+class="cmmi-12">O</span>(<span 
+class="cmmi-12">L</span>) access time where <span 
+class="cmmi-12">L </span>is
+the length of the key.
+<!--l. 191--><p class="noindent" >Tries can also be used on primitive data types in the form of a <span 
+class="cmbx-12">bitwise-trie</span>. It takes the primitive
+data type and treats them as a bit-array. This produces effectively a cache-independent binary
+search tree that is in fact highly optimized and parallelized.
+                                                                                         
+                                                                                         
+<!--l. 196--><p class="noindent" >Further, the implementation went over here uses recursion for most of the operations. While this is
+more intuitive than the iterative approach it is slower due to how imperative programming
+languages function. I will send out a version of trie that uses iteration instead of recursion with the
+same operations as well.
+ 
+</body></html> 
+
+                                                                                         
+
+
