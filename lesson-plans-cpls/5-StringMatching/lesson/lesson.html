@@ -1,0 +1,320 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title></title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html --> 
+<meta name="src" content="lesson.tex"> 
+<meta name="date" content="2017-03-05 00:05:00"> 
+<link rel="stylesheet" type="text/css" href="lesson.css"> 
+<style type="text/css">
+body {
+    margin:40px auto;
+    max-width:650px;
+    line-height:1.6;
+    font-size:18px;
+    color:#444;
+    padding:0 10px
+}
+
+h1,h2,h3 {
+    line-height:1.2
+}
+</style>
+
+
+</head><body 
+>
+<h3 class="likesectionHead"><a 
+ id="x1-1000"></a>String Matching Algorithms</h3>
+<!--l. 62--><p class="noindent" >
+<h4 class="likesubsectionHead"><a 
+ id="x1-2000"></a>Suffix Array</h4>
+<!--l. 64--><p class="noindent" >A suffix array is a data structure used to store all the suffixes of a given string and is frequently
+used for searching for a certain pattern within a string. It is an array of all the possible suffixes of
+the given string sorted in lexigraphical order. For example, the suffix array for the string
+&#8220;bananas&#8221; would be:
+                                                                                         
+                                                                                         
+<div class="verbatim" id="verbatim-1">
+[&#8216;ananas&#8217;,&#x00A0;&#8216;anas&#8217;,&#x00A0;&#8216;as&#8217;,&#x00A0;&#8216;bananas&#8217;,&#x00A0;&#8216;nanas&#8217;,&#x00A0;&#8216;nas&#8217;,&#x00A0;&#8216;s&#8217;]</div>
+<!--l. 71--><p class="nopar" >
+<!--l. 73--><p class="noindent" >The lexigraphical ordering gives us the advantage of searching for any possible substring with
+binary search instead of linear searches, meaning we only have to perform &Theta;(log(<span 
+class="cmmi-12">n</span>))
+instead of &Theta;(<span 
+class="cmmi-12">n</span>) comparisons, which gives us &Theta;(<span 
+class="cmmi-12">n</span> log(<span 
+class="cmmi-12">n</span>)) plus the time to construct
+the suffix array instead of &Theta;(<span 
+class="cmmi-12">n</span><sup><span 
+class="cmr-8">2</span></sup>) where <span 
+class="cmmi-12">n </span>is the length of the string in which we are
+searching and the substrings can be as large as the text itself. The advantage is especially
+apparently when we have to search for <span 
+class="cmmi-12">m </span>separate patters as we only have to construct
+the suffix tree once but get to save on all the binary searches. If we were to search for
+<span 
+class="cmmi-12">m </span>substrings, repeated linear search would have a total runtime of &Theta;(<span 
+class="cmmi-12">mn</span><sup><span 
+class="cmr-8">2</span></sup>) whereas
+repeated binary search would be &Theta;(<span 
+class="cmmi-12">mn</span> log(<span 
+class="cmmi-12">n</span>)) plus the time it takes to construct the suffix
+array.
+<!--l. 85--><p class="noindent" >To build this suffix array, a naive approach would be to run a simple sort. This would take
+&Theta;(<span 
+class="cmmi-12">n</span> log(<span 
+class="cmmi-12">n</span>)) comparisons, where each comparison takes &Theta;(<span 
+class="cmmi-12">n</span>), so the total runtime is &Theta;(<span 
+class="cmmi-12">n</span><sup><span 
+class="cmr-8">2</span></sup> log(<span 
+class="cmmi-12">n</span>)).
+This is very bad. As we would preferably want the search to take more time than the construction.
+We can take a short cut by using the fact that the suffixes of all the suffixes in the suffix array are
+also in the suffix array.
+<!--l. 92--><p class="noindent" >Specifically, consider the example of &#8220;bananas,&#8221; initially, we just have the array in the order the
+suffixes are generated:
+                                                                                         
+                                                                                         
+<div class="verbatim" id="verbatim-2">
+[&#8216;bananas&#8217;,&#x00A0;&#8216;ananas&#8217;,&#x00A0;&#8216;nanas&#8217;,&#x00A0;&#8216;anas&#8217;,&#x00A0;&#8216;nas&#8217;,&#x00A0;&#8216;as&#8217;,&#x00A0;&#8216;s&#8217;]</div>
+<!--l. 96--><p class="nopar" >
+<!--l. 98--><p class="noindent" >Now we sort them only by first letter, this can be done with a bucket sort in <span 
+class="cmmi-12">O</span>(<span 
+class="cmmi-12">n</span>) time, giving
+us:
+                                                                                         
+                                                                                         
+<div class="verbatim" id="verbatim-3">
+[&#8216;ananas&#8217;,&#x00A0;&#8216;anas&#8217;,&#x00A0;&#8216;as&#8217;,&#x00A0;&#8216;bananas&#8217;,&#x00A0;&#8216;nanas&#8217;,&#x00A0;&#8216;nas&#8217;,&#x00A0;&#8216;s&#8217;]</div>
+<!--l. 102--><p class="nopar" >
+<!--l. 104--><p class="noindent" >This is not completely sorted, we have two unsorted ranges, specifically those starting with <span 
+class="cmtt-12">a </span>and
+those starting with <span 
+class="cmtt-12">n</span>. But note to solve those ranges we look to everything after the first letter, but
+those substrings are already present in the suffix array in approximately sorted order. Specifically,
+for those starting with <span 
+class="cmtt-12">a</span>, even though we don&#8217;t yet know the order of <span 
+class="cmtt-12">ananas </span>and <span 
+class="cmtt-12">anas </span>as
+<span 
+class="cmtt-12">nanas </span>and <span 
+class="cmtt-12">nas </span>are within an undetermined range, we can see that those two definitely
+precede <span 
+class="cmtt-12">as </span>as <span 
+class="cmtt-12">s </span>is further in the approximately sorted array than those starting with
+<span 
+class="cmtt-12">n</span>.
+<!--l. 114--><p class="noindent" >Now we have the suffixes sorted by the first two letters, we can safely compare the first four, and
+after that we can safely compare the first eight. This technique is called <span 
+class="cmbx-12">prefix doubling</span>,
+and allows us to construct the array in <span 
+class="cmmi-12">O</span>(<span 
+class="cmmi-12">n </span>+ <span 
+class="cmmi-12">n</span> log(<span 
+class="cmmi-12">n</span>)) = <span 
+class="cmmi-12">O</span>(<span 
+class="cmmi-12">n</span> log(<span 
+class="cmmi-12">n</span>)) time, with <span 
+class="cmmi-12">n</span>
+spent doing the first bucket sort, and at most log(<span 
+class="cmmi-12">n</span>) sorts to clean up the uncertain
+ranges.
+<!--l. 120--><p class="noindent" >
+<h4 class="likesubsectionHead"><a 
+ id="x1-3000"></a>Rabin-Karp Algorithm</h4>
+<!--l. 122--><p class="noindent" >Another way to quickly match strings is via a hashing algorithm. The annoying thing about string
+matching is that checking for equivalence is <span 
+class="cmmi-12">O</span>(<span 
+class="cmmi-12">N</span>) where <span 
+class="cmmi-12">N </span>is the length of the string instead of
+<span 
+class="cmmi-12">O</span>(1) for most other types (such as ints). One solution to this is to turn a string into an integer via
+a technique known as <span 
+class="cmbx-12">polynomial hashing</span>.
+<!--l. 128--><p class="noindent" >The basic idea of polynomial hashing is very similar to how we represent numbers. When we see
+the number 1314, for example, what it represents is actually a polynomial where each digit is a
+coefficient evaluated at the base, i.e. <span 
+class="cmmi-12">P</span>(<span 
+class="cmmi-12">x</span>) = 1<span 
+class="cmmi-12">x</span><sup><span 
+class="cmr-8">3</span></sup> + 3<span 
+class="cmmi-12">x</span><sup><span 
+class="cmr-8">2</span></sup> + 1<span 
+class="cmmi-12">x</span><sup><span 
+class="cmr-8">1</span></sup> + 4<span 
+class="cmmi-12">x</span><sup><span 
+class="cmr-8">0</span></sup> evaluated at 10. Similarly the
+binary string of &#8220;101101&#8221; is equivalent to the polynomial <span 
+class="cmmi-12">P</span>(<span 
+class="cmmi-12">x</span>) = 1<span 
+class="cmmi-12">x</span><sup><span 
+class="cmr-8">5</span></sup> + 0<span 
+class="cmmi-12">x</span><sup><span 
+class="cmr-8">4</span></sup> + 1<span 
+class="cmmi-12">x</span><sup><span 
+class="cmr-8">3</span></sup> + 1<span 
+class="cmmi-12">x</span><sup><span 
+class="cmr-8">2</span></sup> + 0<span 
+class="cmmi-12">x</span><sup><span 
+class="cmr-8">1</span></sup> + 1<span 
+class="cmmi-12">x</span><sup><span 
+class="cmr-8">0</span></sup>
+evaluated at 2.
+<!--l. 135--><p class="noindent" >A similar approach can be approached to strings. Suppose we take the entire ASCII
+character set, where each character actually represents a digit in a base 128 system (ASCII
+values range from 0 to 127), we can rewrite any string <span 
+class="cmmi-12">s </span>of length <span 
+class="cmmi-12">n </span>as its hash value
+<span 
+class="cmmi-12">H</span>(<span 
+class="cmmi-12">s</span>):
+<center class="math-display" >
+<img 
+src="lesson0x.png" alt="         n
+        &sum;        (n&minus; i)
+H (s) =     si128
+        i=0
+" class="math-display" ></center>
+<!--l. 141--><p class="nopar" >
+<!--l. 143--><p class="noindent" >Where <span 
+class="cmmi-12">s</span><sub><span 
+class="cmmi-8">i</span></sub> is the <span 
+class="cmmi-12">i</span><sup><span 
+class="cmmi-8">th</span></sup> character&#8217;s ASCII value. Note also that 128 was an arbitrary value I chose
+because of the size of the ASCII character set, it can really be changed to one more than the
+amount of characters to represent (because each character can be thought of a digit), and in the
+general case we call this value the base, or <span 
+class="cmmi-12">B</span>. This works for short strings but for long strings we
+run into issues of <span 
+class="cmmi-12">H </span>growing too large for long <span 
+class="cmmi-12">s</span>. To solve this we take the function mod <span 
+class="cmmi-12">P </span>where
+<span 
+class="cmmi-12">P </span>is a large prime. We make <span 
+class="cmmi-12">P </span>prime such that no combination of <span 
+class="cmmi-12">s </span>and the base system will result
+in a multiple of <span 
+class="cmmi-12">P </span>and create a collision (when two strings end up having the hash
+value). This, of, course, will not eliminate all collisions, if we try to hash <span 
+class="cmmi-12">P </span>+ 1 strings
+for example, two would still end up having the same hash value (by the Pigeon-Hole
+principle).
+<!--l. 156--><p class="noindent" >So the general has function <span 
+class="cmmi-12">H</span>(<span 
+class="cmmi-12">s</span>) is:
+<center class="math-display" >
+<img 
+src="lesson1x.png" alt="|---------------------------|
+|       &sum;n                  |
+H (s) =     siB (n&minus;i) modP   |
+|       i=0                 |
+-----------------------------
+" class="math-display" ></center>
+<!--l. 159--><p class="nopar" >
+<!--l. 161--><p class="noindent" >
+<h5 class="likesubsubsectionHead"><a 
+ id="x1-4000"></a>Hash Rolling</h5>
+<!--l. 163--><p class="noindent" >Consider the following problem: suppose we want to find a pattern, <span 
+class="cmmi-12">p</span>, in a string <span 
+class="cmmi-12">s</span>. We can of
+course, find a hash for <span 
+class="cmmi-12">p</span>, <span 
+class="cmmi-12">H</span>(<span 
+class="cmmi-12">p</span>) and find a hash for each substring of <span 
+class="cmmi-12">s </span>with length the same as that
+of <span 
+class="cmmi-12">p</span>. However, if we recompute the hash each time, it would take &Theta;(<span 
+class="cmmi-12">nm</span>) complexity where <span 
+class="cmmi-12">n </span>is the
+length of <span 
+class="cmmi-12">s </span>and <span 
+class="cmmi-12">m </span>is the length of <span 
+class="cmmi-12">p </span>(<span 
+class="cmmi-12">n </span>hashes to compute, each has takes <span 
+class="cmmi-12">m </span>operations). What we
+are forgetting is that the substring <span 
+class="cmmi-12">s</span>[<span 
+class="cmmi-12">i,i </span>+ <span 
+class="cmmi-12">n</span>] is only 2 letters away from <span 
+class="cmmi-12">s</span>[<span 
+class="cmmi-12">i </span>+ 1<span 
+class="cmmi-12">,i </span>+ <span 
+class="cmmi-12">n </span>+ 1]. This
+gives us an efficient algorithm known as hash rolling to compare all <span 
+class="cmmi-12">m </span>length hashes of <span 
+class="cmmi-12">s </span>in <span 
+class="cmmi-12">O</span>(<span 
+class="cmmi-12">n</span>)
+time.
+<!--l. 173--><p class="noindent" >The trick is if we call <span 
+class="cmmi-12">s</span>[<span 
+class="cmmi-12">i,i </span>+ <span 
+class="cmmi-12">n</span>], <span 
+class="cmmi-12">H</span><sub><span 
+class="cmmi-8">s</span></sub>, we can compute the next hash by taking away the leading
+term of <span 
+class="cmmi-12">H</span><sub><span 
+class="cmmi-8">s</span></sub>, which is <span 
+class="cmmi-12">s</span><sub><span 
+class="cmmi-8">i</span></sub><span 
+class="cmmi-12">B</span><sup><span 
+class="cmr-8">(</span><span 
+class="cmmi-8">m</span><span 
+class="cmsy-8">&minus;</span><span 
+class="cmr-8">1)</span></sup>, multiplying what&#8217;s left over by <span 
+class="cmmi-12">B</span>, then adding <span 
+class="cmmi-12">s</span><sub>
+<span 
+class="cmmi-8">i</span><span 
+class="cmr-8">+</span><span 
+class="cmmi-8">n</span><span 
+class="cmr-8">+1</span></sub>, thereby
+constructing the hash for <span 
+class="cmmi-12">s</span>[<span 
+class="cmmi-12">i </span>+ 1<span 
+class="cmmi-12">,i </span>+ <span 
+class="cmmi-12">n </span>+ 1].
+<!--l. 178--><p class="noindent" >With this method, we can find all occurrences of the pattern in the string in &Theta;(<span 
+class="cmmi-12">n </span>+ <span 
+class="cmmi-12">m</span>) time, which
+is significantly better than &Theta;(<span 
+class="cmmi-12">mn</span>).
+                                                                                         
+                                                                                         
+<!--l. 181--><p class="noindent" >
+<h5 class="likesubsubsectionHead"><a 
+ id="x1-5000"></a>Double Hashing</h5>
+<!--l. 183--><p class="noindent" >However, as said before, there are hash collisions once we have more than <span 
+class="cmmi-12">P </span>strings. To solve this
+problem, we can either use hashes to generate a list of possible candidates, then only perform
+regular string comparison on them, but this runs into problems when the substring occurs very
+often in the text. Take the example of trying to find &#8220;aaa&#8221; in &#8220;aaaaaaaaaaaaaaaa.&#8221; In scenarios
+like this, the runtime is reduced down to <span 
+class="cmmi-12">O</span>(<span 
+class="cmmi-12">mn</span>), which is Rabin-Karp algorithm&#8217;s worst
+runtime.
+<!--l. 191--><p class="noindent" >But we don&#8217;t necessarily have to resort to this. More often than not we use something called
+<span 
+class="cmbx-12">rational gambling</span>, which is based on the concept that the probability of two hash functions
+colliding at the same time is extremely low. And since each functions are determined solely by
+the base and modulus (<span 
+class="cmmi-12">P</span>), we can create two hash functions <span 
+class="cmmi-12">H</span><sub><span 
+class="cmr-8">1</span></sub> and <span 
+class="cmmi-12">H</span><sub><span 
+class="cmr-8">2</span></sub>, employing
+two different <span 
+class="cmmi-12">B,P </span>pairs, and assume that every time both hash functions return the
+same value actually contain the same string. Of course, this is a probabilistic approach
+that doesn&#8217;t guarantee 100% accuracy, but it works for most (read as &#8220;all&#8221;) practical
+cases.
+ 
+</body></html> 
+
+                                                                                         
+
+
