@@ -1,0 +1,2506 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title></title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html --> 
+<meta name="src" content="lesson.tex"> 
+<meta name="date" content="2017-03-28 09:31:00"> 
+<link rel="stylesheet" type="text/css" href="lesson.css"> 
+<style type="text/css">
+body {
+    margin:40px auto;
+    max-width:650px;
+    line-height:1.6;
+    font-size:18px;
+    color:#444;
+    padding:0 10px
+}
+
+h1,h2,h3 {
+    line-height:1.2
+}
+</style>
+
+
+</head><body 
+>
+<h3 class="likesectionHead"><a 
+ id="x1-1000"></a>Dynamic Programming</h3>
+<!--l. 62--><p class="noindent" >Let us consider a simple question, compute the <span 
+class="cmmi-12">n</span><sup><span 
+class="cmmi-8">th</span></sup> Fibonacci number. The classically bad
+approach is <!--l. 64-->
+<div class="lstlisting" id="listing-1"><span class="label"><a 
+ id="x1-1001r1"></a><span 
+class="cmr-10">1</span></span><span 
+class="cmtt-10">def</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">fib1</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">n</span><span 
+class="cmtt-10">)</span><span 
+class="cmtt-10">:</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-1002r2"></a><span 
+class="cmr-10">2</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">if</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">n</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x003C;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">2:</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-1003r3"></a><span 
+class="cmr-10">3</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">return</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">n</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-1004r4"></a><span 
+class="cmr-10">4</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">else</span><span 
+class="cmtt-10">:</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-1005r5"></a><span 
+class="cmr-10">5</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">return</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">fib</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">n</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">-</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">1)</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">+</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">fib</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">n</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">-</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">2)</span>
+</div>
+<!--l. 72--><p class="noindent" >The runtime of this is 2<sup><span 
+class="cmmi-8">n</span></sup>, as when we compute for each <span 
+class="cmmi-12">n </span>we compute two more. But note that we
+call <span 
+class="cmtt-12">fib </span>on smaller numbers. We call those &#8220;subproblems&#8221; as they are in the same <span 
+class="cmti-12">format </span>of the
+problem we are trying to solve except with smaller inputs.
+<!--l. 77--><p class="noindent" >The above solution is what we call an <span 
+class="cmbx-12">divide and conquer </span>solution as it splits the problem into
+smaller sub-problems which it then solve. Divide and conquer algorithms work well when all the
+subproblems are unique, but when there are <span 
+class="cmbx-12">overlapping subproblems </span>as is the case of the
+Fibonacci&#8217;s, divide and conquer is doing a lot of extra work that it doesn&#8217;t have to. To solve this,
+we use dynamic programming.
+<!--l. 84--><p class="noindent" >Dynamic programming approaches allows us to only solve the <span 
+class="cmbx-12">distinct </span>subproblems
+and drastically decrease the runtime. There are two ways to do this, one is known as
+the top-down memoized approach, and the other is the bottom-up tabular approach:
+<!--l. 88-->
+<div class="lstlisting" id="listing-2"><span class="label"><a 
+ id="x1-1006r1"></a><span 
+class="cmr-10">1</span></span><span 
+class="cmtt-10">cache</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">=</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">{0:</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">1,</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">1:</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">1}</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-1007r2"></a><span 
+class="cmr-10">2</span></span><span 
+class="cmtt-10">def</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">fib2</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">n</span><span 
+class="cmtt-10">)</span><span 
+class="cmtt-10">:</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-1008r3"></a><span 
+class="cmr-10">3</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">if</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">n</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">in</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">cache</span><span 
+class="cmtt-10">:</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-1009r4"></a><span 
+class="cmr-10">4</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">return</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">cache</span><span 
+class="cmtt-10">[</span><span 
+class="cmtt-10">n</span><span 
+class="cmtt-10">]</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-1010r5"></a><span 
+class="cmr-10">5</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">else</span><span 
+class="cmtt-10">:</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-1011r6"></a><span 
+class="cmr-10">6</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">cache</span><span 
+class="cmtt-10">[</span><span 
+class="cmtt-10">n</span><span 
+class="cmtt-10">]</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">=</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">fib2</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">n</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">-</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">1)</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">+</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">fib2</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">n</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">-</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">2)</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-1012r7"></a><span 
+class="cmr-10">7</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">return</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">cache</span><span 
+class="cmtt-10">[</span><span 
+class="cmtt-10">n</span><span 
+class="cmtt-10">]</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-1013r8"></a><span 
+class="cmr-10">8</span></span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-1014r9"></a><span 
+class="cmr-10">9</span></span><span 
+class="cmtt-10">def</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">fib3</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">n</span><span 
+class="cmtt-10">)</span><span 
+class="cmtt-10">:</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-1015r10"></a><span 
+class="cmr-10">10</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">fibs</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">=</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">[0,</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">1]</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-1016r11"></a><span 
+class="cmr-10">11</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">for</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">i</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">in</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">xrange</span><span 
+class="cmtt-10">(2,</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">n</span><span 
+class="cmtt-10">)</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-1017r12"></a><span 
+class="cmr-10">12</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">fibs</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">append</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">fibs</span><span 
+class="cmtt-10">[</span><span 
+class="cmtt-10">i</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">-</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">1]</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">+</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">fibs</span><span 
+class="cmtt-10">[</span><span 
+class="cmtt-10">i</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">-</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">2])</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-1018r13"></a><span 
+class="cmr-10">13</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">return</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">fibs</span><span 
+class="cmtt-10">[-1]</span>
+</div>
+<!--l. 104--><p class="noindent" >In the first example we &#8220;memoize&#8221; or remember the unique subproblems we&#8217;ve solved, and use
+them to solve new problems, and in the second example we solve all the unique subproblems in a
+sorted order and store them in a table.
+<!--l. 108--><p class="noindent" >Memoization is often times easier to do, but creates a lot of memory overhead and is often less
+versatile, as often times we use the structure of the subproblems to our advantage which can
+only be gained by a tabular structure. To see these in action, let us step through some
+examples.
+<!--l. 113--><p class="noindent" >
+<h4 class="likesubsectionHead"><a 
+ id="x1-2000"></a>Matrix Chain Multiplication</h4>
+                                                                                         
+                                                                                         
+<!--l. 115--><p class="noindent" ><span 
+class="cmbx-12">Problem</span>: Given a list of matrices <img 
+src="lesson0x.png" alt="&#x27E8;A1,A2, ...,An &#x27E9;"  class="left" align="middle">, in what order should we multiply so that the
+total number of computations is the lowest.
+<!--l. 119--><p class="noindent" >Subproblem: Given a list of matrices <img 
+src="lesson1x.png" alt="&#x27E8;Ai,Ai+1, ...,Ai+j&#x27E9;"  class="left" align="middle">, how should we parenthesize so that the
+total number of computations is the lowest.
+<!--l. 123--><p class="noindent" >Substructure: In order to parenthesize <img 
+src="lesson2x.png" alt="&#x27E8;Ai, ...,Ai+j&#x27E9;"  class="left" align="middle">, there exists a <span 
+class="cmmi-12">k </span>between <span 
+class="cmmi-12">i </span>and <span 
+class="cmmi-12">j </span>such that
+the total cost of multiplication by doing (<span 
+class="cmmi-12">A</span><sub><span 
+class="cmmi-8">i</span></sub><span 
+class="cmmi-12">A</span><sub><span 
+class="cmmi-8">i</span><span 
+class="cmr-8">+1</span></sub><span 
+class="cmmi-12">&hellip;</span><span 
+class="cmmi-12">A</span><sub><span 
+class="cmmi-8">i</span><span 
+class="cmr-8">+</span><span 
+class="cmmi-8">k</span></sub>)(<span 
+class="cmmi-12">A</span><sub><span 
+class="cmmi-8">i</span><span 
+class="cmr-8">+</span><span 
+class="cmmi-8">k</span><span 
+class="cmr-8">+1</span></sub><span 
+class="cmmi-12">&hellip;</span><span 
+class="cmmi-12">A</span><sub><span 
+class="cmmi-8">i</span><span 
+class="cmr-8">+</span><span 
+class="cmmi-8">j</span></sub>) is the lowest. Note that we
+know the cost of <span 
+class="cmmi-12">A</span><sub><span 
+class="cmmi-8">i</span></sub><span 
+class="cmmi-12">&hellip;</span><span 
+class="cmmi-12">A</span><sub><span 
+class="cmmi-8">i</span><span 
+class="cmr-8">+</span><span 
+class="cmmi-8">k</span></sub> as that is a shorter sequence and we are building a table from the ground
+up.
+<!--l. 129--><p class="noindent" >Base Case: if <span 
+class="cmmi-12">j </span>= 0 then the cost is 0.
+<!--l. 131--><p class="noindent" >Algorithm: <!--l. 132-->
+<div class="lstlisting" id="listing-3"><span class="label"><a 
+ id="x1-2001r1"></a><span 
+class="cmr-10">1</span></span><span 
+class="cmtt-10">def</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">min_operations_needed</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">p</span><span 
+class="cmtt-10">,</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">n</span><span 
+class="cmtt-10">)</span><span 
+class="cmtt-10">:</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-2002r2"></a><span 
+class="cmr-10">2</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">#</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">the</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">p</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">parameter</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">is</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">a</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">list</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">of</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">length</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">n</span><span 
+class="cmtt-10">+1</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">where</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">the</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">ith</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-2003r3"></a><span 
+class="cmr-10">3</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">#</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">matrix</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">(0</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">indexed</span><span 
+class="cmtt-10">)</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">has</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">p</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">p</span><span 
+class="cmtt-10">[</span><span 
+class="cmtt-10">i</span><span 
+class="cmtt-10">]</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">x</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">p</span><span 
+class="cmtt-10">[</span><span 
+class="cmtt-10">i</span><span 
+class="cmtt-10">+1]</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-2004r4"></a><span 
+class="cmr-10">4</span></span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-2005r5"></a><span 
+class="cmr-10">5</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">#</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">min_op_lookup</span><span 
+class="cmtt-10">[</span><span 
+class="cmtt-10">i</span><span 
+class="cmtt-10">][</span><span 
+class="cmtt-10">j</span><span 
+class="cmtt-10">]</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">==</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">minimum</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">number</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">of</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">operations</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">required</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">to</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-2006r6"></a><span 
+class="cmr-10">6</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">#</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">compute</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">A_i</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">...</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">A_i</span><span 
+class="cmtt-10">+</span><span 
+class="cmtt-10">j</span><span 
+class="cmtt-10">)</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-2007r7"></a><span 
+class="cmr-10">7</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">min_op_lookup</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">=</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">[]</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-2008r8"></a><span 
+class="cmr-10">8</span></span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-2009r9"></a><span 
+class="cmr-10">9</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">for</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">i</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">in</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">xrange</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">n</span><span 
+class="cmtt-10">)</span><span 
+class="cmtt-10">:</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-2010r10"></a><span 
+class="cmr-10">10</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">min_op_lookup</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">append</span><span 
+class="cmtt-10">([0])</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">#</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">min_op_lookup</span><span 
+class="cmtt-10">[</span><span 
+class="cmtt-10">i</span><span 
+class="cmtt-10">][0]</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">=</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">0,</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">base</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">case</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-2011r11"></a><span 
+class="cmr-10">11</span></span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-2012r12"></a><span 
+class="cmr-10">12</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">for</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">j</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">in</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">xrange</span><span 
+class="cmtt-10">(1,</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">n</span><span 
+class="cmtt-10">)</span><span 
+class="cmtt-10">:</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">#</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">j</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">is</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">chain</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">length</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-2013r13"></a><span 
+class="cmr-10">13</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">for</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">i</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">in</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">xrange</span><span 
+class="cmtt-10">(0,</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">n</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">-</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">j</span><span 
+class="cmtt-10">)</span><span 
+class="cmtt-10">:</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">#</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">compute</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">min_op_lookup</span><span 
+class="cmtt-10">[</span><span 
+class="cmtt-10">i</span><span 
+class="cmtt-10">][</span><span 
+class="cmtt-10">j</span><span 
+class="cmtt-10">]</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-2014r14"></a><span 
+class="cmr-10">14</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">min_val</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">=</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">1000000</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">#</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">large</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">number</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-2015r15"></a><span 
+class="cmr-10">15</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">for</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">k</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">in</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">xrange</span><span 
+class="cmtt-10">(0,</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">j</span><span 
+class="cmtt-10">)</span><span 
+class="cmtt-10">:</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-2016r16"></a><span 
+class="cmr-10">16</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">divide_at_k</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">=</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">min_op_lookup</span><span 
+class="cmtt-10">[</span><span 
+class="cmtt-10">i</span><span 
+class="cmtt-10">][</span><span 
+class="cmtt-10">k</span><span 
+class="cmtt-10">]</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">+</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-2017r17"></a><span 
+class="cmr-10">17</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">min_op_lookup</span><span 
+class="cmtt-10">[</span><span 
+class="cmtt-10">i</span><span 
+class="cmtt-10">+</span><span 
+class="cmtt-10">k</span><span 
+class="cmtt-10">+1][</span><span 
+class="cmtt-10">j</span><span 
+class="cmtt-10">-</span><span 
+class="cmtt-10">k</span><span 
+class="cmtt-10">-1]</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">+</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-2018r18"></a><span 
+class="cmr-10">18</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">p</span><span 
+class="cmtt-10">[</span><span 
+class="cmtt-10">i</span><span 
+class="cmtt-10">]*</span><span 
+class="cmtt-10">p</span><span 
+class="cmtt-10">[</span><span 
+class="cmtt-10">i</span><span 
+class="cmtt-10">+</span><span 
+class="cmtt-10">k</span><span 
+class="cmtt-10">+1]*</span><span 
+class="cmtt-10">p</span><span 
+class="cmtt-10">[</span><span 
+class="cmtt-10">i</span><span 
+class="cmtt-10">+</span><span 
+class="cmtt-10">j</span><span 
+class="cmtt-10">+1])</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-2019r19"></a><span 
+class="cmr-10">19</span></span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-2020r20"></a><span 
+class="cmr-10">20</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">if</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">divide_at_k</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x003C;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">min_val</span><span 
+class="cmtt-10">:</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-2021r21"></a><span 
+class="cmr-10">21</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">min_val</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">=</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">divide_at_k</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-2022r22"></a><span 
+class="cmr-10">22</span></span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-2023r23"></a><span 
+class="cmr-10">23</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">min_op_lookup</span><span 
+class="cmtt-10">[</span><span 
+class="cmtt-10">i</span><span 
+class="cmtt-10">].</span><span 
+class="cmtt-10">append</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">min_val</span><span 
+class="cmtt-10">)</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-2024r24"></a><span 
+class="cmr-10">24</span></span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-2025r25"></a><span 
+class="cmr-10">25</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">return</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">min_op_lookup</span><span 
+class="cmtt-10">[0][-1]</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">#</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">last</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">element</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">in</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">first</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">row</span>
+</div>
+<!--l. 160--><p class="noindent" >
+<h4 class="likesubsectionHead"><a 
+ id="x1-3000"></a>0-1 Knapsack Problem</h4>
+<!--l. 162--><p class="noindent" ><span 
+class="cmbx-12">Problem</span>: Given a knapsack of capacity <span 
+class="cmmi-12">W</span>, a list of <span 
+class="cmmi-12">n </span>items each with value <span 
+class="cmmi-12">v</span><sub><span 
+class="cmmi-8">i</span></sub> and weight <span 
+class="cmmi-12">w</span><sub><span 
+class="cmmi-8">i</span></sub>, find
+an algorithm to maximize
+<center class="math-display" >
+<img 
+src="lesson3x.png" alt="&sum;n                 &sum;n
+   vixi subject to     wixi and xi &isin; {0,1 }
+i=1                 i=1
+" class="math-display" ></center>
+<!--l. 166--><p class="nopar" >
+<!--l. 168--><p class="noindent" >Subproblem: maximize the list under the constraint that the total weight is less than <span 
+class="cmmi-12">j </span>and only
+use up to item <span 
+class="cmmi-12">i</span>, store the result of 2d array <span 
+class="cmmi-12">dp</span>
+<!--l. 171--><p class="noindent" >Substructure: when we compute <span 
+class="cmmi-12">dp</span>[<span 
+class="cmmi-12">i</span>][<span 
+class="cmmi-12">j</span>], we can either include the <span 
+class="cmmi-12">i</span><sup><span 
+class="cmmi-8">th</span></sup> item or not. If <span 
+class="cmmi-12">w</span><sub>
+<span 
+class="cmmi-8">i</span></sub> <span 
+class="cmmi-12">&#x003E; j</span>, then it
+is equal to <span 
+class="cmmi-12">dp</span>[<span 
+class="cmmi-12">i </span><span 
+class="cmsy-10x-x-120">&minus; </span>1][<span 
+class="cmmi-12">j</span>]. If it is not, then we have
+<center class="math-display" >
+<img 
+src="lesson4x.png" alt="dp[i][j] = max (m [i &minus; 1, j],m [i &minus; 1,j &minus; w ] + v )
+                                       i    i
+" class="math-display" ></center>
+<!--l. 176--><p class="nopar" >
+                                                                                         
+                                                                                         
+<!--l. 178--><p class="noindent" >Base case: using no items means we have 0 value
+<!--l. 180--><p class="noindent" >Algorithm: <!--l. 181-->
+<div class="lstlisting" id="listing-4"><span class="label"><a 
+ id="x1-3001r1"></a><span 
+class="cmr-10">1</span></span><span 
+class="cmtt-10">def</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">max_value</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">v</span><span 
+class="cmtt-10">,</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">w</span><span 
+class="cmtt-10">,</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">n</span><span 
+class="cmtt-10">,</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">W</span><span 
+class="cmtt-10">)</span><span 
+class="cmtt-10">:</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-3002r2"></a><span 
+class="cmr-10">2</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">#</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">v</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">=</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">list</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">of</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">values</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-3003r3"></a><span 
+class="cmr-10">3</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">#</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">w</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">=</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">list</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">of</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">weights</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-3004r4"></a><span 
+class="cmr-10">4</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">#</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">n</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">=</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">number</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">of</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">items</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-3005r5"></a><span 
+class="cmr-10">5</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">#</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">W</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">=</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">capacity</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">of</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">knapsack</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-3006r6"></a><span 
+class="cmr-10">6</span></span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-3007r7"></a><span 
+class="cmr-10">7</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">dp</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">=</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">[[0</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">for</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">i</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">in</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">xrange</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">W</span><span 
+class="cmtt-10">)</span><span 
+class="cmtt-10">]</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">for</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">j</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">in</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">xrange</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">n</span><span 
+class="cmtt-10">)</span><span 
+class="cmtt-10">]</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">#</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">initialize</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">to</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">n</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">x</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">W</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-3008r8"></a><span 
+class="cmr-10">8</span></span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-3009r9"></a><span 
+class="cmr-10">9</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">for</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">i</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">in</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">xrange</span><span 
+class="cmtt-10">(1,</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">n</span><span 
+class="cmtt-10">)</span><span 
+class="cmtt-10">:</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-3010r10"></a><span 
+class="cmr-10">10</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">for</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">j</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">in</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">xrange</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">W</span><span 
+class="cmtt-10">)</span><span 
+class="cmtt-10">:</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-3011r11"></a><span 
+class="cmr-10">11</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">if</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">w</span><span 
+class="cmtt-10">[</span><span 
+class="cmtt-10">i</span><span 
+class="cmtt-10">]</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x003E;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">j</span><span 
+class="cmtt-10">:</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-3012r12"></a><span 
+class="cmr-10">12</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">dp</span><span 
+class="cmtt-10">[</span><span 
+class="cmtt-10">i</span><span 
+class="cmtt-10">][</span><span 
+class="cmtt-10">j</span><span 
+class="cmtt-10">]</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">=</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">dp</span><span 
+class="cmtt-10">[</span><span 
+class="cmtt-10">i</span><span 
+class="cmtt-10">-1][</span><span 
+class="cmtt-10">j</span><span 
+class="cmtt-10">]</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-3013r13"></a><span 
+class="cmr-10">13</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">else</span><span 
+class="cmtt-10">:</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-3014r14"></a><span 
+class="cmr-10">14</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">dp</span><span 
+class="cmtt-10">[</span><span 
+class="cmtt-10">i</span><span 
+class="cmtt-10">][</span><span 
+class="cmtt-10">j</span><span 
+class="cmtt-10">]</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">=</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">max</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">dp</span><span 
+class="cmtt-10">[</span><span 
+class="cmtt-10">i</span><span 
+class="cmtt-10">-1][</span><span 
+class="cmtt-10">j</span><span 
+class="cmtt-10">],</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">dp</span><span 
+class="cmtt-10">[</span><span 
+class="cmtt-10">i</span><span 
+class="cmtt-10">-1][</span><span 
+class="cmtt-10">j</span><span 
+class="cmtt-10">-</span><span 
+class="cmtt-10">w</span><span 
+class="cmtt-10">[</span><span 
+class="cmtt-10">i</span><span 
+class="cmtt-10">]]</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">+</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">v</span><span 
+class="cmtt-10">[</span><span 
+class="cmtt-10">i</span><span 
+class="cmtt-10">])</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-3015r15"></a><span 
+class="cmr-10">15</span></span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-3016r16"></a><span 
+class="cmr-10">16</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">return</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">dp</span><span 
+class="cmtt-10">[</span><span 
+class="cmtt-10">n</span><span 
+class="cmtt-10">][</span><span 
+class="cmtt-10">W</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">-</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">1]</span>
+</div>
+<!--l. 200--><p class="noindent" >
+<h4 class="likesubsectionHead"><a 
+ id="x1-4000"></a>Edit Distance</h4>
+<!--l. 202--><p class="noindent" ><span 
+class="cmbx-12">Problem</span>: Given two strings, how many <span 
+class="cmti-12">edits </span>do we need to change one into the other (edits
+include insertion, deletion and substitution).
+<!--l. 205--><p class="noindent" >Subproblem: in order to edit one string to fit another, we must edit its substring to fit the
+substring of the other.
+<!--l. 208--><p class="noindent" >Substructure: at every letter, we can either insert, delete or substitute, we know the
+cost to get the prefix of the two strings to be the same, so we pick the path that is the
+easiest.
+<!--l. 212--><p class="noindent" >Base Case: if one string is empty then the edit distance is the length of the other.
+<!--l. 215--><p class="noindent" >Algorithm: <!--l. 216-->
+<div class="lstlisting" id="listing-5"><span class="label"><a 
+ id="x1-4001r1"></a><span 
+class="cmr-10">1</span></span><span 
+class="cmtt-10">int</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">levenshtein_distance</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">string</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&amp;</span><span 
+class="cmtt-10">a</span><span 
+class="cmtt-10">,</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">string</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&amp;</span><span 
+class="cmtt-10">b</span><span 
+class="cmtt-10">)</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">{</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-4002r2"></a><span 
+class="cmr-10">2</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">computes</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">the</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">levenshtein</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">edit</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">distance</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">insertion</span><span 
+class="cmtt-10">,</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">deletion</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">and</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-4003r3"></a><span 
+class="cmr-10">3</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">substitution</span><span 
+class="cmtt-10">)</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">of</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">two</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">strings</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-4004r4"></a><span 
+class="cmr-10">4</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">int</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">dist_lookup</span><span 
+class="cmtt-10">[</span><span 
+class="cmtt-10">a</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">size</span><span 
+class="cmtt-10">()</span><span 
+class="cmtt-10">][</span><span 
+class="cmtt-10">b</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">size</span><span 
+class="cmtt-10">()</span><span 
+class="cmtt-10">];</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-4005r5"></a><span 
+class="cmr-10">5</span></span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-4006r6"></a><span 
+class="cmr-10">6</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">for</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">int</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">i</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">=</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">0</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">i</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x003C;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">a</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">size</span><span 
+class="cmtt-10">()</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">i</span><span 
+class="cmtt-10">++)</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">{</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-4007r7"></a><span 
+class="cmr-10">7</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">dist_lookup</span><span 
+class="cmtt-10">[</span><span 
+class="cmtt-10">i</span><span 
+class="cmtt-10">][0]</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">=</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">i</span><span 
+class="cmtt-10">;</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-4008r8"></a><span 
+class="cmr-10">8</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">}</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-4009r9"></a><span 
+class="cmr-10">9</span></span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-4010r10"></a><span 
+class="cmr-10">10</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">for</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">int</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">j</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">=</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">0</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">j</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x003C;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">b</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">size</span><span 
+class="cmtt-10">()</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">j</span><span 
+class="cmtt-10">++)</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">{</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-4011r11"></a><span 
+class="cmr-10">11</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">dist_lookup</span><span 
+class="cmtt-10">[0][</span><span 
+class="cmtt-10">j</span><span 
+class="cmtt-10">]</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">=</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">j</span><span 
+class="cmtt-10">;</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-4012r12"></a><span 
+class="cmr-10">12</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">}</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-4013r13"></a><span 
+class="cmr-10">13</span></span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-4014r14"></a><span 
+class="cmr-10">14</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">for</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">int</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">i</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">=</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">1</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">i</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x003C;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">a</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">size</span><span 
+class="cmtt-10">()</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">i</span><span 
+class="cmtt-10">++)</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">{</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-4015r15"></a><span 
+class="cmr-10">15</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">for</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">int</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">j</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">=</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">1</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">j</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x003C;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">b</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">size</span><span 
+class="cmtt-10">()</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">j</span><span 
+class="cmtt-10">++)</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">{</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-4016r16"></a><span 
+class="cmr-10">16</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">int</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">sub_cost</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">=</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">a</span><span 
+class="cmtt-10">[</span><span 
+class="cmtt-10">i</span><span 
+class="cmtt-10">]</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">==</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">b</span><span 
+class="cmtt-10">[</span><span 
+class="cmtt-10">j</span><span 
+class="cmtt-10">])</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">?</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">0</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">:</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">1;</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-4017r17"></a><span 
+class="cmr-10">17</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">int</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">cost</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">=</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">dist_lookup</span><span 
+class="cmtt-10">[</span><span 
+class="cmtt-10">i</span><span 
+class="cmtt-10">-1][</span><span 
+class="cmtt-10">j</span><span 
+class="cmtt-10">]</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">+</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">1;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">deletion</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-4018r18"></a><span 
+class="cmr-10">18</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">cost</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">=</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">min</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">cost</span><span 
+class="cmtt-10">,</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">dist_lookup</span><span 
+class="cmtt-10">[</span><span 
+class="cmtt-10">i</span><span 
+class="cmtt-10">][</span><span 
+class="cmtt-10">j</span><span 
+class="cmtt-10">-1]</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">+</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">1)</span><span 
+class="cmtt-10">;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">insertion</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-4019r19"></a><span 
+class="cmr-10">19</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">substitution</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-4020r20"></a><span 
+class="cmr-10">20</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">cost</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">=</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">min</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">cost</span><span 
+class="cmtt-10">,</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">dist_lookup</span><span 
+class="cmtt-10">[</span><span 
+class="cmtt-10">i</span><span 
+class="cmtt-10">-1][</span><span 
+class="cmtt-10">j</span><span 
+class="cmtt-10">-1]</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">+</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">sub_cost</span><span 
+class="cmtt-10">)</span><span 
+class="cmtt-10">;</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-4021r21"></a><span 
+class="cmr-10">21</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">dist_lookup</span><span 
+class="cmtt-10">[</span><span 
+class="cmtt-10">i</span><span 
+class="cmtt-10">][</span><span 
+class="cmtt-10">j</span><span 
+class="cmtt-10">]</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">=</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">cost</span><span 
+class="cmtt-10">;</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-4022r22"></a><span 
+class="cmr-10">22</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">}</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-4023r23"></a><span 
+class="cmr-10">23</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">}</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-4024r24"></a><span 
+class="cmr-10">24</span></span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-4025r25"></a><span 
+class="cmr-10">25</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">return</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">dist_lookup</span><span 
+class="cmtt-10">[</span><span 
+class="cmtt-10">a</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">size</span><span 
+class="cmtt-10">()</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">-</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">1][</span><span 
+class="cmtt-10">b</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">size</span><span 
+class="cmtt-10">()</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">-</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">1];</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-4026r26"></a><span 
+class="cmr-10">26</span></span><span 
+class="cmtt-10">}</span>
+</div>
+<!--l. 245--><p class="noindent" >
+<h4 class="likesubsectionHead"><a 
+ id="x1-5000"></a>Longest Increasing Subsequence</h4>
+<!--l. 247--><p class="noindent" ><span 
+class="cmbx-12">Problem</span>: Given an array of integers, define a subsequence as the result of deleting some elements
+in the array without changing the order of the remaining elements, what is the longest increasing
+subsequence of any given array
+<!--l. 252--><p class="noindent" >This problem is slightly more involved, we calculate the longest increasing subsequence of length 1,
+2, 3, ... up to the longest one that exists. We also keep track of the values at the endpoints, which
+are the lowest last number of the LIS of length <span 
+class="cmmi-12">i</span>. And since we are working with strictly increasing
+subsequences, the list of endpoints will be sorted, which allows us to perform a binary search,
+reducing the total runtime to <span 
+class="cmmi-12">n</span> log <span 
+class="cmmi-12">n</span>
+<!--l. 259-->
+                                                                                         
+                                                                                         
+<div class="lstlisting" id="listing-6"><span class="label"><a 
+ id="x1-5001r1"></a><span 
+class="cmr-10">1</span></span><span 
+class="cmtt-10">int</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">LIS</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">vector</span><span 
+class="cmtt-10">&#x003C;</span><span 
+class="cmtt-10">int</span><span 
+class="cmtt-10">&#x003E;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">a</span><span 
+class="cmtt-10">)</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">{</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-5002r2"></a><span 
+class="cmr-10">2</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">int</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">endpoints</span><span 
+class="cmtt-10">[</span><span 
+class="cmtt-10">a</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">size</span><span 
+class="cmtt-10">()</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">+</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">1];</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">endpoints</span><span 
+class="cmtt-10">[</span><span 
+class="cmtt-10">j</span><span 
+class="cmtt-10">]</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">is</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">the</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">index</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">of</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">the</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">endpoint</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">of</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">lis</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">of</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">length</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">j</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-5003r3"></a><span 
+class="cmr-10">3</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">int</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">lis_len</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">=</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">0;</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-5004r4"></a><span 
+class="cmr-10">4</span></span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-5005r5"></a><span 
+class="cmr-10">5</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">for</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">int</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">i</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">=</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">0</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">i</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x003C;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">a</span><span 
+class="cmtt-10">.</span><span 
+class="cmtt-10">size</span><span 
+class="cmtt-10">()</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">i</span><span 
+class="cmtt-10">++)</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">{</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-5006r6"></a><span 
+class="cmr-10">6</span></span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-5007r7"></a><span 
+class="cmr-10">7</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">binary</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">search</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">for</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">the</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">largest</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">j</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">such</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">that</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">the</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">endpoint</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">value</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">is</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">less</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-5008r8"></a><span 
+class="cmr-10">8</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">than</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">the</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">current</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">value</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-5009r9"></a><span 
+class="cmr-10">9</span></span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-5010r10"></a><span 
+class="cmr-10">10</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">int</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">lo</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">=</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">1;</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-5011r11"></a><span 
+class="cmr-10">11</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">int</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">hi</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">=</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">lis_len</span><span 
+class="cmtt-10">;</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-5012r12"></a><span 
+class="cmr-10">12</span></span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-5013r13"></a><span 
+class="cmr-10">13</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">while</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">lo</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x003C;=</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">hi</span><span 
+class="cmtt-10">)</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">{</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-5014r14"></a><span 
+class="cmr-10">14</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">int</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">mid</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">=</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">lo</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">+</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">hi</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">+</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">1)</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">/</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">2;</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-5015r15"></a><span 
+class="cmr-10">15</span></span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-5016r16"></a><span 
+class="cmr-10">16</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">if</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">a</span><span 
+class="cmtt-10">[</span><span 
+class="cmtt-10">endpoints</span><span 
+class="cmtt-10">[</span><span 
+class="cmtt-10">mid</span><span 
+class="cmtt-10">]]</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x003C;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">a</span><span 
+class="cmtt-10">[</span><span 
+class="cmtt-10">i</span><span 
+class="cmtt-10">])</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">{</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-5017r17"></a><span 
+class="cmr-10">17</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">lo</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">=</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">mid</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">+</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">1;</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-5018r18"></a><span 
+class="cmr-10">18</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">}</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-5019r19"></a><span 
+class="cmr-10">19</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">else</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">{</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-5020r20"></a><span 
+class="cmr-10">20</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">hi</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">=</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">mid</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">-</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">1;</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-5021r21"></a><span 
+class="cmr-10">21</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">}</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-5022r22"></a><span 
+class="cmr-10">22</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">}</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-5023r23"></a><span 
+class="cmr-10">23</span></span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-5024r24"></a><span 
+class="cmr-10">24</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">//</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">lo</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">=</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">length</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">of</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">longest</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">prefix</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">of</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">a</span><span 
+class="cmtt-10">[</span><span 
+class="cmtt-10">i</span><span 
+class="cmtt-10">]</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">+</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">1</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-5025r25"></a><span 
+class="cmr-10">25</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">endpoints</span><span 
+class="cmtt-10">[</span><span 
+class="cmtt-10">lo</span><span 
+class="cmtt-10">]</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">=</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">i</span><span 
+class="cmtt-10">;</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-5026r26"></a><span 
+class="cmr-10">26</span></span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-5027r27"></a><span 
+class="cmr-10">27</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">if</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">(</span><span 
+class="cmtt-10">lo</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x003E;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">lis_len</span><span 
+class="cmtt-10">)</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">{</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-5028r28"></a><span 
+class="cmr-10">28</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">lis_len</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">=</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">lo</span><span 
+class="cmtt-10">;</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-5029r29"></a><span 
+class="cmr-10">29</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">}</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-5030r30"></a><span 
+class="cmr-10">30</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">}</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-5031r31"></a><span 
+class="cmr-10">31</span></span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-5032r32"></a><span 
+class="cmr-10">32</span></span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">return</span><span 
+class="cmtt-10">&#x00A0;</span><span 
+class="cmtt-10">lis_len</span><span 
+class="cmtt-10">;</span><span 
+class="cmtt-10">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-5033r33"></a><span 
+class="cmr-10">33</span></span><span 
+class="cmtt-10">}</span>
+</div>
+<!--l. 294--><p class="noindent" >
+<h4 class="likesubsectionHead"><a 
+ id="x1-6000"></a>Conclusion</h4>
+<!--l. 296--><p class="noindent" >These problem are what are known as the classic dynamic programming problems. There are many
+more as DP is more of a mindset rather than a specific technique. But in general DP can be
+applied to problems with the following two properties:
+      <ul class="itemize1">
+      <li class="itemize">Overlapping  Subproblems:  the  larger  problem  can  be  solved  by  solving  the  same
+      problem with smaller inputs
+      </li>
+      <li class="itemize">Optimal Substructure: the optimal solution to the large problem is comprised of the
+      optimal solutions of those smaller problems</li></ul>
+<!--l. 306--><p class="noindent" >For problems with those properties, our next step is to find the base case and the recurrence
+relationship (mathematically), and finally we write up the code.
+ 
+</body></html> 
+
+                                                                                         
+
+
