@@ -1,14 +1,12 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=latex 2017.1.8)  28 MAR 2017 09:31
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.1.8)  27 MAR 2017 14:30
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**\makeatletter\def\HCode{\futurelet\HCode\HChar}\def\HChar{\ifx"\HCode\def\HCo
-de"##1"{\Link##1}\expandafter\HCode\else\expandafter\Link\fi}\def\Link#1.a.b.c.
-{\g@addto@macro\@documentclasshook{\RequirePackage[#1,html]{tex4ht}}\let\HCode\
-documentstyle\def\documentstyle{\let\documentstyle\HCode\expandafter\def\csname
- tex4ht\endcsname{#1,html}\def\HCode####1{\documentstyle[tex4ht,}\@ifnextchar[{
-\HCode}{\documentstyle[tex4ht]}}}\makeatother\HCode .a.b.c.\input  lesson.tex
-(./lesson.tex (/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+**lesson.tex
+(./lesson.tex
+LaTeX2e <2016/02/01>
+Babel <3.9q> and hyphenation patterns for 81 language(s) loaded.
+(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
 (/usr/share/texlive/texmf-dist/tex/latex/base/size12.clo
 File: size12.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
@@ -25,30 +23,16 @@ File: size12.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 \belowcaptionskip=\skip42
 \bibindent=\dimen102
 )
-(/usr/share/texmf/tex/generic/tex4ht/tex4ht.sty
-version 2008-10-27-17:23
-Package: tex4ht 
---------------------------------------
---- Note --- for _ at preamble, use the command line option `early_'
---------------------------------------
---------------------------------------
---- Note --- for ^ at preamble, use the command line option `early^'
---------------------------------------
-\tmp:toks=\toks14
-)
-(/usr/share/texmf/tex/generic/tex4ht/usepackage.4ht
-version 2009-05-21-09:32
-)
 (/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
 Package: geometry 2010/09/12 v5.6 Page Geometry
 
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
 Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
-\KV@toks@=\toks15
+\KV@toks@=\toks14
 )
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifpdf.sty
 Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
-Package ifpdf Info: pdfTeX in PDF mode is not detected.
+Package ifpdf Info: pdfTeX in PDF mode is detected.
 )
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifvtex.sty
 Package: ifvtex 2010/03/01 v1.5 Detect VTeX and its facilities (HO)
@@ -68,12 +52,12 @@ Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 \Gm@layoutheight=\dimen108
 \Gm@layouthoffset=\dimen109
 \Gm@layoutvoffset=\dimen110
-\Gm@dimlist=\toks16
+\Gm@dimlist=\toks15
 )
 (/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
 Package: inputenc 2015/03/17 v1.2c Input encoding file
-\inpenc@prehook=\toks17
-\inpenc@posthook=\toks18
+\inpenc@prehook=\toks16
+\inpenc@posthook=\toks17
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
@@ -383,7 +367,7 @@ Now handling font encoding U ...
 (/usr/share/texlive/texmf-dist/tex/latex/listings/listings.sty
 \lst@mode=\count90
 \lst@gtempboxa=\box26
-\lst@token=\toks19
+\lst@token=\toks18
 \lst@length=\count91
 \lst@currlwidth=\dimen111
 \lst@column=\count92
@@ -411,13 +395,18 @@ Package: color 2016/01/03 v1.1b Standard LaTeX Color (DPC)
 (/usr/share/texlive/texmf-dist/tex/latex/latexconfig/color.cfg
 File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
 )
-Package color Info: Driver file: dvips.def on input line 143.
+Package color Info: Driver file: pdftex.def on input line 143.
 
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/dvips.def
-File: dvips.def 2015/12/30 v3.0k Driver-dependent file (DPC,SPQR)
+(/usr/share/texlive/texmf-dist/tex/latex/pdftex-def/pdftex.def
+File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
 )
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/dvipsnam.def
-File: dvipsnam.def 2015/12/30 v3.0k Driver-dependent file (DPC,SPQR)
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
+)
+\Gread@gobject=\count98
 ))
 (/usr/share/texlive/texmf-dist/tex/latex/base/textcomp.sty
 Package: textcomp 2005/09/27 v1.99g Standard LaTeX package
@@ -580,8 +569,8 @@ Package: setspace 2011/12/19 v6.7a set line spacing
 )
 (/usr/share/texlive/texmf-dist/tex/latex/tools/verbatim.sty
 Package: verbatim 2014/10/28 v1.5q LaTeX2e package for verbatim enhancements
-\every@verbatim=\toks20
-\verbatim@line=\toks21
+\every@verbatim=\toks19
+\verbatim@line=\toks20
 \verbatim@in@stream=\read1
 )
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
@@ -596,7 +585,7 @@ Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
 (/usr/share/texlive/texmf-dist/tex/latex/latexconfig/graphics.cfg
 File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
 )
-Package graphics Info: Driver file: dvips.def on input line 95.
+Package graphics Info: Driver file: pdftex.def on input line 95.
 )
 \Gin@req@height=\dimen115
 \Gin@req@width=\dimen116
@@ -610,9 +599,9 @@ Package: footnote 1997/01/28 1.13 Save footnotes around boxes
 Package: enumitem 2011/09/28 v3.5.2 Customized lists
 \labelindent=\skip43
 \enit@outerparindent=\dimen118
-\enit@toks=\toks22
+\enit@toks=\toks21
 \enit@inbox=\box29
-\enitdp@description=\count98
+\enitdp@description=\count99
 )
 (/usr/share/texlive/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
 \fancy@headwidth=\skip44
@@ -635,7 +624,7 @@ Package: amstext 2000/06/29 v2.01 AMS text
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
-\@emptytoks=\toks23
+\@emptytoks=\toks22
 \ex@=\dimen119
 ))
 (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty
@@ -645,13 +634,13 @@ Package: amsbsy 1999/11/29 v1.2d Bold Symbols
 (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty
 Package: amsopn 1999/12/14 v2.01 operator names
 )
-\inf@bad=\count99
+\inf@bad=\count100
 LaTeX Info: Redefining \frac on input line 199.
-\uproot@=\count100
-\leftroot@=\count101
+\uproot@=\count101
+\leftroot@=\count102
 LaTeX Info: Redefining \overline on input line 297.
-\classnum@=\count102
-\DOTSCASE@=\count103
+\classnum@=\count103
+\DOTSCASE@=\count104
 LaTeX Info: Redefining \ldots on input line 394.
 LaTeX Info: Redefining \dots on input line 397.
 LaTeX Info: Redefining \cdots on input line 518.
@@ -660,404 +649,32 @@ LaTeX Info: Redefining \cdots on input line 518.
 \big@size=\dimen121
 LaTeX Font Info:    Redeclaring font encoding OML on input line 630.
 LaTeX Font Info:    Redeclaring font encoding OMS on input line 631.
-\macc@depth=\count104
-\c@MaxMatrixCols=\count105
+\macc@depth=\count105
+\c@MaxMatrixCols=\count106
 \dotsspace@=\muskip10
-\c@parentequation=\count106
-\dspbrk@lvl=\count107
-\tag@help=\toks24
-\row@=\count108
-\column@=\count109
-\maxfields@=\count110
-\andhelp@=\toks25
+\c@parentequation=\count107
+\dspbrk@lvl=\count108
+\tag@help=\toks23
+\row@=\count109
+\column@=\count110
+\maxfields@=\count111
+\andhelp@=\toks24
 \eqnshift@=\dimen122
 \alignsep@=\dimen123
 \tagshift@=\dimen124
 \tagwidth@=\dimen125
 \totwidth@=\dimen126
 \lineht@=\dimen127
-\@envbody=\toks26
+\@envbody=\toks25
 \multlinegap=\skip54
 \multlinetaggap=\skip55
-\mathdisplay@stack=\toks27
+\mathdisplay@stack=\toks26
 LaTeX Info: Redefining \[ on input line 2735.
 LaTeX Info: Redefining \] on input line 2736.
 )
 (/usr/share/texlive/texmf-dist/tex/latex/parskip/parskip.sty
 Package: parskip 2001/04/09 non-zero parskip adjustments
-)
-(/usr/share/texmf/tex/generic/tex4ht/tex4ht.4ht
-version 2009-01-07-07:11
---------------------------------------
---- Note --- for additional information, use the command line option `info'
---------------------------------------
-
-::::::::::::::::::::::::::::::::::::::::::
- TeX4ht info is available in the log file 
-::::::::::::::::::::::::::::::::::::::::::
-) (/usr/share/texmf/tex/generic/tex4ht/tex4ht.sty
-version 2008-10-27-17:23
-
---- needs --- tex4ht lesson ---
-\tmp:cnt=\count111
-\openout15 = `lesson.tmp'.
-
-(./lesson.tmp)
-\tmp:dim=\skip56
---------------------------------------
---- Note --- for XML code, use the command line option `xml' or `xhtml'
---------------------------------------
- (./lesson.xref)
-\:refout=\write3
-\openout3 = `lesson.xref'.
-
- (/usr/share/texmf/tex/generic/tex4ht/html4.4ht
-version 2009-05-18-23:01
---------------------------------------
---- Note --- to remove the <?xml version=...?> processing instruction use the c
-ommand line option `no-VERSION'
---------------------------------------
---------------------------------------
---- Note --- to remove the DOCTYPE declaration use the command line option `no-
-DOCTYPE'
---------------------------------------
-)
-(/usr/share/texmf/tex/generic/tex4ht/html4-math.4ht
-version 2009-05-18-23:01
-)
---------------------------------------
---- Note --- for marking of the base font, use the command line option `fonts+'
-
---------------------------------------
---------------------------------------
---- Note --- for non active _, use the command line option `no_'
---------------------------------------
---------------------------------------
---- Note --- for _ of catcode 13, use the command line option `_13'
---------------------------------------
---------------------------------------
---- Note --- for non active ^, use the command line option `no^'
---------------------------------------
---------------------------------------
---- Note --- for ^ of catcode 13, use the command line option `^13'
---------------------------------------
-
-(/usr/share/texmf/tex/generic/tex4ht/html4.4ht
-version 2009-05-18-23:01
---------------------------------------
---- Note --- for alternative charset, use the command line option `charset=...'
-
---------------------------------------
---------------------------------------
---- Note --- to ignore CSS font decoration, use the `NoFonts' command line opti
-on
---------------------------------------
---------------------------------------
---- Note --- for jpg bitmaps of pictures, use the `jpg' command line option. (C
-haracter bitmaps are controled only by `g' records of tex4ht.env and `-g' switc
-hes of tex4ht.c) 
---------------------------------------
---------------------------------------
---- Note --- for gif bitmaps of pictures, use the `gif' command line option. (C
-haracter bitmaps are controled only by `g' records of tex4ht.env and `-g' switc
-hes of tex4ht.c) 
---------------------------------------
---------------------------------------
---- Note --- for content and toc in 2 frames, use the command line option `fram
-es'
---------------------------------------
---------------------------------------
---- Note --- for content, toc, and footnotes in 3 frames, use the command line 
-option `frames-fn'
---------------------------------------
---------------------------------------
---- Note --- for file extension name xht, use the command line option `xht'
---------------------------------------
-TeX4ht package options: html
---------------------------------------
---- Note --- to ignore CSS code, use the command line option `-css
---------------------------------------
---------------------------------------
---- Note --- for inline CSS code, use the command line option `css-in'
---------------------------------------
---------------------------------------
---- Note --- for pop ups on mouse over, use the command line option `mouseover'
-
---------------------------------------
---------------------------------------
---- Note --- for addressing images in a subdirectory, use the command line opti
-on `imgdir:.../'
---------------------------------------
-)
-(/usr/share/texmf/tex/generic/tex4ht/html4-math.4ht
-version 2009-05-18-23:01
-)
-\:tokwrite=\toks28
-\:tokpage=\toks29
---------------------------------------
---- Note --- for back links to toc, use the command line option `sections+'
---------------------------------------
---------------------------------------
---- Note --- for linear crosslinks of pages, use the command line option `next'
-
---------------------------------------
-\openout15 = `lesson.4ct'.
-
-\:tocout=\write4
-\openout4 = `lesson.4tc'.
-
-
-(/usr/share/texmf/tex/generic/tex4ht/html4.4ht
-version 2009-05-18-23:01
-)
-(/usr/share/texmf/tex/generic/tex4ht/html4-math.4ht
-version 2009-05-18-23:01
-)
-(/usr/share/texmf/tex/generic/tex4ht/latex.4ht
-version 2009-05-21-09:32
---------------------------------------
---- Note --- for links into captions, instead of float heads, use the command l
-ine option `refcaption'
---------------------------------------
-
-(/usr/share/texmf/tex/generic/tex4ht/html4.4ht
-version 2009-05-18-23:01
---------------------------------------
---- Note --- For mini tocs immediately aftter the header use the command line o
-ption `minitoc<'
---------------------------------------
---------------------------------------
---- Note --- for enumerated list elements with valued data, use the command lin
-e option `enumerate+'
---------------------------------------
---------------------------------------
---- Note --- for enumerated list elements li's with value attributes, use the c
-ommand line option `enumerate-'
---------------------------------------
---------------------------------------
---- Note --- for CSS2 code, use the command line option `css2'
---------------------------------------
---------------------------------------
---- Note --- for pictorial tabular, use the command line option `pic-tabular'
---------------------------------------
---------------------------------------
---- Note --- for bitmap fbox'es, use the command line option `pic-fbox'
---------------------------------------
---------------------------------------
---- Note --- for bitmap framebox'es, use the command line option `pic-framebox'
-
---------------------------------------
---------------------------------------
---- Note --- for inline footnotes use command line option `fn-in'
---------------------------------------
---------------------------------------
---- Note --- for tracing of latex font commands, use the command line option `f
-onts'
---------------------------------------
---------------------------------------
---- Note --- for width specifications of tabular p entries, use the `p-width' c
-ommand line option or a configuration similar to \Configure{HColWidth}{\HCode{ 
-style="width:\HColWidth"}}
---------------------------------------
-)
-(/usr/share/texmf/tex/generic/tex4ht/html4-math.4ht
-version 2009-05-18-23:01
---------------------------------------
---- Note --- for pictorial eqnarray, use the command line option `pic-eqnarray'
-
---------------------------------------
---------------------------------------
---- Note --- for pictorial array, use the command line option `pic-array'
---------------------------------------
---------------------------------------
---- Note --- for pictorial $...$ environments, use the command line option `pic
--m' (not recommended!!)
---------------------------------------
---------------------------------------
---- Note --- for pictorial $...$ and $$...$$ environments with latex alt, use t
-he command line option `pic-m+' (not safe!!)
---------------------------------------
---------------------------------------
---- Note --- for pictorial array, use the command line option `pic-array'
---------------------------------------
-))
-(/usr/share/texmf/tex/generic/tex4ht/fontmath.4ht
-version 2009-05-21-09:32
-
-(/usr/share/texmf/tex/generic/tex4ht/html4.4ht
-version 2009-05-18-23:01
-)
-(/usr/share/texmf/tex/generic/tex4ht/html4-math.4ht
-version 2009-05-18-23:01
-))
-(/usr/share/texmf/tex/generic/tex4ht/article.4ht
-version 2009-05-21-09:32
-
-(/usr/share/texmf/tex/generic/tex4ht/html4.4ht
-version 2009-05-18-23:01
---------------------------------------
---- Note --- for automatic sectioning pagination, use the command line option `
-1', `2', `3', '4', '5', '6', or '7'
---------------------------------------
---------------------------------------
---- Note --- for files named derived from section titles, use the command line 
-option `sec-filename'
---------------------------------------
---------------------------------------
---- Note --- for i-columns index, use the command line option `index=i' (e.g., 
-index=2)
---------------------------------------
-)
-(/usr/share/texmf/tex/generic/tex4ht/html4-math.4ht
-version 2009-05-18-23:01
-))
-(/usr/share/texmf/tex/generic/tex4ht/inputenc.4ht
-version 2009-05-21-09:32
-
-(/usr/share/texmf/tex/generic/tex4ht/html4.4ht
-version 2009-05-18-23:01
-)
-(/usr/share/texmf/tex/generic/tex4ht/html4-math.4ht
-version 2009-05-18-23:01
-))
-(/usr/share/texmf/tex/generic/tex4ht/utf8.4ht
-version 2009-05-21-09:32
-
-(/usr/share/texmf/tex/generic/tex4ht/html4.4ht
-version 2009-05-18-23:01
-)
-(/usr/share/texmf/tex/generic/tex4ht/html4-math.4ht
-version 2009-05-18-23:01
-))
-(/usr/share/texmf/tex/generic/tex4ht/listings.4ht
-version 2009-05-21-09:32
-
-(/usr/share/texmf/tex/generic/tex4ht/html4.4ht
-version 2009-05-18-23:01
---------------------------------------
---- Note --- to ensure proper alignments use fixed size fonts (see listings.dtx
-)
---------------------------------------
-)
-(/usr/share/texmf/tex/generic/tex4ht/html4-math.4ht
-version 2009-05-18-23:01
-))
-(/usr/share/texmf/tex/generic/tex4ht/color.4ht
-version 2009-05-21-09:32
-
-(/usr/share/texmf/tex/generic/tex4ht/html4.4ht
-version 2009-05-18-23:01
-)
-(/usr/share/texmf/tex/generic/tex4ht/html4-math.4ht
-version 2009-05-18-23:01
-))
-(/usr/share/texmf/tex/generic/tex4ht/dvips.4ht
-version 2009-05-21-09:32
-
-(/usr/share/texmf/tex/generic/tex4ht/html4.4ht
-version 2009-05-18-23:01
-)
-(/usr/share/texmf/tex/generic/tex4ht/html4-math.4ht
-version 2009-05-18-23:01
-))
-(/usr/share/texmf/tex/generic/tex4ht/dvipsnam.4ht
-version 2009-05-21-09:32
-
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/dvipsnam.def)
-(/usr/share/texmf/tex/generic/tex4ht/html4.4ht
-version 2009-05-18-23:01
-)
-(/usr/share/texmf/tex/generic/tex4ht/html4-math.4ht
-version 2009-05-18-23:01
-))
-(/usr/share/texmf/tex/generic/tex4ht/verbatim.4ht
-version 2009-05-21-09:32
-
-(/usr/share/texmf/tex/generic/tex4ht/html4.4ht
-version 2009-05-18-23:01
-)
-(/usr/share/texmf/tex/generic/tex4ht/html4-math.4ht
-version 2009-05-18-23:01
-))
-(/usr/share/texmf/tex/generic/tex4ht/graphicx.4ht
-version 2009-05-21-09:32
-
-(/usr/share/texmf/tex/generic/tex4ht/html4.4ht
-version 2009-05-18-23:01
-)
-(/usr/share/texmf/tex/generic/tex4ht/html4-math.4ht
-version 2009-05-18-23:01
-))
-(/usr/share/texmf/tex/generic/tex4ht/graphics.4ht
-version 2009-05-21-09:32
-
-(/usr/share/texmf/tex/generic/tex4ht/html4.4ht
-version 2009-05-18-23:01
---------------------------------------
---- Note --- if included graphics are of degraded quality, try the command line
- options `graphics-num' or `graphics-'. The `num' should provide the density of
- pixels in the bitmaps (e.g., 110). 
---------------------------------------
---------------------------------------
---- Note --- for key dimensions try the option `Gin-dim'; for key dimensions wh
-en bounding box is unavailable try `Gin-dim+'; neither is recommended
---------------------------------------
-)
-(/usr/share/texmf/tex/generic/tex4ht/html4-math.4ht
-version 2009-05-18-23:01
-))
-(/usr/share/texmf/tex/generic/tex4ht/enumitem.4ht
-version 2009-05-21-09:32
-
-(/usr/share/texmf/tex/generic/tex4ht/html4.4ht
-version 2009-05-18-23:01
-)
-(/usr/share/texmf/tex/generic/tex4ht/html4-math.4ht
-version 2009-05-18-23:01
-))
-(/usr/share/texmf/tex/generic/tex4ht/amsmath.4ht
-version 2009-05-21-09:32
-\tmp:muskip=\muskip11
-
-(/usr/share/texmf/tex/generic/tex4ht/html4.4ht
-version 2009-05-18-23:01
-)
-(/usr/share/texmf/tex/generic/tex4ht/html4-math.4ht
-version 2009-05-18-23:01
-))
-(/usr/share/texmf/tex/generic/tex4ht/amstext.4ht
-version 2009-05-21-09:32
-
-(/usr/share/texmf/tex/generic/tex4ht/html4.4ht
-version 2009-05-18-23:01
-)
-(/usr/share/texmf/tex/generic/tex4ht/html4-math.4ht
-version 2009-05-18-23:01
-))
-(/usr/share/texmf/tex/generic/tex4ht/amsbsy.4ht
-version 2009-05-21-09:32
-
-(/usr/share/texmf/tex/generic/tex4ht/html4.4ht
-version 2009-05-18-23:01
-)
-(/usr/share/texmf/tex/generic/tex4ht/html4-math.4ht
-version 2009-05-18-23:01
-))
-(/usr/share/texmf/tex/generic/tex4ht/amsopn.4ht
-version 2009-05-21-09:32
-
-(/usr/share/texmf/tex/generic/tex4ht/html4.4ht
-version 2009-05-18-23:01
-)
-(/usr/share/texmf/tex/generic/tex4ht/html4-math.4ht
-version 2009-05-18-23:01
-))
-(/usr/share/texmf/tex/generic/tex4ht/html4.4ht
-version 2009-05-18-23:01
-)
-(/usr/share/texmf/tex/generic/tex4ht/html4-math.4ht
-version 2009-05-18-23:01
-)) (./lesson.aux)
+) (./lesson.aux)
 \openout1 = `lesson.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 57.
@@ -1081,9 +698,9 @@ File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 LaTeX Font Info:    ... okay on input line 57.
 
 *geometry* driver: auto-detecting
-*geometry* detected driver: dvips
+*geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
-* driver: dvips
+* driver: pdftex
 * paper: <default>
 * layout: <same size as paper>
 * layoutoffset:(h,v)=(0.0pt,0.0pt)
@@ -1115,19 +732,78 @@ LaTeX Font Info:    ... okay on input line 57.
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 \c@lstlisting=\count112
---- file lesson.css ---
+(/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count113
+\scratchdimen=\dimen128
+\scratchbox=\box32
+\nofMPsegments=\count114
+\nofMParguments=\count115
+\everyMPshowfont=\toks27
+\MPscratchCnt=\count116
+\MPscratchDim=\dimen129
+\MPnumerator=\count117
+\makeMPintoPDFobject=\count118
+\everyMPtoPDFconversion=\toks28
+) (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
+Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
+)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifluatex.sty
+Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
+
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/grfext.sty
+Package: grfext 2010/08/19 v1.1 Manage graphics extensions (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
+Package: kvdefinekeys 2011/04/07 v1.3 Define keys (HO)
+))
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
+Package: kvsetkeys 2012/04/25 v1.16 Key value parser (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/etexcmds.sty
+Package: etexcmds 2011/02/16 v1.5 Avoid name clashes with e-TeX commands (HO)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+)))
+Package grfext Info: Graphics extension search list:
+(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 452.
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2015/06/04 1.6 listings language file
 )
-l. 115 Writing lesson.idv[1] (lesson0x.png)
- [1
+Underfull \vbox (badness 1603) has occurred while \output is active []
 
-]
-l. 119 Writing lesson.idv[2] (lesson1x.png)
-l. 123 Writing lesson.idv[3] (lesson2x.png)
-l. 164 Writing lesson.idv[4] (lesson3x.png)
-l. 174 Writing lesson.idv[5] (lesson4x.png)
- [2]
+
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
+
+] [2]
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2015/06/04 1.6 listings language file
 )
@@ -1136,23 +812,44 @@ File: lstlang1.sty 2015/06/04 1.6 listings language file
 )
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
-)
+) [3]
 ! Use of ? doesn't match its definition.
 l.250 array?
             
-? 
-[3] [4] (./lesson.aux) )
+If you say, e.g., `\def\a1{...}', then you must always
+put `1' after `\a', since control sequence names are
+made up of letters only. The macro here has not been
+followed by the required stuff, so I'm ignoring it.
+
+[4] [5] (./lesson.aux) )
 (\end occurred inside a group at level 1)
 
 ### simple group (level 1) entered at line 58 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 9313 strings out of 493030
- 114938 string characters out of 6136261
- 410573 words of memory out of 5000000
- 12652 multiletter control sequences out of 15000+600000
+ 5901 strings out of 493029
+ 78972 string characters out of 6136235
+ 332383 words of memory out of 5000000
+ 9344 multiletter control sequences out of 15000+600000
  9589 words of font info for 35 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 34i,6n,63p,691b,1418s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 38i,12n,60p,232b,1883s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</u
+sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/sha
+re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/tex
+live/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/font
+s/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12
+.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb>
+Output written on lesson.pdf (5 pages, 133465 bytes).
+PDF statistics:
+ 69 PDF objects out of 1000 (max. 8388607)
+ 49 compressed objects within 1 object stream
+ 0 named destinations out of 1000 (max. 500000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
-Output written on lesson.dvi (4 pages, 103376 bytes).
