@@ -63,13 +63,11 @@ them. Now let's talk about some more specific features of graphs.
 
 \subsection*{Minimum Spanning Tree (MST)}
 
-A tree is a perennial plant with an elongated stem, or trunk, supporting... Oh
-wait, wrong wikipedia page.
-
-A tree in CS is a \textbf{connected}, \textbf{acyclic} graph. A spanning tree in
-a graph is sub-graph that is a tree that connects all vertices within a given graph.
-A \textbf{Minimum Spanning Tree (MST)} is a spanning tree with the minimum total
-edge weight.
+A tree is a \textbf{undirected}, \textbf{connected}, \textbf{acyclic} graph
+where there is \textbf{exactly one} path between any two vertices. A spanning
+tree in a graph is sub-graph that is a tree that connects all vertices within a
+given graph. A \textbf{Minimum Spanning Tree (MST)} is a spanning tree with the
+minimum total edge weight.
 
 In English, a MST is a subset of the edges that connects the graph with the
 minimum total weight. There are various real life applications of minimum
@@ -77,17 +75,18 @@ spanning tree, such as choosing how to lay optic cable to connect a bunch of
 data centers or roads connecting cities. But in contest, a lot of times you will
 just be asked to ``find the MST."
 
-There are two algorithms used, both are pretty intuitive, and have the same
-runtime but make sure you understand the essence because sometimes you'll have
-to construct the MST without constructing the graph.
+There are two algorithms used, both are pretty intuitive, and have similar
+runtime but it's important to understand them as somtimes you'll need to
+construct the MST without constructing the entire graph (due to memory/time
+restrictions)
 
 \subsubsection*{Prim's Algorithm}
 
-Prim's algorithm starts with an arbitrary vertex, $v_0$, and divide up the graph
-into two sets of vertices: $V$ and $U$. Initially $V = \{v_0\}$ and $U$ is
-everything else in the graph. While $U$ is non-empty / $V \neq G$, we pick the
-edge $(v, u)$ with $v \in V$ and $u \in U$ with the minimum edge weight. Add the
-edge to the MST, and move $u$ form $U$ to $V$. In psudocode, it is:
+Given $G(V, E)$, Prim's algorithm starts with an arbitrary vertex, $v_0$, and divide up the graph
+into two sets of vertices: $S$ and $T$. Initially $S = \{v_0\}$ and $T = V
+\setminus S$ ($V$ without $S$). While $T$ is non-empty / $S \neq V$, we pick the
+edge $(v, u)$ with $v \in S$ and $u \in T$ with the minimum edge weight. Add the
+edge to the MST, and move $u$ form $T$ to $S$. In psudocode, it is:
 \begin{verbatim}
 Prim(Graph G):
     boolean visited[V] initialized to false
@@ -103,9 +102,18 @@ Prim(Graph G):
     return MST
 \end{verbatim}
 
-The runtime of this largely depends on finding the edge with minimum weight
-between the visited and unvisited set. If we conduct a linear search, the
-runtime is $O(V^2)$ whereas if we use a priority queue it is $O(E \log(V))$.
+The runtime of this dependent on our implementation. The important operation is
+finding the edge with minimum weight between the visited and unvisited set. This
+is usually done by storing the vertices in a priority heap ordered by their
+shortest distance to the visited set, initialized to infinity. At each step, we
+take the vertex with the minimum distance to the partially constructed tree and
+add that to the MST. Then we update its neighbor's distances if necessary. This
+calls for two operations: remove min and decrease priority, both of which can be
+done in $\log (V)$ time. So the total runtime of the algorithm if implemented
+with a heap as priority queue is $O(|V| \log(|V|) + |E| \log(|V|))$, as we need
+to remove min $|V|$ times and decrease priority at most $|E|$ times. But since
+in a connected graph $|E| \geq |V|$, the runtime is often written as $O(|E| \log
+(|V|))$
 
 \subsubsection*{Kruskal's Algorithm}
 
@@ -128,18 +136,18 @@ Kruskal(Graph G):
 \end{verbatim}
 
 Note that the runtime of this is exactly like the runtime of Prim $O(E \log(V))$
-because we literally go through each edge and the unions of sets can be done in
-$O(\log(N))$ time where $N$ is the size of the larger set.
+because we literally go through each edge and the unions of sets as well as
+checking if two elements are in the same set can be done in $O(\log(N))$ time
+where $N$ is the size of the larger set.
 
 \subsection*{Shortest Path -- Dijkstra}
 
-As I have said last time, there is a reason why DFS and BFS should be renamed to
-depth first transversal and breath first transversal because there are better
-searching algorithms. And today we're going to learn about the better algorithm
--- Dijkstra's. The advantage of this over the other two is that this algorithm
-is targeted in finding the shortest path between two points in a graph, and have
-significantly better run time. Dijkstra's algorithm is a modified version of
-what is known as \textbf{best first search}.
+Similar to BFS and DFS, Dijkstra's algorithm is also an algorithm for searching
+for a path between any two nodes. The advantage of this over the other two is
+that this algorithm is targeted in finding the shortest path, and have
+significantly better run time. The general idea behind Dijkstra's algorithm is
+known as \textbf{best first search}, which means at any stage of the search we
+prioritize the best candidate.
 
 We assign a distance to each node, 0 at the initial node and infinity at every
 other node. Then at each node, we calculate the tentative distance to each of
@@ -181,15 +189,17 @@ Dijkstra(Graph G, Vertex src, Vertex dest):
 
 The algorithm terminates when the node we are looking for has been visited, or
 when the entire graph has been traversed. The algorithm has the worst-case
-runtime of $O(E + V \log(V))$ if we use a priority queue to store distance.
+runtime of $O((|V| + |E|) \log(|V|))$ if we use a priority queue to store
+distance.
 
 \subsection*{Floyd-Warshall}
 
 Dijkstra's algorithm is one that calculates the shortest distance from one point
 to another (and potentially one point to every other point in the graph).
 However, sometimes we need to find all pairwise distances between all pairs of
-nodes. This can be done with repeated Dijkstra's with time complexity of $O(EV +
-V^2 \log(V))$. However, this is doing quite a bit of overcounting as we are
+nodes. This can be done with repeated Dijkstra's with time complexity of
+$O(|E||V| +
+|V|^2 \log(|V|))$. However, this is doing quite a bit of overcounting as we are
 traversing the graph more times than necessary. In truth we only need to
 traverse all the edges one per vertex. This is known as the Floyd-Warshall
 algorithm. It repeated gets estimates of all pairwise distances and stop at the

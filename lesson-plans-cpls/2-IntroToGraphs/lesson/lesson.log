@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=latex 2017.1.8)  1 FEB 2017 10:34
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=latex 2017.1.8)  5 APR 2017 17:53
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1035,12 +1035,12 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 ### simple group (level 1) entered at line 57 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 7500 strings out of 493030
- 94024 string characters out of 6136261
- 289639 words of memory out of 5000000
- 10893 multiletter control sequences out of 15000+600000
- 8400 words of font info for 30 fonts, out of 8000000 for 9000
+ 7502 strings out of 493030
+ 94045 string characters out of 6136261
+ 286639 words of memory out of 5000000
+ 10894 multiletter control sequences out of 15000+600000
+ 8747 words of font info for 31 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 28i,6n,46p,664b,465s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 28i,5n,46p,664b,465s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on lesson.dvi (5 pages, 37436 bytes).
+Output written on lesson.dvi (5 pages, 27800 bytes).

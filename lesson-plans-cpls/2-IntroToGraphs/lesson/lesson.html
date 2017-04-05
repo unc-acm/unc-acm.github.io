@@ -7,8 +7,9 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
 <!-- html --> 
 <meta name="src" content="lesson.tex"> 
-<meta name="date" content="2017-02-01 10:34:00"> 
+<meta name="date" content="2017-04-05 17:53:00"> 
 <link rel="stylesheet" type="text/css" href="lesson.css"> 
+
 <style type="text/css">
 body {
     margin:40px auto;
@@ -40,141 +41,215 @@ it represents relationships between similar constructs.
 <!--l. 69--><p class="noindent" >For the purposes of complexity analysis, the runtime is often expressed in terms of the size of the
 <span 
 class="cmmi-12">E </span>and <span 
-class="cmmi-12">V </span>sets, similar to how complexities of operations with 1D data structures is often in
-terms of the length. In most cases, we can make the assumption of <span 
-class="cmmi-12">E </span><span 
-class="cmsy-10x-x-120">&asymp; </span><span 
-class="cmmi-12">V</span> <sup><span 
-class="cmr-8">2</span></sup>. This is
-because in a fully connected graph, the size of the edge set is equal to <span 
-class="cmmi-12">V </span>(<span 
+class="cmmi-12">V </span>sets, similar to how complexities of operations with 1D data structures is often in terms
+of the length. We know that <span 
+class="cmsy-10x-x-120">|</span><span 
+class="cmmi-12">E</span><span 
+class="cmsy-10x-x-120">|&le;|</span><span 
 class="cmmi-12">V </span><span 
-class="cmsy-10x-x-120">&minus; </span>1), and in
-contests it is often best to assume the worst unless there&#8217;s a good reason for acting
-otherwise.
-<!--l. 77--><p class="noindent" >There are many types of graphs, and each of them are used to represent different relationships
+class="cmsy-10x-x-120">| </span>as in a fully connected graph, the size of the edge set is
+equal to <span 
+class="cmsy-10x-x-120">|</span><span 
+class="cmmi-12">V </span><span 
+class="cmsy-10x-x-120">|</span>(<span 
+class="cmsy-10x-x-120">|</span><span 
+class="cmmi-12">V </span><span 
+class="cmsy-10x-x-120">|&minus; </span>1). But in programming contests, if unspecified, one should assume
+<span 
+class="cmsy-10x-x-120">|</span><span 
+class="cmmi-12">E</span><span 
+class="cmsy-10x-x-120">|&asymp;|</span><span 
+class="cmmi-12">V </span><span 
+class="cmsy-10x-x-120">|</span><sup><span 
+class="cmr-8">2</span></sup> as they will often throw the worst case at you. (Sidenote: a graph in which
+<span 
+class="cmsy-10x-x-120">|</span><span 
+class="cmmi-12">E</span><span 
+class="cmsy-10x-x-120">|&asymp;|</span><span 
+class="cmmi-12">V </span><span 
+class="cmsy-10x-x-120">|</span><sup><span 
+class="cmr-8">2</span></sup> is known as a <span 
+class="cmti-12">dense </span>graph, a graph in which <span 
+class="cmsy-10x-x-120">|</span><span 
+class="cmmi-12">E</span><span 
+class="cmsy-10x-x-120">| </span><span 
+class="cmmi-12">&#x003C;&#x003C; </span><span 
+class="cmsy-10x-x-120">|</span><span 
+class="cmmi-12">V </span><span 
+class="cmsy-10x-x-120">|</span><sup><span 
+class="cmr-8">2</span></sup> is known as a <span 
+class="cmti-12">sparse</span>
+graph)
+<!--l. 78--><p class="noindent" >There are many types of graphs, and each of them are used to represent different relationships
 between values, and their difference is mostly on what the edges can be. To start off there&#8217;s
-directed and undirected graphs, in directed graphs the edges only go in one direction whereas in
-undirected graphs the edges go in both. There are further restrictions on whether the edge length
-is specified, as well as the allowed range of the length, for example, some graphs call for
-negative edge lengths while others restrict the edge lengths to only positive. For the
-purposes of this lecture, we are going to deal with directed graphs with positive edge
-lengths.
-<!--l. 87--><p class="noindent" >I know that we usually don&#8217;t go into implementation in this class. But the implementation of a
-graph can also help us visualize information. There are two major ways of representing
-graph:
+directed and undirected graphs, in directed graphs the edges are ordered pairs (i.e. an edge from <span 
+class="cmmi-12">i</span>
+to <span 
+class="cmmi-12">j </span>is distinct from an edge from <span 
+class="cmmi-12">j </span>to <span 
+class="cmmi-12">i</span>) whereas in undirected graphs an edge is just a connection.
+One can imagine an undirected edge between <span 
+class="cmmi-12">i </span>and <span 
+class="cmmi-12">j </span>to be consisted of two directed edges, one
+from <span 
+class="cmmi-12">i </span>to <span 
+class="cmmi-12">j </span>and the other from <span 
+class="cmmi-12">j </span>to <span 
+class="cmmi-12">i</span>. There are further restrictions on whether the edge length
+is specified, as well as the allowed range of the length, for example, some graphs call
+for negative edge lengths while others restrict the edge lengths to only positive. For
+the purposes of this lecture, we are going to deal with directed graphs with positive
+edge lengths. Further distinction can be made by the nature of the paths, or connected
+collections of edges, within a graph. A cycle is a path that starts and ends at the same
+node. An acyclic graph is a graph without cycles. A special type of graph that is often
+studied is the direct acyclic graph (DAG). Another type of graph that comes up a lot is a
+tree, which is a directed graph where there exists exactly one path between any two
+vertices.
+<!--l. 96--><p class="noindent" >I know that we usually don&#8217;t go into implementation in this class. But the implementation of a
+graph is important and can sometimes heavily affects the runtime. Graphs are usually represented
+in two ways:
+                                                                                         
+                                                                                         
       <ul class="itemize1">
       <li class="itemize">Adjacency Matrix: A 2D array of booleans (or edge lengths) where the indices are the
-      nodes connecting the edge.
+      nodes connecting the edge. This method has space complexity <span 
+class="cmmi-12">O</span>(<span 
+class="cmsy-10x-x-120">|</span><span 
+class="cmmi-12">V </span><span 
+class="cmsy-10x-x-120">|</span><sup><span 
+class="cmr-8">2</span></sup>)
       </li>
-      <li class="itemize">Edge List: This involves a slight modification of the node data structure, which is
-      usually just a 1D array, but this modification involves adding an additional list of
-      connected vertices.</li></ul>
-                                                                                         
-                                                                                         
-<!--l. 98--><p class="noindent" >The advantage of using adjacency matrix is that it&#8217;s much simpler to code up, the disadvantage is
-that it uses a lot of space. But I digress, back to graph algorithms.
-<!--l. 102--><p class="noindent" >
+      <li class="itemize">Edge List: An array of linked lists, where the indices are the vertices and at each
+      index is a list of its neighbors (and optionally the edge length) (<span 
+class="cmmi-12">i </span>and <span 
+class="cmmi-12">j </span>are known
+      as neighbors if there exists an edge from <span 
+class="cmmi-12">i </span>to <span 
+class="cmmi-12">j</span>). This method has space complexity
+      <span 
+class="cmmi-12">O</span>(<span 
+class="cmsy-10x-x-120">|</span><span 
+class="cmmi-12">V </span><span 
+class="cmsy-10x-x-120">| </span>+ <span 
+class="cmsy-10x-x-120">|</span><span 
+class="cmmi-12">E</span><span 
+class="cmsy-10x-x-120">|</span>)</li></ul>
+<!--l. 109--><p class="noindent" >There are advantage and disadvantage of both, from a contest perspective, an adjacency matrix
+is easy to write up, but sometimes consume much more memory than an adjacency
+list.
+<!--l. 113--><p class="noindent" >
 <h4 class="likesubsectionHead"><a 
  id="x1-3000"></a>Depth First Search and Applications</h4>
-<!--l. 104--><p class="noindent" >The most basic algorithm we will study today is the depth first search, otherwise known as depth
+<!--l. 115--><p class="noindent" >The most basic algorithm we will study today is the depth first search, otherwise known as depth
 first transversal. The point of this algorithm is to find a path from one node to another. Let&#8217;s look
 through an example together.
-<!--l. 108--><p class="noindent" >We are going to solve a maze. A maze can be represented as a graph where each grid point
+<!--l. 119--><p class="noindent" >We are going to solve a maze. A maze can be represented as a graph where each grid point
 represent a vertex and if two points are &#8220;adjacent,&#8221; i.e. If you can reach one square from another,
-then they are connected by an edge in our representation.
-<!--l. 113--><p class="noindent" >The algorithm goes as follows, we keep a list of booleans corresponding to the list of vertices.
+then they are connected by an edge in our representation. This is not the best representation of a
+maze, we can simplify this to only represent the intersections as vertices, but this representation
+works for our purposes.
+<!--l. 126--><p class="noindent" >The algorithm goes as follows, we keep a list of booleans corresponding to the list of vertices.
 This list marks if a square has been visited or not. We start by the beginning of the
 maze.
-<!--l. 117--><p class="noindent" >At each crossroads (aka each vertex with more than one edge coming out of it). We will recursively
+<!--l. 130--><p class="noindent" >At each vertex (aka each vertex with more than one edge coming out of it). We will recursively
 search along each of the paths until it reaches either an exit, in which case we&#8217;re done, or a dead
 end, or a visited node. In either of the later cases we go one the next branch, hence earning the
 algorithm its name <span 
 class="cmbx-12">depth first search (DFS)</span>, because it always going the full depth along each
 path.
-<!--l. 124--><p class="noindent" >This algorithm has the complexity of <span 
-class="cmmi-12">O</span>(<span 
-class="cmmi-12">E </span>+ <span 
-class="cmmi-12">V </span>), as in the worst case we are guaranteed to visit
-every vertex, and in doing so we have to traverse every edge. Using the earlier substitution, the
-worse case scenario can be estimated to be about <span 
-class="cmmi-12">O</span>(<span 
-class="cmmi-12">V</span> <sup><span 
-class="cmr-8">2</span></sup>).
+<!--l. 137--><p class="noindent" >If we are looking to recover the path the algorithm took to get from the source to the destination,
+we keep a list of predecessor nodes <span 
+class="cmtt-12">pred</span>, where <span 
+class="cmtt-12">pred[u] = v </span>if in our path we got to <span 
+class="cmtt-12">u </span>from
+<span 
+class="cmtt-12">v</span>.
+<!--l. 141--><p class="noindent" >In psudocode, this is
                                                                                          
                                                                                          
 <div class="verbatim" id="verbatim-1">
-&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;+#
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;#################
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;#&#x00A0;&#x00A0;&#x00A0;#&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;#&#x00A0;&#x00A0;#
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;#&#x00A0;&#x00A0;&#x00A0;#&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;#&#x00A0;&#x00A0;##################
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;#&#x00A0;&#x00A0;&#x00A0;#&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;#&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;#&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;#
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;#&#x00A0;&#x00A0;&#x00A0;#&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;#&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;#&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;#
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;#&#x00A0;&#x00A0;&#x00A0;#######&#x00A0;&#x00A0;#&#x00A0;&#x00A0;&#x00A0;##########&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;#
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;###&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;#&#x00A0;&#x00A0;#&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;#&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;#
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;####################&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;#&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;#
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;#####&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;#&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;#
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;#&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;#&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;#
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;################&#x00A0;&#x00A0;&#x00A0;###############
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;#&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;#######
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;#
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;##########$</div>
-<!--l. 145--><p class="nopar" >
-<!--l. 147--><p class="noindent" >This algorithm is actually very versatile and has profound implications, for example, it can be used
+mark&#x00A0;all&#x00A0;nodes&#x00A0;as&#x00A0;unvisited
+&#x00A0;<br />for&#x00A0;all&#x00A0;node,&#x00A0;set&#x00A0;pred&#x00A0;to&#x00A0;-1
+&#x00A0;<br />
+&#x00A0;<br />DFS(source,&#x00A0;target):
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;if&#x00A0;source&#x00A0;==&#x00A0;target
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;print&#x00A0;path&#x00A0;by&#x00A0;tracing&#x00A0;back&#x00A0;pred&#x00A0;until&#x00A0;one&#x00A0;reaches&#x00A0;-1
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;mark&#x00A0;source&#x00A0;as&#x00A0;visited
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;for&#x00A0;n&#x00A0;in&#x00A0;neighbors&#x00A0;of&#x00A0;source&#x00A0;where&#x00A0;n&#x00A0;is&#x00A0;unvisited
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;pred[n]&#x00A0;=&#x00A0;source
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;DFS(n,&#x00A0;target)</div>
+<!--l. 153--><p class="nopar" >
+<!--l. 155--><p class="noindent" >This algorithm has the complexity of <span 
+class="cmmi-12">O</span>(<span 
+class="cmsy-10x-x-120">|</span><span 
+class="cmmi-12">E</span><span 
+class="cmsy-10x-x-120">| </span>+ <span 
+class="cmsy-10x-x-120">|</span><span 
+class="cmmi-12">V </span><span 
+class="cmsy-10x-x-120">|</span>), as in the worst case we are guaranteed to visit
+every vertex, and in doing so we have to traverse every edge. Using the earlier substitution for
+contests (assuming the graph is dense), the worse case scenario can be estimated to be about
+<span 
+class="cmmi-12">O</span>(<span 
+class="cmsy-10x-x-120">|</span><span 
+class="cmmi-12">V </span><span 
+class="cmsy-10x-x-120">|</span><sup><span 
+class="cmr-8">2</span></sup>).
+<!--l. 160--><p class="noindent" >This algorithm is actually very versatile and has profound implications, for example, it can be used
 to detect if a graph is connected or have several disconnected pieces. This can be done by trying
 to traverse the graph with no endpoint, only seeking to mark all nodes as visited. If
 the call returns and there still exists unvisited nodes, those nodes are disconnected
 from the starting point, allowing us to subdivide an unconnected graph into connected
 pieces.
-<!--l. 155--><p class="noindent" >Another modification of this algorithm is cycle detection. Recall the few terminating conditions,
+<!--l. 168--><p class="noindent" >Another modification of this algorithm is cycle detection. Recall the few terminating conditions,
 another one we haven&#8217;t used yet is reaching a previously visited node. Think about what this
 means. If we hit a previously visited node, that means there is a cycle in our graph starting at that
 node. This will also come in handy in problems.
-<!--l. 161--><p class="noindent" >
+<!--l. 174--><p class="noindent" >
 <h4 class="likesubsectionHead"><a 
  id="x1-4000"></a>Breath First Search and Meet In The Middle</h4>
-<!--l. 163--><p class="noindent" >An alternative method of transversal is known as breath first search or transversal. As its name
+<!--l. 176--><p class="noindent" >An alternative method of transversal is known as breath first search or transversal. As its name
 suggests, unlike depth first search this method takes one step in all possible directions. This is a
 different algorithm but the basic tenement is the same. As a transversal algorithm, it can do
-everything depth first search can, including connectedness and cycle detection. This approach has
-two advantages. The first being that if we are looking for a path between two nodes, breath first
-search guarantees an optimal solution. The second is that it has a much better average time
-complexity than depth first search. Consider we are trying to get from point A to point B, but A
+everything depth first search can, including connectedness and cycle detection. Unlike
+DFS, BFS guarantees an optimal path, as it takes one step in every direction before
+taking 2 steps in any direction. Therefore the first path it finds is guaranteed to be the
+shortest.
                                                                                          
                                                                                          
-branches into B and C, and in DFS, if we stumble into C, we will reach the worst case
-before we get to B, but with breath first search we are guaranteed to reach B in one
-step.
-<!--l. 175--><p class="noindent" >In breath first search, if the average degree of the graph is <span 
+<!--l. 185--><p class="noindent" >In breath first search, if the average degree of the graph is <span 
 class="cmmi-12">p </span>and the true distance between the
 starting and ending positions is <span 
 class="cmmi-12">d</span>, then <span 
 class="cmmi-12">O</span>(<span 
 class="cmmi-12">p</span><sup><span 
 class="cmmi-8">d</span></sup>) nodes will be traversed, whereas DFS
-is much more erratic and &#8220;luck based.&#8221; However, the choice of which to use is highly
-context dependent. While BFS offers the potential for higher speed, it uses up a lot
-of memory, making it potentially unfeasible. It may also be the case that there are
-many desirable results and they are all far in the graph, in which case DFS will be
-preferable.
-<!--l. 183--><p class="noindent" >
+is much more erratic and &#8220;luck based.&#8221; The choice of when to use BFS over DFS is
+highly dependent on the nature of the graph and <span 
+class="cmmi-12">d</span>, if <span 
+class="cmmi-12">d </span>is small but we&#8217;re looking for
+one solution in a large graph, BFS is usually preferred. But if we are looking for many
+solutions (searching based on a criteria) but <span 
+class="cmmi-12">d </span>is relatively large, then DFS would be
+preferred.
+<!--l. 194--><p class="noindent" >
 <h5 class="likesubsubsectionHead"><a 
  id="x1-5000"></a>Meet in the Middle</h5>
-<!--l. 185--><p class="noindent" >Let&#8217;s talk about an interview question. Given the name of two people on Facebook, how does one
+<!--l. 196--><p class="noindent" >Let&#8217;s talk about an interview question. Given the name of two people on Facebook, how does one
 find their degrees of separation.
-<!--l. 188--><p class="noindent" >This is one of those cases where DFS would not solve the problem for rather obvious reasons. But
+<!--l. 199--><p class="noindent" >This is one of those cases where DFS would not solve the problem for rather obvious reasons. But
 let&#8217;s talk about BFS, starting from friend A, if we were to find the distance to friend B via BFS,
 we will have to traverse <span 
 class="cmmi-12">O</span>(<span 
 class="cmmi-12">p</span><sup><span 
 class="cmmi-8">d</span></sup>) people as previously stated.
-<!--l. 193--><p class="noindent" >Sociology theory says that <span 
+<!--l. 204--><p class="noindent" >Sociology theory says that <span 
 class="cmmi-12">d </span>is bounded by 6, and let&#8217;s put a lower bound on <span 
 class="cmmi-12">p </span>as, say, 150. This
 means that we will need to traverse about 150<sup><span 
 class="cmr-8">6</span></sup> = 11390625000000 people. This is not good
 enough.
-<!--l. 197--><p class="noindent" >Consider, however, that we concurrently conduct BFS from both A and B. Each with their own
+<!--l. 208--><p class="noindent" >Consider, however, that we concurrently conduct BFS from both A and B. Each with their own
 unique visited-A and visited-B markings. Then if they encounter the visited marking
 of the other person, we are done. This effectively reduced the complexity of <span 
 class="cmmi-12">O</span>(<span 
@@ -194,13 +269,13 @@ reduces the number of people traversed to 2 <span
 class="cmsy-10x-x-120">&lowast; </span>150<sup><span 
 class="cmr-8">3</span></sup> = 6750000, which is much, much
 less.
-<!--l. 204--><p class="noindent" >Although we introduced this technique in the context of graph theory, this technique
+<!--l. 215--><p class="noindent" >Although we introduced this technique in the context of graph theory, this technique
 can be used in a variety of settings. However, this technique is usually known as the
 &#8220;smart brute-force&#8221; method, and you should only try to do it when there is no other
 algorithms.
-<!--l. 209--><p class="noindent" >Let&#8217;s see an example outside the context of graphs, and yet another popular interview question,
+<!--l. 220--><p class="noindent" >Let&#8217;s see an example outside the context of graphs, and yet another popular interview question,
 the four number problem!
-<!--l. 212--><p class="noindent" >The problem is as follows, you are given a list of integers with length <span 
+<!--l. 223--><p class="noindent" >The problem is as follows, you are given a list of integers with length <span 
 class="cmmi-12">n</span>, find if there exists 4
 number <span 
 class="cmmi-12">a,b,c,d </span>s.t. <span 
@@ -208,20 +283,20 @@ class="cmmi-12">a </span>+ <span
 class="cmmi-12">b </span>+ <span 
 class="cmmi-12">c </span>+ <span 
 class="cmmi-12">d </span>= 0.
-<!--l. 215--><p class="noindent" >The brute force solution is to try all combination of 4 numbers, which is <span 
+<!--l. 226--><p class="noindent" >The brute force solution is to try all combination of 4 numbers, which is <span 
 class="cmmi-12">O</span>(<span 
 class="cmmi-12">n</span><sup><span 
 class="cmr-8">4</span></sup>). For those interview
 oldies, you probably know that &#8220;a hashtable makes everything better,&#8221; so a slightly
-                                                                                         
-                                                                                         
 better solution is to hash all possible <span 
 class="cmsy-10x-x-120">&minus;</span>(<span 
 class="cmmi-12">a </span>+ <span 
 class="cmmi-12">b </span>+ <span 
 class="cmmi-12">c</span>) and check that against the original
 array.
-<!--l. 220--><p class="noindent" >That last approach is incredibly close to the correct one, but as the name suggests, meet in
+<!--l. 231--><p class="noindent" >That last approach is incredibly close to the correct one, but as the name suggests, meet in
+                                                                                         
+                                                                                         
 the <span 
 class="cmbx-12">middle </span>requires using symmetry to our maximum advantage. The insight is that
 <span 

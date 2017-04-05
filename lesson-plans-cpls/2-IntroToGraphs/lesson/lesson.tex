@@ -68,36 +68,47 @@ represents relationships between similar constructs.
 
 For the purposes of complexity analysis, the runtime is often expressed in terms
 of the size of the $E$ and $V$ sets, similar to how complexities of operations
-with 1D data structures is often in terms of the length. In most cases, we can
-make the assumption of $E \approx V^2$. This is because in a fully connected
-graph, the size of the edge set is equal to $V(V-1)$, and in contests it is
-often best to assume the worst unless there's a good reason for acting
-otherwise.
+with 1D data structures is often in terms of the length. We know that $|E| \leq
+|V|$ as in a fully connected graph, the size of the edge set is equal to
+$|V|(|V|-1)$. But in programming contests, if unspecified, one should assume
+$|E| \approx |V|^2$ as they will often throw the worst case at you. (Sidenote:
+a graph in which $|E| \approx |V|^2$ is known as a \textit{dense} graph, a graph
+in which $|E| << |V|^2$ is known as a \textit{sparse} graph)
 
 There are many types of graphs, and each of them are used to represent different
 relationships between values, and their difference is mostly on what the edges
 can be. To start off there's directed and undirected graphs, in directed graphs
-the edges only go in one direction whereas in undirected graphs the edges go in
-both. There are further restrictions on whether the edge length is specified, as
+the edges are ordered pairs (i.e. an edge from $i$ to $j$ is distinct from an
+edge from $j$ to $i$) whereas in undirected graphs an edge is just a connection.
+One can imagine an undirected edge between $i$ and $j$ to be consisted of two
+directed edges, one from $i$ to $j$ and the other from $j$ to $i$.
+There are further restrictions on whether the edge length is specified, as
 well as the allowed range of the length, for example, some graphs call for
 negative edge lengths while others restrict the edge lengths to only positive.
 For the purposes of this lecture, we are going to deal with directed graphs with
-positive edge lengths.
+positive edge lengths. Further distinction can be made by the nature of the
+paths, or connected collections of edges, within a graph. A cycle is a path that
+starts and ends at the same node. An acyclic graph is a graph without cycles. A
+special type of graph that is often studied is the direct acyclic graph (DAG).
+Another type of graph that comes up a lot is a tree, which is a directed graph
+where there exists exactly one path between any two vertices.
 
 I know that we usually don't go into implementation in this class. But the
-implementation of a graph can also help us visualize information. There are
-two major ways of representing graph:
+implementation of a graph is important and can sometimes heavily affects the runtime.
+Graphs are usually represented in two ways:
 \begin{itemize}
     \item Adjacency Matrix: A 2D array of booleans (or edge lengths) where the
-        indices are the nodes connecting the edge.
-    \item Edge List: This involves a slight modification of the node data
-        structure, which is usually just a 1D array, but this modification
-        involves adding an additional list of connected vertices.
+        indices are the nodes connecting the edge. This method has space
+        complexity $O(|V|^2)$
+    \item Edge List: An array of linked lists, where the indices are the
+        vertices and at each index is a list of its neighbors (and optionally
+        the edge length) ($i$ and $j$ are known as neighbors if there exists an
+        edge from $i$ to $j$). This method has space complexity $O(|V| + |E|)$
 \end{itemize}
 
-The advantage of using adjacency matrix is that it's much simpler to code up,
-the disadvantage is that it uses a lot of space. But I digress, back to graph
-algorithms.
+There are advantage and disadvantage of both, from a contest perspective, an
+adjacency matrix is easy to write up, but sometimes consume much more memory
+than an adjacency list.
 
 \subsection*{Depth First Search and Applications}
 
@@ -108,41 +119,43 @@ find a path from one node to another. Let's look through an example together.
 We are going to solve a maze. A maze can be represented as a graph where each
 grid point represent a vertex and if two points are ``adjacent," i.e. If you can
 reach one square from another, then they are connected by an edge in our
-representation.
+representation. This is not the best representation of a maze, we can simplify
+this to only represent the intersections as vertices, but this representation
+works for our purposes.
 
 The algorithm goes as follows, we keep a list of booleans corresponding to the
 list of vertices. This list marks if a square has been visited or not. We start
 by the beginning of the maze.
 
-At each crossroads (aka each vertex with more than one edge coming out of it).
+At each vertex (aka each vertex with more than one edge coming out of it).
 We will recursively search along each of the paths until it reaches either an
 exit, in which case we're done, or a dead end, or a visited node. In either of
 the later cases we go one the next branch, hence earning the algorithm its name
 \textbf{depth first search (DFS)}, because it always going the full depth along
 each path.
 
-This algorithm has the complexity of $O(E + V)$, as in the worst case we are
-guaranteed to visit every vertex, and in doing so we have to traverse every
-edge. Using the earlier substitution, the worse case scenario can be estimated
-to be about $O(V^2)$.
+If we are looking to recover the path the algorithm took to get from the source
+to the destination, we keep a list of predecessor nodes \texttt{pred}, where
+\texttt{pred[u] = v} if in our path we got to \texttt{u} from \texttt{v}.
 
+In psudocode, this is
 \begin{verbatim}
-                    +#                                        
-                     #################                      
-                     #   #        #  #                      
-                     #   #        #  ##################     
-                     #   #        #            #      #     
-                     #   #        #            #      #     
-                     #   #######  #   ##########      #     
-                     ###       #  #            #      #     
-                     ####################      #      #     
-                     #####       #                    #     
-                                 #       #            #     
-                      ################   ###############    
-                                    #            #######    
-                                    #                       
-                                    ##########$             
+mark all nodes as unvisited
+for all node, set pred to -1
+
+DFS(source, target):
+    if source == target
+        print path by tracing back pred until one reaches -1
+    mark source as visited
+        for n in neighbors of source where n is unvisited
+            pred[n] = source
+            DFS(n, target)
 \end{verbatim}
+
+This algorithm has the complexity of $O(|E| + |V|)$, as in the worst case we are
+guaranteed to visit every vertex, and in doing so we have to traverse every
+edge. Using the earlier substitution for contests (assuming the graph is dense),
+the worse case scenario can be estimated to be about $O(|V|^2)$.
 
 This algorithm is actually very versatile and has profound implications, for
 example, it can be used to detect if a graph is connected or have several
@@ -164,21 +177,19 @@ An alternative method of transversal is known as breath first search or
 transversal. As its name suggests, unlike depth first search this method takes
 one step in all possible directions. This is a different algorithm but the basic
 tenement is the same. As a transversal algorithm, it can do everything depth
-first search can, including connectedness and cycle detection. This approach has
-two advantages. The first being that if we are looking for a path between two
-nodes, breath first search guarantees an optimal solution. The second is that it
-has a much better average time complexity than depth first search. Consider we
-are trying to get from point A to point B, but A branches into B and C, and in
-DFS, if we stumble into C, we will reach the worst case before we get to B, but
-with breath first search we are guaranteed to reach B in one step.
+first search can, including connectedness and cycle detection. Unlike DFS, BFS
+guarantees an optimal path, as it takes one step in every direction before
+taking 2 steps in any direction. Therefore the first path it finds is guaranteed
+to be the shortest.
 
 In breath first search, if the average degree of the graph is $p$ and the true
 distance between the starting and ending positions is $d$, then $O(p^d)$ nodes
-will be traversed, whereas DFS is much more erratic and ``luck based.'' However,
-the choice of which to use is highly context dependent. While BFS offers the
-potential for higher speed, it uses up a lot of memory, making it potentially
-unfeasible. It may also be the case that there are many desirable results and
-they are all far in the graph, in which case DFS will be preferable. 
+will be traversed, whereas DFS is much more erratic and ``luck based.'' The
+choice of when to use BFS over DFS is highly dependent on the nature of the
+graph and $d$, if $d$ is small but we're looking for one solution in a large
+graph, BFS is usually preferred. But if we are looking for many solutions
+(searching based on a criteria) but $d$ is relatively large, then DFS would be
+preferred.
 
 \subsubsection*{Meet in the Middle}
 

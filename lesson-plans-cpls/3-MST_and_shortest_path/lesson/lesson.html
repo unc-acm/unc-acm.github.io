@@ -7,8 +7,9 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
 <!-- html --> 
 <meta name="src" content="lesson.tex"> 
-<meta name="date" content="2017-02-13 21:11:00"> 
+<meta name="date" content="2017-04-05 17:54:00"> 
 <link rel="stylesheet" type="text/css" href="lesson.css"> 
+
 <style type="text/css">
 body {
     margin:40px auto;
@@ -23,7 +24,6 @@ h1,h2,h3 {
     line-height:1.2
 }
 </style>
-
 </head><body 
 >
 <h3 class="likesectionHead"><a 
@@ -33,52 +33,60 @@ talk about some more specific features of graphs.
 <!--l. 64--><p class="noindent" >
 <h4 class="likesubsectionHead"><a 
  id="x1-2000"></a>Minimum Spanning Tree (MST)</h4>
-<!--l. 66--><p class="noindent" >A tree is a perennial plant with an elongated stem, or trunk, supporting... Oh wait, wrong
-wikipedia page.
-<!--l. 69--><p class="noindent" >A tree in CS is a <span 
+<!--l. 66--><p class="noindent" >A tree is a <span 
+class="cmbx-12">undirected</span>, <span 
 class="cmbx-12">connected</span>, <span 
-class="cmbx-12">acyclic </span>graph. A spanning tree in a graph is sub-graph that is a tree
-that connects all vertices within a given graph. A <span 
-class="cmbx-12">Minimum Spanning Tree (MST) </span>is a
-spanning tree with the minimum total edge weight.
-<!--l. 74--><p class="noindent" >In English, a MST is a subset of the edges that connects the graph with the minimum total weight.
+class="cmbx-12">acyclic </span>graph where there is <span 
+class="cmbx-12">exactly one </span>path between any
+two vertices. A spanning tree in a graph is sub-graph that is a tree that connects all vertices within
+a given graph. A <span 
+class="cmbx-12">Minimum Spanning Tree (MST) </span>is a spanning tree with the minimum total
+edge weight.
+<!--l. 72--><p class="noindent" >In English, a MST is a subset of the edges that connects the graph with the minimum total weight.
 There are various real life applications of minimum spanning tree, such as choosing how to lay
 optic cable to connect a bunch of data centers or roads connecting cities. But in contest, a lot of
 times you will just be asked to &#8220;find the MST.&#8221;
-<!--l. 80--><p class="noindent" >There are two algorithms used, both are pretty intuitive, and have the same runtime but make sure
-you understand the essence because sometimes you&#8217;ll have to construct the MST without
-constructing the graph.
-<!--l. 84--><p class="noindent" >
+<!--l. 78--><p class="noindent" >There are two algorithms used, both are pretty intuitive, and have similar runtime but it&#8217;s
+important to understand them as somtimes you&#8217;ll need to construct the MST without constructing
+the entire graph (due to memory/time restrictions)
+<!--l. 83--><p class="noindent" >
 <h5 class="likesubsubsectionHead"><a 
  id="x1-3000"></a>Prim&#8217;s Algorithm</h5>
-<!--l. 86--><p class="noindent" >Prim&#8217;s algorithm starts with an arbitrary vertex, <span 
+<!--l. 85--><p class="noindent" >Given <span 
+class="cmmi-12">G</span>(<span 
+class="cmmi-12">V,E</span>), Prim&#8217;s algorithm starts with an arbitrary vertex, <span 
 class="cmmi-12">v</span><sub><span 
-class="cmr-8">0</span></sub>, and divide up the graph into two sets of
-vertices: <span 
-class="cmmi-12">V </span>and <span 
-class="cmmi-12">U</span>. Initially <span 
-class="cmmi-12">V </span>= <span 
+class="cmr-8">0</span></sub>, and divide up the graph into
+two sets of vertices: <span 
+class="cmmi-12">S </span>and <span 
+class="cmmi-12">T</span>. Initially <span 
+class="cmmi-12">S </span>= <span 
 class="cmsy-10x-x-120">{</span><span 
 class="cmmi-12">v</span><sub><span 
 class="cmr-8">0</span></sub><span 
 class="cmsy-10x-x-120">} </span>and <span 
-class="cmmi-12">U </span>is everything else in the graph. While <span 
-class="cmmi-12">U </span>is
+class="cmmi-12">T </span>= <span 
+class="cmmi-12">V </span><span 
+class="cmsy-10x-x-120">\ </span><span 
+class="cmmi-12">S </span>(<span 
+class="cmmi-12">V </span>without <span 
+class="cmmi-12">S</span>). While <span 
+class="cmmi-12">T </span>is
 non-empty / <span 
-class="cmmi-12">V</span> <span 
+class="cmmi-12">S</span><span 
 class="cmmi-12">&ne;</span><span 
-class="cmmi-12">G</span>, we pick the edge (<span 
+class="cmmi-12">V </span>, we pick the edge (<span 
 class="cmmi-12">v,u</span>) with <span 
 class="cmmi-12">v </span><span 
 class="cmsy-10x-x-120">&isin; </span><span 
-class="cmmi-12">V </span>and <span 
+class="cmmi-12">S </span>and <span 
 class="cmmi-12">u </span><span 
 class="cmsy-10x-x-120">&isin; </span><span 
-class="cmmi-12">U </span>with the minimum
+class="cmmi-12">T </span>with the minimum
 edge weight. Add the edge to the MST, and move <span 
 class="cmmi-12">u </span>form <span 
-class="cmmi-12">U </span>to <span 
-class="cmmi-12">V </span>. In psudocode, it
+class="cmmi-12">T </span>to <span 
+class="cmmi-12">S</span>. In psudocode, it
 is:
                                                                                          
                                                                                          
@@ -95,20 +103,53 @@ Prim(Graph&#x00A0;G):
 &#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;visited[u]&#x00A0;=&#x00A0;true
 &#x00A0;<br />
 &#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;return&#x00A0;MST</div>
-<!--l. 104--><p class="nopar" >
-<!--l. 106--><p class="noindent" >The runtime of this largely depends on finding the edge with minimum weight between the visited
-and unvisited set. If we conduct a linear search, the runtime is <span 
+<!--l. 103--><p class="nopar" >
+<!--l. 105--><p class="noindent" >The runtime of this dependent on our implementation. The important operation is finding the edge
+with minimum weight between the visited and unvisited set. This is usually done by storing the
+vertices in a priority heap ordered by their shortest distance to the visited set, initialized to
+infinity. At each step, we take the vertex with the minimum distance to the partially constructed
+tree and add that to the MST. Then we update its neighbor&#8217;s distances if necessary. This calls for
+two operations: remove min and decrease priority, both of which can be done in log(<span 
+class="cmmi-12">V </span>) time.
+So the total runtime of the algorithm if implemented with a heap as priority queue is
+<span 
 class="cmmi-12">O</span>(<span 
-class="cmmi-12">V</span> <sup><span 
-class="cmr-8">2</span></sup>) whereas if we use a priority
-queue it is <span 
+class="cmsy-10x-x-120">|</span><span 
+class="cmmi-12">V </span><span 
+class="cmsy-10x-x-120">|</span> log(<span 
+class="cmsy-10x-x-120">|</span><span 
+class="cmmi-12">V </span><span 
+class="cmsy-10x-x-120">|</span>) + <span 
+class="cmsy-10x-x-120">|</span><span 
+class="cmmi-12">E</span><span 
+class="cmsy-10x-x-120">|</span> log(<span 
+class="cmsy-10x-x-120">|</span><span 
+class="cmmi-12">V </span><span 
+class="cmsy-10x-x-120">|</span>)), as we need to remove min <span 
+class="cmsy-10x-x-120">|</span><span 
+class="cmmi-12">V </span><span 
+class="cmsy-10x-x-120">| </span>times and decrease priority at most
+<span 
+class="cmsy-10x-x-120">|</span><span 
+class="cmmi-12">E</span><span 
+class="cmsy-10x-x-120">| </span>times. But since in a connected graph <span 
+class="cmsy-10x-x-120">|</span><span 
+class="cmmi-12">E</span><span 
+class="cmsy-10x-x-120">|&ge;|</span><span 
+class="cmmi-12">V </span><span 
+class="cmsy-10x-x-120">|</span>, the runtime is often written as
+<span 
 class="cmmi-12">O</span>(<span 
-class="cmmi-12">E</span> log(<span 
-class="cmmi-12">V </span>)).
-<!--l. 110--><p class="noindent" >
+class="cmsy-10x-x-120">|</span><span 
+class="cmmi-12">E</span><span 
+class="cmsy-10x-x-120">|</span> log(<span 
+class="cmsy-10x-x-120">|</span><span 
+class="cmmi-12">V </span><span 
+class="cmsy-10x-x-120">|</span>))
+<!--l. 118--><p class="noindent" >
 <h5 class="likesubsubsectionHead"><a 
  id="x1-4000"></a>Kruskal&#8217;s Algorithm</h5>
-<!--l. 112--><p class="noindent" >Kruskal&#8217;s algorithm is the opposite of Prim&#8217;s. Instead of building a tree spawning from one vertex.
+<!--l. 120--><p class="noindent" >Kruskal&#8217;s algorithm is the opposite of Prim&#8217;s. Instead of building a tree spawning from one vertex.
 It builds a forest that eventually becomes one single spanning tree. This algorithm is
 greedy in nature as well. We began by picking the shortest edge, adding that to the
 MST, then we combine the two trees at the endpoints of the edge. In psudocode it
@@ -126,33 +167,33 @@ Kruskal(Graph&#x00A0;G):
 &#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;trees[u]&#x00A0;=&#x00A0;trees[v]&#x00A0;=&#x00A0;UNION(trees[u],&#x00A0;trees[v])
 &#x00A0;<br />
 &#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;return&#x00A0;MST</div>
-<!--l. 128--><p class="nopar" >
-<!--l. 130--><p class="noindent" >Note that the runtime of this is exactly like the runtime of Prim <span 
+<!--l. 136--><p class="nopar" >
+<!--l. 138--><p class="noindent" >Note that the runtime of this is exactly like the runtime of Prim <span 
 class="cmmi-12">O</span>(<span 
 class="cmmi-12">E</span> log(<span 
-class="cmmi-12">V </span>)) because we literally
-go through each edge and the unions of sets can be done in <span 
+class="cmmi-12">V </span>)) because we
+literally go through each edge and the unions of sets as well as checking if two elements
+are in the same set can be done in <span 
 class="cmmi-12">O</span>(log(<span 
 class="cmmi-12">N</span>)) time where <span 
-class="cmmi-12">N </span>is the size of
-the larger set.
-<!--l. 134--><p class="noindent" >
+class="cmmi-12">N </span>is the size of the larger
+set.
+<!--l. 143--><p class="noindent" >
 <h4 class="likesubsectionHead"><a 
  id="x1-5000"></a>Shortest Path &#8211; Dijkstra</h4>
-<!--l. 136--><p class="noindent" >As I have said last time, there is a reason why DFS and BFS should be renamed to depth first
-transversal and breath first transversal because there are better searching algorithms. And today
-we&#8217;re going to learn about the better algorithm &#8211; Dijkstra&#8217;s. The advantage of this over the other
-two is that this algorithm is targeted in finding the shortest path between two points in a graph,
-and have significantly better run time. Dijkstra&#8217;s algorithm is a modified version of what is known
-as <span 
-class="cmbx-12">best first search</span>.
-<!--l. 144--><p class="noindent" >We assign a distance to each node, 0 at the initial node and infinity at every other node. Then at
+<!--l. 145--><p class="noindent" >Similar to BFS and DFS, Dijkstra&#8217;s algorithm is also an algorithm for searching for a path between
+any two nodes. The advantage of this over the other two is that this algorithm is targeted in
+finding the shortest path, and have significantly better run time. The general idea behind
+Dijkstra&#8217;s algorithm is known as <span 
+class="cmbx-12">best first search</span>, which means at any stage of the search we
+prioritize the best candidate.
+<!--l. 152--><p class="noindent" >We assign a distance to each node, 0 at the initial node and infinity at every other node. Then at
 each node, we calculate the tentative distance to each of its neighbors by adding the weight of the
 edge to the distance at the current node. If the tentative distance is smaller than the distance
 currently associated with the neighbor, we will update the distance to the smaller value. We will
 then mark the current node as visited and move to the neighbor with the lowest associated
 distance.
-<!--l. 152--><p class="noindent" >This algorithm is a bit more complex than the others when written in psudocode but here is what
+<!--l. 160--><p class="noindent" >This algorithm is a bit more complex than the others when written in psudocode but here is what
 it should look like:
                                                                                          
                                                                                          
@@ -182,33 +223,47 @@ Dijkstra(Graph&#x00A0;G,&#x00A0;Vertex&#x00A0;src,&#x00A0;Vertex&#x00A0;dest):
 &#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;visited[v]&#x00A0;=&#x00A0;true
 &#x00A0;<br />
 &#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;return&#x00A0;dist[dest]</div>
-<!--l. 180--><p class="nopar" >
-<!--l. 182--><p class="noindent" >The algorithm terminates when the node we are looking for has been visited, or when the entire
+<!--l. 188--><p class="nopar" >
+<!--l. 190--><p class="noindent" >The algorithm terminates when the node we are looking for has been visited, or when the entire
 graph has been traversed. The algorithm has the worst-case runtime of <span 
-class="cmmi-12">O</span>(<span 
-class="cmmi-12">E </span>+ <span 
-class="cmmi-12">V</span> log(<span 
-class="cmmi-12">V </span>)) if we use
-a priority queue to store distance.
-<!--l. 186--><p class="noindent" >
+class="cmmi-12">O</span>((<span 
+class="cmsy-10x-x-120">|</span><span 
+class="cmmi-12">V </span><span 
+class="cmsy-10x-x-120">| </span>+ <span 
+class="cmsy-10x-x-120">|</span><span 
+class="cmmi-12">E</span><span 
+class="cmsy-10x-x-120">|</span>) log(<span 
+class="cmsy-10x-x-120">|</span><span 
+class="cmmi-12">V </span><span 
+class="cmsy-10x-x-120">|</span>)) if we
+use a priority queue to store distance.
+<!--l. 195--><p class="noindent" >
 <h4 class="likesubsectionHead"><a 
  id="x1-6000"></a>Floyd-Warshall</h4>
-<!--l. 188--><p class="noindent" >Dijkstra&#8217;s algorithm is one that calculates the shortest distance from one point to another (and
-potentially one point to every other point in the graph). However, sometimes we need to
-find all pairwise distances between all pairs of nodes. This can be done with repeated
-Dijkstra&#8217;s with time complexity of <span 
+<!--l. 197--><p class="noindent" >Dijkstra&#8217;s algorithm is one that calculates the shortest distance from one point to another (and
+potentially one point to every other point in the graph). However, sometimes we need to find all
+pairwise distances between all pairs of nodes. This can be done with repeated Dijkstra&#8217;s
+with time complexity of <span 
 class="cmmi-12">O</span>(<span 
-class="cmmi-12">EV </span>+ <span 
-class="cmmi-12">V</span> <sup><span 
+class="cmsy-10x-x-120">|</span><span 
+class="cmmi-12">E</span><span 
+class="cmsy-10x-x-120">||</span><span 
+class="cmmi-12">V </span><span 
+class="cmsy-10x-x-120">| </span>+ <span 
+class="cmsy-10x-x-120">|</span><span 
+class="cmmi-12">V </span><span 
+class="cmsy-10x-x-120">|</span><sup><span 
 class="cmr-8">2</span></sup> log(<span 
-class="cmmi-12">V </span>)). However, this is doing quite a bit of
+class="cmsy-10x-x-120">|</span><span 
+class="cmmi-12">V </span><span 
+class="cmsy-10x-x-120">|</span>)). However, this is doing quite a bit of
                                                                                          
                                                                                          
 overcounting as we are traversing the graph more times than necessary. In truth we
 only need to traverse all the edges one per vertex. This is known as the Floyd-Warshall
 algorithm. It repeated gets estimates of all pairwise distances and stop at the optimal
 one.
-<!--l. 198--><p class="noindent" >In psudocode it is:
+<!--l. 208--><p class="noindent" >In psudocode it is:
                                                                                          
                                                                                          
 <div class="verbatim" id="verbatim-4">
@@ -223,8 +278,8 @@ let&#x00A0;dist&#x00A0;be&#x00A0;a&#x00A0;2D&#x00A0;array&#x00A0;of&#x00A0;dista
 &#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;for&#x00A0;i&#x00A0;from&#x00A0;1...V:
 &#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;if&#x00A0;dist[i][j]&#x00A0;&#x003E;&#x00A0;dist[i][k]&#x00A0;+&#x00A0;dist[k][j]
 &#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;dist[i][j]&#x00A0;=&#x00A0;dist[i][k]&#x00A0;+&#x00A0;dist[k][j]</div>
-<!--l. 211--><p class="nopar" >
-<!--l. 213--><p class="noindent" >Basically the idea behind this is that if we can go from point i to j faster through k, we&#8217;ll do
+<!--l. 221--><p class="nopar" >
+<!--l. 223--><p class="noindent" >Basically the idea behind this is that if we can go from point i to j faster through k, we&#8217;ll do
 it. Note that this algorithm does not give the exact path, a simple modification will
 return the path. [every time we do the substitution w/ k, we know it is a part of the
 path]

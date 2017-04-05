@@ -8,15 +8,7 @@ typedef pair<int, float> vertex_priority;
 class vertex_comp {
     public:
         bool operator() (const vertex_priority &v1, const vertex_priority &v2) {
-            if (v1.second - v2.second > 0.00001) {
-                return 1;
-            }
-            else if (v1.second - v2.second > -0.00001) {
-                return 0;
-            }
-            else {
-                return -1;
-            }
+            return (v1.second > v2.second);
         };
 };
 
@@ -24,22 +16,21 @@ typedef priority_queue<vertex_priority, vector<vertex_priority>, vertex_comp> ve
 
 class Undirected_Graph {
     int V;
-    float **E;
-    public:
+    vector<vector<float> > E;
+  public:
     Undirected_Graph(int V) {
         this->V = V;
 
-        this->E = new float*[V];
-
         for (int i = 0 ; i < V ; i++) {
-            (this->E)[i] = new float[i]();
+            (this->E).push_back(vector<float>(i));
         }
     };
 
-    Undirected_Graph(int V, float **E) {
+    Undirected_Graph(int V, vector<vector<float> > E) {
         this->V = V;
         this->E = E;
     };
+
     void add_edge(int from, int to, float len) {
         if (from > to) {
             add_edge(to, from, len);
@@ -48,79 +39,55 @@ class Undirected_Graph {
             E[from][to] = len;
         }
     };
+    
     float MST() {
         float total_cost = 0;
         vertex_cost_queue costs;
-        vertex_priority current;
-        set<int> S;
-        int prev_node[V];
-        bool visited[V];
+        bool visited[V] = {false};
+        int visited_count = 0;
 
-        // pick V[0] as our starting pt
-        visited[0] = true;
-        for (int i = 1 ; i < V ; i++) {
-            if (E[i][0]) {
-                costs.push(make_pair(i, E[i][0]));
-            }
-            else {
-                costs.push(make_pair(i, INT_MAX));
-            }
-            S.insert(i);
-            prev_node[i] = 0;
-            visited[i] = false;
-        }
+        costs.push({0, 0});
 
-        while (!S.empty()) {
-            current = costs.top();
+        while (!costs.empty()) {
+            vertex_priority current = costs.top();
             costs.pop();
-            S.erase(current.first);
 
-            visited[current.first] = true;
-
-            if (current.first < prev_node[current.first]) {
-                total_cost += E[current.first][prev_node[current.first]];
-            }
-            else {
-                total_cost += E[prev_node[current.first]][current.first];
-
+            if (visited[current.first]) {
+                continue;
             }
 
-            for (int i = 0 ; i < V ; i++) {
-                if (!visited[i]) {
-                    if (current.first > i) {
-                        if (prev_node[i] > i) {
-                            if (E[i][current.first] < E[i][prev_node[i]]) {
-                                costs.push(make_pair(i, E[i][current.first]));
-                                prev_node[i] = current.first;
-                            }
-                        }
-                        else {
-                            if (E[i][current.first] < E[prev_node[i]][i]) {
-                                costs.push(make_pair(i, E[i][current.first]));
-                                prev_node[i] = current.first;
-                            }
-                        }
-                    }
-                    else {
-                        if (prev_node[i] > i) {
-                            if (E[current.first][i] < E[i][prev_node[i]]) {
-                                costs.push(make_pair(i, E[current.first][i]));
-                                prev_node[i] = current.first;
-                            }
-                        }
-                        else {
-                            if (E[current.first][i] < E[prev_node[i]][i]) {
-                                costs.push(make_pair(i, E[current.first][i]));
-                                prev_node[i] = current.first;
-                            }
-                        }
-                    }
+            //cout << current.first << "(" << current.second << ")"<< '\n';
+
+            for (int i = 0 ; i < current.first ; i++) {
+                if (!visited[i] && E[i][current.first] > -0.5) {
+                    //cout << "Pushed edge from " << current.first;
+                    //cout << " to " << i << " (" << E[i][current.first] << ")" << '\n';
+                    costs.push({i, E[i][current.first]});
                 }
             }
+
+            for (int i =  current.first + 1 ; i < V ; i++) {
+                if (!visited[i] && E[current.first][i] > -0.5) {
+                    //cout << "Pushed edge from " << current.first;
+                    //cout << " to " << i << " (" << E[current.first][i] << ")" << '\n';
+                    costs.push({i, E[current.first][i]});
+                }
+            }
+
+            total_cost += current.second;
+
+            visited[current.first] = true;
+            visited_count++;
         }
 
-        return total_cost;
-    };
+        if (visited_count == this->V) {
+            return total_cost;
+        }
+
+        else {
+            return -1;
+        }
+    }; 
 };
 
 float dist(vector<pair<float, float> > pts, int i, int j) {
@@ -146,13 +113,14 @@ int main(int argc, char *argv[]) {
         }
 
         for (int i = 0 ; i < V ; i++) {
-            for (int j = i ; j < V ; j++) {
+            for (int j = i + 1 ; j < V ; j++) {
                 G.add_edge(i, j, dist(pts, i, j));
             }
         }
 
         cout << G.MST() << "\n\n";
     }
+
     return 0;
 }
 
