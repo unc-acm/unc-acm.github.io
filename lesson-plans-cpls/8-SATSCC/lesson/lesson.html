@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title></title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html --> 
+<meta name="src" content="lesson.tex"> 
+<meta name="date" content="2017-04-14 15:23:00"> 
+<link rel="stylesheet" type="text/css" href="lesson.css"> 
+<style type="text/css">
+body {
+    margin:40px auto;
+    max-width:650px;
+    line-height:1.6;
+    font-size:18px;
+    color:#444;
+    padding:0 10px
+}
+
+h1,h2,h3 {
+    line-height:1.2
+}
+</style>
+
+
+</head><body 
+>
+<h3 class="likesectionHead"><a 
+ id="x1-1000"></a>Strongly Connected Components</h3>
+<!--l. 62--><p class="noindent" ><span 
+class="cmbx-12">Def. </span>We say that vertices <span 
+class="cmmi-12">u </span>and <span 
+class="cmmi-12">v </span>are in the same strongly connected component of a graph if
+there exists a path from <span 
+class="cmmi-12">u </span>to <span 
+class="cmmi-12">v </span>and from <span 
+class="cmmi-12">v </span>to <span 
+class="cmmi-12">u</span>.
+<!--l. 66--><p class="noindent" >Notice that in an undirected graph, connectedness implies strongly connectedness, as every edge is
+bidirectional. Therefore we are going to only consider directed graphs.
+<!--l. 70--><p class="noindent" >Finding the strongly connected components of a graph allows us to partition the graph into
+strongly connected subgraphs within which one can get from each vertex to every other
+vertex.
+<!--l. 74--><p class="noindent" >
+<h4 class="likesubsectionHead"><a 
+ id="x1-2000"></a>Kosaraju&#8217;s algorithm</h4>
+<!--l. 76--><p class="noindent" >Kosaraju&#8217;s algorithm is what we can use to find the strongly connected components of the graph in
+<span 
+class="cmmi-12">O</span>(<span 
+class="cmmi-12">E </span>+ <span 
+class="cmmi-12">V </span>) time. The algorithm relies on the fact that the strongly connected components of the
+graph are the same as the strongly connected components of the transpose graph (same graph with
+the direction of all the edges reversed).
+<!--l. 82--><p class="noindent" >Kosaraju&#8217;s algorithm is essentially two DFS, one on the graph and another on the reverse graph.
+The first DFS on the original graph is a reverse topological sort(ish), we sort the list of vertices in
+such a way that <span 
+class="cmmi-12">u </span>comes before <span 
+class="cmmi-12">v </span>if there exists and edge from <span 
+class="cmmi-12">v </span>to <span 
+class="cmmi-12">u</span>. I say this is
+approximately a topological sort because technically one cannot topologically sort a graph if it
+contains a cycle, but in our case, if it contains a cycle, we ignore it, and keep going.
+Note that this will sometimes create forests in connected graphs as a result, but that&#8217;s
+fine.
+<!--l. 91--><p class="noindent" >Now we have this list, note that the first element of the list is a node in the original graph that is
+either in a cycle or has no incoming edges. Now we dfs from this node on the <span 
+class="cmbx-12">transpose </span>graph,
+and every element it can get to is guaranteed to be in the same strongly connected component as
+it, this is because the SCC of the transpose graph is the same as that of the original
+graph. After we dfs from that point, we move onto the next un-assigned element in the
+sorted list and repeat the process, thereby generating a group of strongly connected
+subgraphs.
+<!--l. 101--><p class="noindent" >
+                                                                                         
+                                                                                         
+<h4 class="likesubsectionHead"><a 
+ id="x1-3000"></a>Boolean Satisfiability Problems</h4>
+<!--l. 103--><p class="noindent" >There is a special type of problems called boolean satisfiability problems that can be solved
+with Kosaraju&#8217;s algorithm. The problem is relatively simple, given a bunch of boolean
+variables <span 
+class="cmmi-12">x</span><sub><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-12">,x</span><sub><span 
+class="cmr-8">2</span></sub><span 
+class="cmmi-12">,</span><span 
+class="cmmi-12">&hellip;</span><span 
+class="cmmi-12">,x</span><sub><span 
+class="cmmi-8">n</span></sub> and a boolean expression expressed as the conjunction of several
+pairwise disjunctions using these variables. Our task is to determine if there exists a
+solution.
+<!--l. 109--><p class="noindent" >To solve this problem we introduce something called the <span 
+class="cmbx-12">implication graph</span>. The implication
+graph is a graph where there exists an edge between two nodes if there exists a logical
+implication that if one node is true so is the next. We construct the implication graph as
+follows: if the entire boolean expression is true, then each of the pairwise disjunctions
+are true (because they are all connected via conjunctions). Therefore suppose we have
+(<span 
+class="cmmi-12">x</span><sub><span 
+class="cmmi-8">i</span></sub> <span 
+class="cmsy-10x-x-120">&or; </span><span 
+class="cmmi-12">x</span><sub><span 
+class="cmmi-8">j</span></sub>) as a part of the conjunction, then we can construct two edges: <span 
+class="cmsy-10x-x-120">¬</span><span 
+class="cmmi-12">x</span><sub><span 
+class="cmmi-8">i</span></sub> <span 
+class="cmsy-10x-x-120">&rarr; </span><span 
+class="cmmi-12">x</span><sub><span 
+class="cmmi-8">j</span></sub> and
+<span 
+class="cmsy-10x-x-120">¬</span><span 
+class="cmmi-12">x</span><sub><span 
+class="cmmi-8">j</span></sub> <span 
+class="cmsy-10x-x-120">&rarr; </span><span 
+class="cmmi-12">x</span><sub><span 
+class="cmmi-8">i</span></sub>.
+<!--l. 118--><p class="noindent" >Once we construct the implication graph, we know that the equation is <span 
+class="cmbx-12">NOT </span>satisfiable if <span 
+class="cmmi-12">x</span><sub><span 
+class="cmmi-8">i</span></sub> and
+<span 
+class="cmsy-10x-x-120">¬</span><span 
+class="cmmi-12">x</span><sub><span 
+class="cmmi-8">i</span></sub> are within the strongly connected component. As that would mean <span 
+class="cmmi-12">x</span><sub><span 
+class="cmmi-8">i</span></sub> and <span 
+class="cmsy-10x-x-120">¬</span><span 
+class="cmmi-12">x</span><sub><span 
+class="cmmi-8">i</span></sub> must both be
+true.
+<!--l. 122--><p class="noindent" >Otherwise we can pick an arbitrary starting point, assign it <span 
+class="cmtt-12">true</span>, its opposite <span 
+class="cmtt-12">false </span>and floodfill
+those truth values to its strongly connected component.
+ 
+</body></html> 
+
+                                                                                         
+
+
